@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* CSS code for styling the website */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    #navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #333;
+      padding: 10px;
+    }
+
+    #navbar h1 {
+      font-size: 24px;
+      color: #fff;
+    }
+
+    #navbar h1 a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    #navbar ul {
+      list-style: none;
+      display: flex;
+    }
+
+    #navbar ul li {
+      margin-left: 20px;
+    }
+
+    #navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    #navbar ul li a:hover {
+      color: #ccc;
+    }
+
+    #navbar ul li a.current {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    #showcase {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url("https://www.pexels.com/photo/green-rice-field-1040899/"); /* Changed the background image to a rice field */
+      background-size: cover;
+      background-position: center;
+    }
+
+    #showcase h1 {
+      font-size: 48px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    #showcase h1 span {
+      color: #00fa00; /* Changed the color of SAURAV KATTEL to green */
+      font-style: italic;
+    }
+
+    footer {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+
+    footer p {
+      color: #fff;
+    }
+
+    /* Added styles for the new sections */
+
+    .section {
+      padding: 20px;
+    }
+
+    .section h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .section a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .section a:hover {
+      color: #ccc;
+    }
+
+    .section img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 20px;
+    }
+
+    .grid-item {
+      border: 1px solid #fff;
+      padding: 10px;
+    }
+
+    .grid-item h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .grid-item p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form label {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .form input, .form textarea {
+      font-size: 16px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #fff;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .form input:focus, .form textarea:focus {
+      outline: none;
+      border-color: #00fa00;
+    }
+
+    .form button {
+      font-size: 18px;
+      padding: 10px;
+      border: none;
+      background-color: #00fa00;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .form button:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+  </style>
+  <title>Personal Website</title>
+</head>
+<body>
+  <header>
+    <!-- Navbar -->
+    <nav id="navbar">
+      <div class="container">
+        <h1><a href="#">Personal Website</a></h1>
+        <ul>
+          <li><a href="index.html" class="current">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="articles.html">Articles</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Showcase Area -->
+    <div id="showcase">
+      <div class="container">
+        <h1>Welcome to <span>SAURAV KATTEL</span>'s website</h1>
+      </div>
+    </div>
+  </header>
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        Hi, I'm Saurav Kattel, a passionate writer and researcher. I love to write
+        about topics related to agriculture, environment, technology, and
+        society. I have published several articles in various journals and
+        magazines, and I'm always looking for new opportunities to share my
+        knowledge and insights with the world.
+      </p>
+      <p>
+        On this website, you will find some of my articles that I have written
+        or plan to write. You can also learn more about me and my background,
+        and contact me if you have any questions or feedback. I hope you enjoy
+        reading my articles and find them useful and informative.
+      </p>
+    </div>
+  </section>
+  <!-- Articles Section -->
+  <section id="articles" class="section">
+    <div class="container">
+      <h2>My Articles</h2>
+      <div class="grid">
+        <!-- Grid Item 1 -->
+        <div class="grid-item">
+          <img src="https://www.pexels.com/photo/field-of-wheat-1563353/" alt="Wheat Field" />
+          <h3>The Future of Wheat Production in Nepal</h3>
+          <p>
+            Wheat is one of the most important crops in Nepal, providing food
+            security and income for millions of farmers. However, wheat
+            production is facing many challenges, such as climate change, pests,
+            diseases, and low productivity. In this article, I explore the
+            current status and trends of wheat production in Nepal, and propose
+            some strategies and solutions to improve wheat yield and quality in
+            the future.
+          </p>
+          <a href="#">Read More</a>
+        </div>
+        <!-- Grid Item 2 -->
+        <div class="grid-item">
+          <img src="https://www.pexels.com/photo/green-leafed-plant-1122768/" alt="Tea Plantation" />
+          <h3>The Benefits of Organic Tea Farming in Nepal</h3>
+          <p>
+            Tea is one of the most popular beverages in the world, and Nepal is
+            one of the major tea producers and exporters. However, most of the
+            tea produced in Nepal is conventional, which relies on chemical
+            fertilizers and pesticides that harm the environment and human
+            health. In this article, I discuss the benefits of organic tea
+            farming, which is a more sustainable and eco-friendly way of growing
+            tea. I also share some examples and best practices of organic tea
+            farming in Nepal and other countries.
+          </p>
+          <a href="#">Read More</a>
+        </div>
+        <!-- Grid Item 3 -->
+        <div class="grid-item">
+          <img src="https://www.pexels.com/photo/close-up-photo-of-green-leaves-158028/" alt="Bamboo Forest" />
+          <h3>The Potential of Bamboo as a Renewable Resource in Nepal</h3>
+          <p>
+            Bamboo is a fast-growing and versatile plant
