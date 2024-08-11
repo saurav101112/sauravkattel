@@ -1,269 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    /* CSS code for styling the website */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAURAV AGRI-TECH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
+        .background-globe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-size: cover;
+            animation: rotateGlobe 60s linear infinite, switchImages 120s linear infinite;
+            opacity: 0.15; /* Control the visibility */
+        }
 
-    #navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #333;
-      padding: 10px;
-    }
+        @keyframes rotateGlobe {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-    #navbar h1 {
-      font-size: 24px;
-      color: #fff;
-    }
+        @keyframes switchImages {
+            0% {
+                background-image: url('C:/Users/user/Desktop/png-transparent-earth-globe-3d-computer-graphics-globe-miscellaneous-3d-computer-graphics-globe.png');
+            }
+            50% {
+                background-image: url('C:/Users/user/Desktop/png-transparent-earth-globe-3d-computer-graphics-globe-miscellaneous-3d-computer-graphics-globe.png');
+            }
+            51% {
+                background-image: url('C:/Users/user/Desktop/IMG20231211100823.jpg');
+            }
+            100% {
+                background-image: url('C:/Users/user/Desktop/IMG20231211100823.jpg');
+            }
+        }
 
-    #navbar h1 a {
-      text-decoration: none;
-      color: #fff;
-    }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
 
-    #navbar ul {
-      list-style: none;
-      display: flex;
-    }
+        header {
+            background: #4CAF50; /* Green background */
+            color: #fff; /* White text */
+            padding: 20px 0;
+        }
 
-    #navbar ul li {
-      margin-left: 20px;
-    }
+        header h1 {
+            text-align: center;
+            margin: 0;
+            padding: 10px;
+            background-color: #3b2f2f; /* Chocolatey black background */
+            display: inline-block;
+            border-radius: 5px;
+        }
 
-    #navbar ul li a {
-      text-decoration: none;
-      color: #fff;
-    }
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
 
-    #navbar ul li a:hover {
-      color: #ccc;
-    }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
 
-    #navbar ul li a.current {
-      color: #fff;
-      font-weight: bold;
-    }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
 
-    #showcase {
-      height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-image: url("https://www.pexels.com/photo/green-rice-field-1040899/"); /* Changed the background image to a rice field */
-      background-size: cover;
-      background-position: center;
-    }
+        main {
+            float: left;
+            width: 70%;
+            margin-top: 30px;
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-    #showcase h1 {
-      font-size: 48px;
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
+        article {
+            background: none;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
 
-    #showcase h1 span {
-      color: #00fa00; /* Changed the color of SAURAV KATTEL to green */
-      font-style: italic;
-    }
+        article h2 {
+            color: #1E90FF; /* Blue color for subheadings */
+            margin-top: 0;
+        }
 
-    footer {
-      background-color: #333;
-      padding: 10px;
-      text-align: center;
-    }
+        article .date {
+            color: #999;
+            font-size: 14px;
+        }
 
-    footer p {
-      color: #fff;
-    }
+        article .summary {
+            font-size: 16px;
+        }
 
-    /* Added styles for the new sections */
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #333;
+            text-decoration: none;
+        }
 
-    .section {
-      padding: 20px;
-    }
+        .read-more:hover {
+            text-decoration: underline;
+        }
 
-    .section h2 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
+        aside {
+            float: right;
+            width: 30%;
+            margin-top: 30px;
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-    .section p {
-      font-size: 18px;
-      line-height: 1.5;
-    }
+        aside section {
+            background: none;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
 
-    .section a {
-      color: #fff;
-      text-decoration: underline;
-    }
+        aside h3 {
+            color: #1E90FF; /* Blue color for subheadings */
+            margin-top: 0;
+        }
 
-    .section a:hover {
-      color: #ccc;
-    }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            clear: both;
+        }
 
-    .section img {
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-    }
+        footer ul {
+            padding: 0;
+            list-style: none;
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      grid-gap: 20px;
-    }
+        footer ul li {
+            display: inline;
+            margin: 0 10px;
+        }
 
-    .grid-item {
-      border: 1px solid #fff;
-      padding: 10px;
-    }
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
 
-    .grid-item h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
+        footer ul li a:hover {
+            text-decoration: underline;
+        }
 
-    .grid-item p {
-      font-size: 16px;
-      line-height: 1.5;
-    }
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
 
-    .form {
-      display: flex;
-      flex-direction: column;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+            main, aside {
+                width: 100%;
+                float: none;
+                margin-top: 20px;
+            }
 
-    .form label {
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-
-    .form input, .form textarea {
-      font-size: 16px;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #fff;
-      background-color: #000;
-      color: #fff;
-    }
-
-    .form input:focus, .form textarea:focus {
-      outline: none;
-      border-color: #00fa00;
-    }
-
-    .form button {
-      font-size: 18px;
-      padding: 10px;
-      border: none;
-      background-color: #00fa00;
-      color: #000;
-      cursor: pointer;
-    }
-
-    .form button:hover {
-      background-color: #fff;
-      color: #000;
-    }
-
-  </style>
-  <title>Personal Website</title>
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <!-- Navbar -->
-    <nav id="navbar">
-      <div class="container">
-        <h1><a href="#">Personal Website</a></h1>
-        <ul>
-          <li><a href="index.html" class="current">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="articles.html">Articles</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-    <!-- Showcase Area -->
-    <div id="showcase">
-      <div class="container">
-        <h1>Welcome to <span>SAURAV KATTEL</span>'s website</h1>
-      </div>
-    </div>
-  </header>
-  <!-- About Section -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>
-        Hi, I'm Saurav Kattel, a passionate writer and researcher. I love to write
-        about topics related to agriculture, environment, technology, and
-        society. I have published several articles in various journals and
-        magazines, and I'm always looking for new opportunities to share my
-        knowledge and insights with the world.
-      </p>
-      <p>
-        On this website, you will find some of my articles that I have written
-        or plan to write. You can also learn more about me and my background,
-        and contact me if you have any questions or feedback. I hope you enjoy
-        reading my articles and find them useful and informative.
-      </p>
-    </div>
-  </section>
-  <!-- Articles Section -->
-  <section id="articles" class="section">
-    <div class="container">
-      <h2>My Articles</h2>
-      <div class="grid">
-        <!-- Grid Item 1 -->
-        <div class="grid-item">
-          <img src="https://www.pexels.com/photo/field-of-wheat-1563353/" alt="Wheat Field" />
-          <h3>The Future of Wheat Production in Nepal</h3>
-          <p>
-            Wheat is one of the most important crops in Nepal, providing food
-            security and income for millions of farmers. However, wheat
-            production is facing many challenges, such as climate change, pests,
-            diseases, and low productivity. In this article, I explore the
-            current status and trends of wheat production in Nepal, and propose
-            some strategies and solutions to improve wheat yield and quality in
-            the future.
-          </p>
-          <a href="#">Read More</a>
+    <div class="background-globe"></div>
+    <header>
+        <div class="container">
+            <h1>SAURAV AGRI-TECH</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <!-- Grid Item 2 -->
-        <div class="grid-item">
-          <img src="https://www.pexels.com/photo/green-leafed-plant-1122768/" alt="Tea Plantation" />
-          <h3>The Benefits of Organic Tea Farming in Nepal</h3>
-          <p>
-            Tea is one of the most popular beverages in the world, and Nepal is
-            one of the major tea producers and exporters. However, most of the
-            tea produced in Nepal is conventional, which relies on chemical
-            fertilizers and pesticides that harm the environment and human
-            health. In this article, I discuss the benefits of organic tea
-            farming, which is a more sustainable and eco-friendly way of growing
-            tea. I also share some examples and best practices of organic tea
-            farming in Nepal and other countries.
-          </p>
-          <a href="#">Read More</a>
+    </header>
+
+    <div class="container">
+        <main>
+            <article>
+                <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
+                <p class="date">August 11, 2024</p>
+                <p class="summary">
+                    <!-- Insert the content from the Word document here -->
+                    <!-- Example content, please replace with actual content from the document -->
+                    जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। 
+                    नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ। 
+                    यो लेखमा हामी जैविक खेतीको चुनौतीहरू र नेपालमा यसलाई सफलतापूर्वक लागू गर्नका लागि आवश्यक कदमहरूबारे छलफल गर्नेछौं।
+                </p>
+                <a href="#" class="read-more">Read More</a>
+            </article>
+            
+            <article>
+                <h2>Article Title 2</h2>
+                <p class="date">August 10, 2024</p>
+                <p class="summary">This is another brief summary of a different article. Summaries help readers decide if they want to read the full article.</p>
+                <a href="#" class="read-more">Read More</a>
+            </article>
+        </main>
+
+        <aside>
+            <section class="about">
+                <h3>About Me</h3>
+                <p>This section is a brief introduction about yourself. You can mention your background, interests, and what you like to write about.</p>
+            </section>
+
+            <section class="recent-articles">
+                <h3>Recent Articles</h3>
+                <ul>
+                    <li><a href="#">नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</a></li>
+                    <li><a href="#">Article Title 2</a></li>
+                    <li><a href="#">Article Title 3</a></li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SAURAV AGRI-TECH. All rights reserved.</p>
+            <ul class="social-media">
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">GitHub</a></li>
+            </ul>
         </div>
-        <!-- Grid Item 3 -->
-        <div class="grid-item">
-          <img src="https://www.pexels.com/photo/close-up-photo-of-green-leaves-158028/" alt="Bamboo Forest" />
-          <h3>The Potential of Bamboo as a Renewable Resource in Nepal</h3>
-          <p>
-            Bamboo is a fast-growing and versatile plant
+    </footer>
+</body>
+</html>
