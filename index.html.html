@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAURAV AGRI-TECH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #e0f7fa, #00695c);
+            overflow: hidden;
+        }
+
+        .globe {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #3b8b00, #2c6a00);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+            animation: rotateGlobe 60s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .seedling {
+            width: 50px;
+            height: 100px;
+            position: absolute;
+            bottom: 20%;
+            animation: rotateSeedling 5s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        .seedling::before {
+            content: "";
+            width: 10px;
+            height: 60px;
+            background: #4caf50;
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            border-radius: 5px;
+        }
+
+        .seedling::after {
+            content: "";
+            width: 60px;
+            height: 30px;
+            background: #4caf50;
+            position: absolute;
+            bottom: 60px;
+            left: -5px;
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        @keyframes rotateSeedling {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        @keyframes rotateGlobe {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .glowing-circle {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            box-shadow: 0 0 30px 10px violet;
+            position: absolute;
+            animation: spiralGlow 10s linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes spiralGlow {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1.1);
+            }
+        }
+
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 100px;
+            background: radial-gradient(circle, #ff4d4d, #ff0000);
+            animation: explode 1s ease-out forwards, fadeOut 3s linear 1s forwards;
+            transform-origin: bottom center;
+        }
+
+        @keyframes explode {
+            from {
+                transform: scale(0) rotate(0deg);
+            }
+            to {
+                transform: scale(1) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+
+        .cycle {
+            animation: cycleAnimation 63s infinite;
+        }
+
+        @keyframes cycleAnimation {
+            0%, 60% {
+                opacity: 1;
+            }
+            61%, 63% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fireworksDisplay {
+            60%, 61% {
+                opacity: 1;
+            }
+            62%, 63% {
+                opacity: 0;
+            }
+        }
+
+        .globe.cycle {
+            animation: rotateGlobe 60s linear infinite, cycleAnimation 63s infinite;
+        }
+
+        .fireworks.cycle {
+            animation: fireworksDisplay 63s infinite;
+        }
+
+        header {
+            background: rgba(76, 175, 80, 0.8); /* Green background with transparency */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+            padding: 10px;
+            background-color: rgba(59, 47, 47, 0.8); /* Chocolatey black background with transparency */
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* White background with transparency */
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h2 {
+            color: #1E90FF;
+            margin-top: 0;
+        }
+
+        p.date {
+            color: #999;
+            font-size: 14px;
+        }
+
+        p.summary {
+            font-size: 16px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .full-article {
+            display: none;
+            margin-top: 20px;
+        }
+
+        aside {
+            margin-top: 30px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            main, aside {
+                width: 100%;
+                float: none;
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="globe cycle">
+            <div class="seedling"></div>
+        </div>
+        <div class="glowing-circle"></div>
+        <div class="fireworks cycle">
+            <!-- Firework elements -->
+            <div class="firework" style="transform: translate(-150px, -100px);"></div>
+            <div class="firework" style="transform: translate(-50px, -200px);"></div>
+            <div class="firework" style="transform: translate(50px, -150px);"></div>
+            <div class="firework" style="transform: translate(150px, -250px);"></div>
+        </div>
+    </div>
+
+    <header>
+        <h1>SAURAV AGRI-TECH</h1>
+    </header>
+
+    <div class="container">
+        <main>
+            <article>
+                <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
+                <p class="date">August 11, 2024</p>
+                <p class="summary">
+                    जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। 
+                    नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ। 
+                    यो लेखमा हामी जैविक खेतीको चुनौतीहरू र नेपालमा यसलाई सफलतापूर्वक लागू गर्नका लागि आवश्यक कदमहरूबारे छलफल गर्नेछौं।
+                </p>
+                <span class="read-more" onclick="showFullArticle()">Read More</span>
+                
+                <div class="full-article">
+                    <p>करिब ६० प्रतिशत जनसङ्ख्या कृषि पेशामा आश्रित मुलुक नेपालमा प्रत्यक्ष तथा अप्रत्यक्ष रुपमा कृषि पेशामा आबद्ध हुने चासोलाई हेर्ने हो भने यो दर घट्दो देखिन्छ। करिब अधिकांश मानिसहरू यस पेशामा संलग्न भएतापनि कृषि क्षेत्रको उत्पादन तथा उत्पादकत्वलाई करिबबाट नियाल्ने हो भने यसको अवस्था दयनीय रहेको देखिन्छ। हालसालैको तथ्याङ्कलाई हेर्ने हो भने करिब ६०% जनसङ्ख्या संलग्न यस क्षेत्रको कुलग्राहस्थ उत्पादनमा जम्मा २१.६% हिस्सा रहेको छ, जुन अन्य क्षेत्रको तुलनामा एकदमै न्यून देखिन्छ। ऊर्जाशील युवाहरूमा कृषिप्रतिको घट्दो चासो पारम्परिक र अव्यवस्थित खेती प्रणाली तथा सासाना र टुक्रे जग्गामा खेती जस्ता पद्धतिहरु निरन्तर रुपमा अनुकरण हुनु नै कृषि क्षेत्रको मुख्य निराशालाई लिन सकिन्छ।</p>
+                    <p>सामान्यतया जैविक खेती भन्नाले प्राकृतिक रुपमा उपलब्ध स्रोतहरूलाई मात्र उपभोग गरी गरिने खेती प्रणालीलाई बुझ्न सकिन्छ। यस कृषि प्रणालीमा बाहिरी स्रोत तथा प्रणालीको न्यूनतम उपभोग गरिन्छ र सामान्यतया हुने खेती प्रणालीमा उपयोग हुने रसायनिक मल किटनाशक औषधिको उपयोगलाई नकारिन्छ। दैनिक जीवनमा निरन्तर रूपमा उपयोग हुँदै आएका यस्ता स्रोतहरू (रासायनिक मल कीटनाशक विषादी तथा अन्य रासायनिक हर्मोन)को प्रयोगमा रोक लगाई प्राकृतिक रुपमा प्राप्त तथा प्राकृतिक तरिकाले परिमार्जित स्रोतहरूको प्रयोग नै जैविक खेतीको विशेषता हो भन्न सकिन्छ। यस्ता रासायनिक स्रोतहरूको विकल्पमा जैविक मल जैविकृनाशक विषादीहरूको प्रयोग गरी उत्पादनयुक्त माटोको गुणलाई दिगो रुपमा स्थापित गर्नु नै जैविक खेती प्रणालीको मुख्य उद्देश्य हो। जैविक खेतीको इतिहासलाई हेर्ने हो भने जैविक खेतीको सुरुवात प्रारम्भिक १९ औँ शताब्दीमा सर एल्बर्ट हवार्ड एफएच किङ र रुडल्फ स्टेनले अवधारणाको विकास गरेको पाइन्छ।</p>
+                    <p><strong>जैविक खेती; आवश्यकता कि चाहना मात्र?</strong><br>
+                    विविधतापूर्ण पारिस्थितिक प्रणालीले भरिपूर्ण देश नेपालमा उपलब्धित प्राकृतिक स्रोत तथा साधनहरूको उपयोग गरी यसैमा आधारित जैविक खेती प्रणालीको विकास गर्ने हो भने यसको प्रचुर सम्भावना देखिन्छ। मानव सभ्यताको पछिल्ला दशकहरूलाई हेर्दै आउने हो भने बढ्दो जनसङ्ख्या र यो संख्यालाई खाद्यान्नको परिपूर्ति गर्न विकास भएका स्रोत तथा साधनहरूको उपभोगले प्राकृतिक स्रोत तथा वातावरणमा ठूलो असर पर्न गएको छ। साथै उत्पादित वस्तुमा हुने विषको अवशेष र त्यसको सेवनबाट स्वास्थ्य क्षेत्रमा पर्ने दीर्घकालीन असरलाई केलाउँदै यसको विकल्पमा जैविक खेतीबारे सकारात्मक बहस छलफल तथा यसको मूल्यांकन गरिनु आजको आवश्यकता देखिन्छ।</p>
+                </div>
+            </article>
+        </main>
+
+        <aside>
+            <section class="about">
+                <h3>About Me</h3>
+                <p>This section is a brief introduction about yourself. You can mention your background, interests, and what you like to write about.</p>
+            </section>
+
+            <section class="recent-articles">
+                <h3>Recent Articles</h3>
+                <ul>
+                    <li><a href="#">नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</a></li>
+                    <li><a href="#">Article Title 2</a></li>
+                    <li><a href="#">Article Title 3</a></li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+
+    <script>
+        function showFullArticle() {
+            var article = document.querySelector('.full-article');
+            var readMoreLink = document.querySelector('.read-more');
+            article.style.display = 'block';
+            readMoreLink.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
