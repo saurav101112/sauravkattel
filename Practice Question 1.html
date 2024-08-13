@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('MRMCPicforBackground_2023_09_17_14_07_24.jpg') no-repeat center center fixed;
+            background: url('your-image-url-here.jpg') no-repeat center center fixed;
             background-size: cover;
         }
 
@@ -101,6 +101,10 @@
         .incorrect {
             background-color: red;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -117,7 +121,7 @@
                 <button id="next-btn" onclick="nextPage()">Next</button>
             </div>
 
-            <button id="submit" onclick="showResult()">Submit Answers</button>
+            <button id="submit" onclick="showResult()" disabled>Submit Answers</button>
 
             <div id="result"></div>
         </div>
@@ -225,12 +229,14 @@
             { question: "The number of circles of a given radius that touches both of the axes is:", options: ["3", "4", "1", "2"], answer: "4" }
         ];
 
-        const questionsPerPage = 15; // Number of questions per page
+        const questionsPerPage = 2; // Number of questions per page
         let currentPage = 0;
+        let userAnswers = Array(questions.length).fill(null); // Store user answers
         let timeLeft = 90 * 60; // 1 hour 30 minutes in seconds
         const timerDisplay = document.getElementById('timer');
         const questionsContainer = document.getElementById('questions-container');
         const resultDisplay = document.getElementById('result');
+        const submitButton = document.getElementById('submit');
 
         // Timer function
         function startTimer() {
@@ -271,6 +277,16 @@
                     optionInput.value = option;
                     optionInput.id = `q${start + index}o${optionIndex}`;
 
+                    // Preserve the selected answer when navigating between pages
+                    if (userAnswers[start + index] === option) {
+                        optionInput.checked = true;
+                    }
+
+                    optionInput.addEventListener('change', () => {
+                        userAnswers[start + index] = option;
+                        checkAllAnswered();
+                    });
+
                     const optionLabel = document.createElement('label');
                     optionLabel.setAttribute('for', optionInput.id);
                     optionLabel.textContent = option;
@@ -310,30 +326,43 @@
             }
         }
 
+        // Check if all questions have been answered to enable submission
+        function checkAllAnswered() {
+            const allAnswered = userAnswers.every(answer => answer !== null);
+            submitButton.disabled = !allAnswered;
+        }
+
         // Handle form submission
         function showResult() {
             let score = 0;
 
             questions.forEach((question, index) => {
-                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
-                if (selectedOption) {
-                    const selectedAnswer = selectedOption.value;
-                    const correctAnswer = question.answer;
-                    const optionLabel = selectedOption.nextSibling;
+                const selectedAnswer = userAnswers[index];
+                const correctAnswer = question.answer;
+                const optionItems = document.querySelectorAll(`input[name="question${index}"]`);
 
-                    if (selectedAnswer === correctAnswer) {
-                        score++;
-                        optionLabel.insertAdjacentHTML('beforeend', '<span class="indicator correct"></span>');
-                    } else {
-                        optionLabel.insertAdjacentHTML('beforeend', '<span class="indicator incorrect"></span>');
-                        const correctOptionLabel = Array.from(document.querySelectorAll(`input[name="question${index}"]`)).find(input => input.value === correctAnswer).nextSibling;
-                        correctOptionLabel.insertAdjacentHTML('beforeend', '<span class="indicator correct"></span>');
+                optionItems.forEach(option => {
+                    const optionLabel = option.nextSibling;
+                    const indicator = document.createElement('span');
+                    indicator.classList.add('indicator');
+
+                    // Remove existing indicators to prevent duplicates
+                    const existingIndicator = optionLabel.querySelector('.indicator');
+                    if (existingIndicator) {
+                        existingIndicator.remove();
                     }
-                } else {
-                    // Mark the correct answer even if the user didn't select any option
-                    const correctOptionLabel = Array.from(document.querySelectorAll(`input[name="question${index}"]`)).find(input => input.value === question.answer).nextSibling;
-                    correctOptionLabel.insertAdjacentHTML('beforeend', '<span class="indicator correct"></span>');
-                }
+
+                    if (option.value === correctAnswer) {
+                        if (option.checked) {
+                            score++;
+                        }
+                        indicator.classList.add('correct');
+                    } else if (option.checked) {
+                        indicator.classList.add('incorrect');
+                    }
+
+                    optionLabel.appendChild(indicator);
+                });
             });
 
             resultDisplay.textContent = `Your score is: ${score}/${questions.length}`;
