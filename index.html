@@ -20,7 +20,7 @@
         /* Heading Section */
         .heading-section {
             background-color: #1E90FF;
-            padding: 20px;
+            padding: 40px 20px 80px;
             text-align: center;
             color: #fff;
             position: relative;
@@ -88,6 +88,10 @@
             transition: color 0.3s ease-in-out;
         }
 
+        .middle-section h1:hover {
+            color: #FF4500;
+        }
+
         /* Parallax Background for Articles Section */
         .parallax-background {
             position: absolute;
@@ -117,7 +121,7 @@
 
         /* Articles Section */
         .articles-section {
-            width: 80%;
+            width: 60%;
             margin: 40px auto;
             position: relative;
             z-index: 2;
@@ -204,6 +208,32 @@
             transform: scale(1.2);
         }
 
+        /* About Me Sidebar */
+        .about-me-sidebar {
+            width: 25%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 2;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        .about-me-sidebar h2 {
+            margin-top: 0;
+            color: #1E90FF;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .about-me-sidebar p {
+            font-size: 14px;
+            color: #333;
+            transition: color 0.3s ease-in-out;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .heading-section h1 {
@@ -239,6 +269,7 @@
                 width: 100%;
                 position: static;
                 margin-top: 20px;
+                text-align: center;
             }
         }
     </style>
@@ -277,6 +308,12 @@
         </div>
 
         <!-- Add more articles below this section -->
+    </div>
+
+    <!-- About Me Sidebar -->
+    <div class="about-me-sidebar">
+        <h2>About Me</h2>
+        <p>Hi, I'm Saurav Kattel, a passionate agricultural technology advocate, striving to bring innovative solutions to the farming community in Nepal.</p>
     </div>
 
     <!-- Footer Section -->
