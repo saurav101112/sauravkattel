@@ -12,7 +12,6 @@
             background: #333;
             color: #333;
             scroll-behavior: smooth;
-            perspective: 1px;
             overflow-x: hidden;
             transition: background-color 0.3s ease-in-out;
         }
@@ -70,6 +69,8 @@
             text-align: center;
             background-color: #fff;
             color: #333;
+            position: relative;
+            z-index: 2;
         }
 
         .middle-section img.photo {
@@ -103,23 +104,22 @@
 
         /* Parallax Background for Articles Section */
         .parallax-background {
-            position: absolute;
+            position: relative;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('depositphotos_3423508-stock-illustration-green-earth-globe.jpg') no-repeat center center;
+            width: 100%;
+            height: 100%;
+            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
             background-size: contain;
             opacity: 0.4;
             z-index: 1;
-            transform: translateZ(-1px) scale(2);
+            transform: scale(1.5);
             animation: rotate 60s linear infinite, glow 3s infinite alternate;
             transition: opacity 0.5s ease-in-out;
         }
 
         @keyframes rotate {
-            from { transform: translateZ(-1px) scale(2) rotate(0deg); }
-            to { transform: translateZ(-1px) scale(2) rotate(360deg); }
+            from { transform: scale(1.5) rotate(0deg); }
+            to { transform: scale(1.5) rotate(360deg); }
         }
 
         @keyframes glow {
@@ -301,11 +301,9 @@
         <h1>Saurav Kattel</h1>
     </div>
 
-    <!-- Parallax Background for Articles Section -->
-    <div class="parallax-background"></div>
-
     <!-- Articles Section -->
     <div class="articles-section" id="articles">
+        <div class="parallax-background"></div>
         <div class="article">
             <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
             <p class="date">August 11, 2024</p>
