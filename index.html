@@ -9,30 +9,31 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('depositphotos_3423508-stock-illustration-green-earth-globe.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: #333;
             color: #333;
             scroll-behavior: smooth;
+            perspective: 1px;
+            overflow-x: hidden;
         }
 
-        /* Globe Background with Rotation and Glow */
-        .rotating-globe {
+        /* Globe Background with Parallax, Rotation, and Glow */
+        .parallax-background {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(0deg);
-            width: 600px;
-            height: 600px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: url('depositphotos_3423508-stock-illustration-green-earth-globe.jpg') no-repeat center center;
             background-size: contain;
             opacity: 0.4; /* Lower transparency */
-            animation: rotate 60s linear infinite, glow 3s infinite alternate;
             z-index: 1;
+            transform: translateZ(-1px) scale(2); /* Parallax Effect */
+            animation: rotate 60s linear infinite, glow 3s infinite alternate;
         }
 
         @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+            from { transform: translateZ(-1px) scale(2) rotate(0deg); }
+            to { transform: translateZ(-1px) scale(2) rotate(360deg); }
         }
 
         @keyframes glow {
@@ -215,8 +216,8 @@
 </head>
 <body>
 
-    <!-- Rotating Globe -->
-    <div class="rotating-globe"></div>
+    <!-- Parallax Background Globe -->
+    <div class="parallax-background"></div>
 
     <!-- SAURAV AGRI-TECH Section -->
     <div class="agri-tech-header" id="agri-tech">
