@@ -1,241 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAURAV AGRI-TECH</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #333;
-            color: #333;
-            scroll-behavior: smooth;
-            perspective: 1px;
-            overflow-x: hidden;
-            transition: background-color 0.5s ease-in-out;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAURAV AGRI-TECH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #333;
+            color: #333;
+            scroll-behavior: smooth;
+            perspective: 1px;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease-in-out;
+        }
 
-        /* Globe Background with Parallax, Rotation, and Glow */
-        .parallax-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
-            background-size: contain;
-            opacity: 0.4;
-            z-index: 1;
-            transform: translateZ(-1px) scale(2);
-            animation: rotate 60s linear infinite, glow 3s infinite alternate;
-        }
+        /* Globe Background with Parallax, Rotation, and Glow */
+        .parallax-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0.4;
+            z-index: 1;
+            transform: translateZ(-1px) scale(2);
+            animation: rotate 60s linear infinite, glow 3s infinite alternate;
+            transition: opacity 0.5s ease-in-out;
+        }
 
-        @keyframes rotate {
-            from { transform: translateZ(-1px) scale(2) rotate(0deg); }
-            to { transform: translateZ(-1px) scale(2) rotate(360deg); }
-        }
+        @keyframes rotate {
+            from { transform: translateZ(-1px) scale(2) rotate(0deg); }
+            to { transform: translateZ(-1px) scale(2) rotate(360deg); }
+        }
 
-        @keyframes glow {
-            0% { box-shadow: 0 0 50px #1E90FF; }
-            50% { box-shadow: 0 0 50px #32CD32; }
-            100% { box-shadow: 0 0 50px #FF4500; }
-        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px #1E90FF; }
+            50% { box-shadow: 0 0 20px #32CD32; }
+            100% { box-shadow: 0 0 20px #FF4500; }
+        }
 
-        /* SAURAV AGRI-TECH Section */
-        .agri-tech-header {
-            padding: 60px 0 20px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            color: #333;
-            margin-top: 50px;
-            position: relative;
-            z-index: 2;
-            transition: padding 0.5s ease-in-out, background 0.5s ease-in-out;
-        }
+        /* SAURAV AGRI-TECH Section */
+        .agri-tech-header {
+            padding: 60px 0 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+            transition: padding 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
 
-        .agri-tech-header h1 {
-            font-size: 36px;
-            margin: 0;
-        }
+        .agri-tech-header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
 
-        /* Narrow Header */
-        .narrow-header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 60px;
-            z-index: 1000;
-            transition: top 0.3s, background-color 0.5s ease-in-out;
-        }
+        /* Narrow Header */
+        .narrow-header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 60px;
+            z-index: 1000;
+            transition: top 0.3s ease-in-out, background-color 0.5s ease-in-out;
+        }
 
-        .narrow-header nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+        .narrow-header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
 
-        .narrow-header nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 5px 10px;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
+        .narrow-header nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            font-size: 18px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
 
-        .narrow-header nav a:hover {
-            background-color: #1E90FF;
-            border-radius: 5px;
-        }
+        .narrow-header nav a:hover {
+            background-color: #1E90FF;
+            border-radius: 5px;
+        }
 
-        /* Hide header on scroll down */
-        .hidden-header {
-            top: -100px;
-        }
+        /* Hide header on scroll down */
+        .hidden-header {
+            top: -100px;
+        }
 
-        /* Middle Section */
-        .middle-section {
-            padding: 40px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-            transition: padding 0.5s ease-in-out;
-        }
+        /* Middle Section */
+        .middle-section {
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            transition: padding 0.5s ease-in-out;
+        }
 
-        .middle-section img.photo {
-            border-radius: 50%;
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            margin-top: 20px;
-            position: relative;
-            z-index: 3;
-            transition: transform 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
-        }
+        .middle-section img.photo {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-top: 20px;
+            position: relative;
+            z-index: 3;
+            transition: transform 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
+        }
 
-        .middle-section img.photo:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #1E90FF;
-        }
+        .middle-section img.photo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #1E90FF;
+        }
 
-        .middle-section h1 {
-            margin-top: 20px;
-            font-size: 48px;
-            color: #333;
-            position: relative;
-            z-index: 3;
-        }
+        .middle-section h1 {
+            margin-top: 20px;
+            font-size: 48px;
+            color: #333;
+            position: relative;
+            z-index: 3;
+            transition: color 0.3s ease-in-out;
+        }
 
-        /* Articles Section */
-        .articles-section {
-            width: 80%;
-            margin: 40px auto;
-            position: relative;
-            z-index: 2;
-            transition: margin 0.5s ease-in-out;
-        }
+        /* Articles Section */
+        .articles-section {
+            width: 80%;
+            margin: 40px auto;
+            position: relative;
+            z-index: 2;
+            transition: margin 0.5s ease-in-out;
+        }
 
-        .articles-section .article {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out;
-        }
+        .articles-section .article {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
 
-        .articles-section .article:hover {
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-        }
+        .articles-section .article:hover {
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        }
 
-        .articles-section .article h2 {
-            margin-top: 0;
-            color: #1E90FF;
-        }
+        .articles-section .article h2 {
+            margin-top: 0;
+            color: #1E90FF;
+            transition: color 0.3s ease-in-out;
+        }
 
-        /* Parallax Glow Effect on Mouse Move */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent, rgba(255,255,255,0.2));
-            pointer-events: none;
-            transform: translate(-50%, -50%) scale(1.5);
-            z-index: 9999;
-            transition: transform 0.1s ease-out;
-        }
+        .articles-section .article p.date {
+            color: #999;
+            font-size: 14px;
+        }
 
-        body:hover::before {
-            transform: translate(-50%, -50%) scale(1);
-        }
+        .articles-section .article p.summary {
+            font-size: 16px;
+            margin: 20px 0;
+        }
 
-        body {
-            cursor: none;
-        }
+        .articles-section .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #1E90FF;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+        }
 
-        body::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, rgba(255,255,255,1), transparent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease-out;
-        }
+        .articles-section .read-more:hover {
+            text-decoration: underline;
+            color: #FF4500;
+        }
 
-        body:hover::after {
-            transform: translate(-50%, -50%) scale(2);
-        }
+        /* Footer Section */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        }
 
-        body:hover {
-            background: radial-gradient(circle, rgba(255,255,255,0.2), transparent) no-repeat center center fixed;
-        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+        }
 
-        body:hover::after {
-            background: radial-gradient(circle, rgba(0,255,255,1), transparent);
-        }
+        footer a:hover {
+            text-decoration: underline;
+            color: #FF4500;
+        }
 
-    </style>
+        footer img {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        footer img:hover {
+            transform: scale(1.2);
+        }
+
+        /* About Me Sidebar */
+        .about-me-sidebar {
+            width: 300px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 2;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        .about-me-sidebar h2 {
+            margin-top: 0;
+            color: #1E90FF;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .about-me-sidebar p {
+            font-size: 14px;
+            color: #333;
+            transition: color 0.3s ease-in-out;
+        }
+    </style>
 </head>
 <body>
-    <div class="parallax-background"></div>
-    <header class="agri-tech-header">
-        <h1>SAURAV AGRI-TECH</h1>
-    </header>
-    <div class="narrow-header">
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </div>
-    <section class="middle-section">
-        <img src="images.jpg" alt="Your Photo" class="photo">
-        <h1>Welcome to SAURAV AGRI-TECH</h1>
-    </section>
-    <section class="articles-section">
-        <div class="article">
-            <h2>Article Title 1</h2>
-            <p class="date">July 21, 2023</p>
-            <p>Article content goes here...</p>
-        </div>
-        <div class="article">
-            <h2>Article Title 2</h2>
-            <p class="date">July 22, 2023</p>
-            <p>Article content goes here...</p>
-        </div>
-    </section>
+
+    <!-- Parallax Background Globe -->
+    <div class="parallax-background"></div>
+
+    <!-- SAURAV AGRI-TECH Section -->
+    <div class="agri-tech-header" id="agri-tech">
+        <h1>SAURAV AGRI-TECH</h1>
+    </div>
+
+    <!-- Narrow Header -->
+    <div class="narrow-header" id="narrow-header">
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#articles">Articles</a>
+        </nav>
+    </div>
+
+    <!-- About Me Sidebar -->
+    <div class="about-me-sidebar">
+        <h2>About Me</h2>
+        <p>Hi, I'm Saurav Kattel, a passionate agricultural technology advocate, striving to bring innovative solutions to the farming community in Nepal.</p>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="middle-section" id="home">
+        <img src="images.jpg" alt="Saurav Kattel" class="photo">
+        <h1>Saurav Kattel</h1>
+    </div>
+
+    <!-- Articles Section -->
+    <div class="articles-section" id="articles">
+        <div class="article">
+            <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
+            <p class="date">August 11, 2024</p>
+            <p class="summary">
+                जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। 
+                नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ। 
+                यो लेखमा हामी जैविक खेतीको चुनौतीहरू र नेपालमा यसलाई सफलतापूर्वक लागू गर्नका लागि आवश्यक कदमहरूबारे छलफल गर्नेछौं।
+            </p>
+            <a href="full-article.html" class="read-more">Read More</a>
+        </div>
+
+        <!-- Add more articles below this section -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Connect with me on social media:</p>
+        <a href="https://www.facebook.com/yourprofile" target="_blank"><img src="facebook-logo.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/yourprofile" target="_blank"><img src="instagram-logo.png" alt="Instagram"></a>
+    </footer>
+
+    <script>
+        // Hide and Show Header on Scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function(){
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            let header = document.getElementById("narrow-header");
+
+            if (currentScroll > lastScrollTop) {
+                // Scroll down
+                header.classList.add("hidden-header");
+            } else {
+                // Scroll up
+                header.classList.remove("hidden-header");
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+        }, false);
+    </script>
+
 </body>
 </html>
