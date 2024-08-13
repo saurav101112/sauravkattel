@@ -9,9 +9,26 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: url('depositphotos_3423508-stock-illustration-green-earth-globe.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
             scroll-behavior: smooth;
+        }
+
+        /* SAURAV AGRI-TECH Section */
+        .agri-tech-header {
+            padding: 60px 0 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+            color: #333;
+            margin-top: 50px; /* Adjust for fixed header */
+            position: relative;
+            z-index: 2;
+        }
+
+        .agri-tech-header h1 {
+            font-size: 36px;
+            margin: 0;
         }
 
         /* Narrow Header */
@@ -22,7 +39,7 @@
             text-align: center;
             position: fixed;
             width: 100%;
-            top: 0;
+            top: 60px; /* Push down for agri-tech header */
             z-index: 1000;
         }
 
@@ -44,27 +61,13 @@
             border-radius: 5px;
         }
 
-        /* SAURAV AGRI-TECH Section */
-        .agri-tech-header {
-            padding: 60px 0 20px; /* Adjust for fixed header */
-            text-align: center;
-            background: linear-gradient(270deg, #ff7e5f, #feb47b);
-            color: #333;
-            animation: backgroundAnimation 10s ease infinite;
-            margin-top: 50px; /* Adjust for fixed header */
-        }
-
-        .agri-tech-header h1 {
-            font-size: 36px;
-            margin: 0;
-        }
-
         /* Middle Section */
         .middle-section {
             padding: 40px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            z-index: 2;
         }
 
         .middle-section img.photo {
@@ -73,35 +76,12 @@
             height: 200px;
             object-fit: cover;
             margin-top: 20px;
-            z-index: 2;
-            position: relative;
         }
 
         .middle-section h1 {
             margin-top: 20px;
             font-size: 48px;
             color: #333;
-            z-index: 2;
-            position: relative;
-        }
-
-        /* Rotating Globe */
-        .rotating-background {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 400px;
-            height: 400px;
-            background: url('depositphotos_3423508-stock-illustration-green-earth-globe.jpg') no-repeat center center;
-            background-size: contain;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            animation: rotateGlobe 20s linear infinite;
-        }
-
-        @keyframes rotateGlobe {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         /* Articles Section */
@@ -144,9 +124,63 @@
             text-decoration: underline;
         }
 
+        /* Footer Section */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer img {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+
+        /* About Me Sidebar */
+        .about-me-sidebar {
+            width: 300px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+            position: fixed;
+            top: 120px; /* Adjust for fixed header */
+            left: 20px;
+            z-index: 2;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-me-sidebar h2 {
+            margin-top: 0;
+            color: #1E90FF;
+        }
+
+        .about-me-sidebar p {
+            font-size: 14px;
+            color: #333;
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- SAURAV AGRI-TECH Section -->
+    <div class="agri-tech-header" id="agri-tech">
+        <h1>SAURAV AGRI-TECH</h1>
+    </div>
 
     <!-- Narrow Header -->
     <div class="narrow-header">
@@ -156,14 +190,14 @@
         </nav>
     </div>
 
-    <!-- SAURAV AGRI-TECH Section -->
-    <div class="agri-tech-header" id="home">
-        <h1>SAURAV AGRI-TECH</h1>
+    <!-- About Me Sidebar -->
+    <div class="about-me-sidebar">
+        <h2>About Me</h2>
+        <p>Hi, I'm Saurav Kattel, a passionate agricultural technology advocate, striving to bring innovative solutions to the farming community in Nepal.</p>
     </div>
 
     <!-- Middle Section -->
-    <div class="middle-section">
-        <div class="rotating-background"></div>
+    <div class="middle-section" id="home">
         <img src="images.jpg" alt="Saurav Kattel" class="photo">
         <h1>Saurav Kattel</h1>
     </div>
@@ -183,6 +217,13 @@
 
         <!-- Add more articles below this section -->
     </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Connect with me on social media:</p>
+        <a href="https://www.facebook.com/yourprofile" target="_blank"><img src="facebook-logo.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/yourprofile" target="_blank"><img src="instagram-logo.png" alt="Instagram"></a>
+    </footer>
 
 </body>
 </html>
