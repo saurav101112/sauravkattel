@@ -11,57 +11,106 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            scroll-behavior: smooth;
         }
 
-        /* Background Animation */
-        @keyframes backgroundAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Narrow Header */
+        .narrow-header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
-        .header {
+        .narrow-header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .narrow-header nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            font-size: 18px;
+        }
+
+        .narrow-header nav a:hover {
+            background-color: #1E90FF;
+            border-radius: 5px;
+        }
+
+        /* SAURAV AGRI-TECH Section */
+        .agri-tech-header {
+            padding: 60px 0 20px; /* Adjust for fixed header */
+            text-align: center;
             background: linear-gradient(270deg, #ff7e5f, #feb47b);
-            background-size: 400% 400%;
+            color: #333;
             animation: backgroundAnimation 10s ease infinite;
-            padding: 50px 0;
+            margin-top: 50px; /* Adjust for fixed header */
+        }
+
+        .agri-tech-header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        /* Middle Section */
+        .middle-section {
+            padding: 40px 0;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
-        .header img {
+        .middle-section img.photo {
             border-radius: 50%;
             width: 200px;
             height: 200px;
             object-fit: cover;
             margin-top: 20px;
+            z-index: 2;
+            position: relative;
         }
 
-        .header h1 {
-            margin: 20px 0 10px;
+        .middle-section h1 {
+            margin-top: 20px;
             font-size: 48px;
             color: #333;
+            z-index: 2;
+            position: relative;
         }
 
-        .header h2 {
-            font-size: 36px;
-            color: #333;
-            margin: 10px 0;
+        /* Rotating Globe */
+        .rotating-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: url('depositphotos_3423508-stock-illustration-green-earth-globe.jpg') no-repeat center center;
+            background-size: contain;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: rotateGlobe 20s linear infinite;
         }
 
-        .container {
+        @keyframes rotateGlobe {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Articles Section */
+        .articles-section {
             width: 80%;
             margin: 40px auto;
-            display: flex;
-            flex-wrap: wrap;
         }
 
-        .main-content {
-            flex: 3;
-            padding-right: 20px;
-        }
-
-        .article {
+        .articles-section .article {
             background-color: #fff;
             padding: 20px;
             margin-bottom: 20px;
@@ -69,149 +118,70 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .article h2 {
+        .articles-section .article h2 {
             margin-top: 0;
             color: #1E90FF;
         }
 
-        .article p.date {
+        .articles-section .article p.date {
             color: #999;
             font-size: 14px;
         }
 
-        .article p.summary {
+        .articles-section .article p.summary {
             font-size: 16px;
             margin: 20px 0;
         }
 
-        .read-more {
+        .articles-section .read-more {
             display: inline-block;
             margin-top: 10px;
             color: #1E90FF;
             text-decoration: none;
         }
 
-        .read-more:hover {
+        .articles-section .read-more:hover {
             text-decoration: underline;
         }
 
-        .sidebar {
-            flex: 1;
-            padding-left: 20px;
-        }
-
-        .about {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .about h3 {
-            margin-top: 0;
-        }
-
-        .recent-articles {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .recent-articles h3 {
-            margin-top: 0;
-        }
-
-        .recent-articles ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .recent-articles ul li {
-            margin: 10px 0;
-        }
-
-        .recent-articles ul li a {
-            color: #1E90FF;
-            text-decoration: none;
-        }
-
-        .recent-articles ul li a:hover {
-            text-decoration: underline;
-        }
-
-        .social-media {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .social-media img {
-            width: 40px;
-            height: 40px;
-            margin: 0 10px;
-            transition: transform 0.3s;
-        }
-
-        .social-media img:hover {
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <div class="header">
-        <h2>SAURAV AGRI-TECH</h2>
-        <img src="images.jpg" alt="Profile Image">
+    <!-- Narrow Header -->
+    <div class="narrow-header">
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#articles">Articles</a>
+        </nav>
+    </div>
+
+    <!-- SAURAV AGRI-TECH Section -->
+    <div class="agri-tech-header" id="home">
+        <h1>SAURAV AGRI-TECH</h1>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="middle-section">
+        <div class="rotating-background"></div>
+        <img src="images.jpg" alt="Saurav Kattel" class="photo">
         <h1>Saurav Kattel</h1>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
-        
-        <!-- Main Content Area -->
-        <div class="main-content">
-            <div class="article">
-                <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
-                <p class="date">August 11, 2024</p>
-                <p class="summary">
-                    जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। 
-                    नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ। 
-                    यो लेखमा हामी जैविक खेतीको चुनौतीहरू र नेपालमा यसलाई सफलतापूर्वक लागू गर्नका लागि आवश्यक कदमहरूबारे छलफल गर्नेछौं।
-                </p>
-                <a href="full-article.html" class="read-more">Read More</a>
-            </div>
+    <!-- Articles Section -->
+    <div class="articles-section" id="articles">
+        <div class="article">
+            <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
+            <p class="date">August 11, 2024</p>
+            <p class="summary">
+                जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। 
+                नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ। 
+                यो लेखमा हामी जैविक खेतीको चुनौतीहरू र नेपालमा यसलाई सफलतापूर्वक लागू गर्नका लागि आवश्यक कदमहरूबारे छलफल गर्नेछौं।
+            </p>
+            <a href="full-article.html" class="read-more">Read More</a>
         </div>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="about">
-                <h3>About Me</h3>
-                <p>This section is a brief introduction about yourself. You can mention your background, interests, and what you like to write about.</p>
-            </div>
-
-            <div class="recent-articles">
-                <h3>Recent Articles</h3>
-                <ul>
-                    <li><a href="#">नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</a></li>
-                    <li><a href="#">Article Title 2</a></li>
-                    <li><a href="#">Article Title 3</a></li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Social Media Icons -->
-    <div class="social-media">
-        <a href="https://www.facebook.com/saurav.kattel.5" target="_blank">
-            <img src="facebook.png" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com/saurav_3177?igsh=MWQ3YW9qZHpzZnlybA==" target="_blank">
-            <img src="instagram.png" alt="Instagram">
-        </a>
+        <!-- Add more articles below this section -->
     </div>
 
 </body>
