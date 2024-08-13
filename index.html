@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,17 @@
             color: #333;
         }
 
+        /* Background Animation */
+        @keyframes backgroundAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .header {
-            background-color: #f0f2f5;
+            background: linear-gradient(270deg, #ff7e5f, #feb47b);
+            background-size: 400% 400%;
+            animation: backgroundAnimation 10s ease infinite;
             padding: 50px 0;
             text-align: center;
             position: relative;
@@ -34,20 +43,10 @@
             color: #333;
         }
 
-        .header p {
-            font-size: 18px;
-            color: #666;
-        }
-
-        .header .hire-me {
-            background-color: #00bfa5;
-            color: #fff;
-            padding: 15px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 18px;
+        .header h2 {
+            font-size: 36px;
+            color: #333;
+            margin: 10px 0;
         }
 
         .container {
@@ -164,10 +163,9 @@
 
     <!-- Header Section -->
     <div class="header">
+        <h2>SAURAV AGRI-TECH</h2>
         <img src="images.jpg" alt="Profile Image">
-        <h1>Lucie Anderson</h1>
-        <p>We shape and activate brands through insight, vision and execution.</p>
-        <a href="#" class="hire-me">HIRE ME</a>
+        <h1>Saurav Kattel</h1>
     </div>
 
     <!-- Main Container -->
