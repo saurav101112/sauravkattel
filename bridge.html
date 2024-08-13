@@ -53,6 +53,13 @@
             transform: scale(1.1);
         }
 
+        a.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+            background-color: rgba(0, 0, 0, 0.3);
+            transform: none;
+        }
+
         @keyframes rain {
             0% {background-position: 0 0;}
             100% {background-position: 100% 100%;}
@@ -76,36 +83,44 @@
         <h1>B.Sc Horticulture Entrance Preparation</h1>
         <table>
             <tr>
-                <td><a href="Practice_Question_1.html">Practice Question 1</a></td>
+                <td><a href="Practice_Question_1.html" id="pq1">Practice Question 1</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_2.html">Practice Question 2</a></td>
+                <td><a href="#" id="pq2">Practice Question 2</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_3.html">Practice Question 3</a></td>
+                <td><a href="#" id="pq3">Practice Question 3</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_4.html">Practice Question 4</a></td>
+                <td><a href="#" id="pq4">Practice Question 4</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_5.html">Practice Question 5</a></td>
+                <td><a href="#" id="pq5">Practice Question 5</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_6.html">Practice Question 6</a></td>
+                <td><a href="#" id="pq6">Practice Question 6</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_7.html">Practice Question 7</a></td>
+                <td><a href="#" id="pq7">Practice Question 7</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_8.html">Practice Question 8</a></td>
+                <td><a href="#" id="pq8">Practice Question 8</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_9.html">Practice Question 9</a></td>
+                <td><a href="#" id="pq9">Practice Question 9</a></td>
             </tr>
             <tr>
-                <td><a href="Practice_Question_10.html">Practice Question 10</a></td>
+                <td><a href="#" id="pq10">Practice Question 10</a></td>
             </tr>
         </table>
     </div>
+    <script>
+        document.getElementById('pq1').addEventListener('click', function(event) {
+            // Disable other practice questions
+            for (let i = 2; i <= 10; i++) {
+                document.getElementById('pq' + i).classList.add('disabled');
+            }
+        });
+    </script>
 </body>
 </html>
