@@ -83,7 +83,7 @@
         <h1>B.Sc Horticulture Entrance Preparation</h1>
         <table>
             <tr>
-                <td><a href="Practice_Question_1.html" id="pq1">Practice Question 1</a></td>
+                <td><a href="#" id="pq1">Practice Question 1</a></td>
             </tr>
             <tr>
                 <td><a href="#" id="pq2">Practice Question 2</a></td>
@@ -116,10 +116,15 @@
     </div>
     <script>
         document.getElementById('pq1').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            
             // Disable other practice questions
             for (let i = 2; i <= 10; i++) {
                 document.getElementById('pq' + i).classList.add('disabled');
             }
+            
+            // Redirect to Practice Question 1 page
+            window.location.href = 'Practice_Question_1.html';
         });
     </script>
 </body>
