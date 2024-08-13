@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAURAV AGRI-TECH</title>
+    <title>SAURAV AGRO-TECH</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,95 +17,50 @@
             transition: background-color 0.3s ease-in-out;
         }
 
-        /* Globe Background with Parallax, Rotation, and Glow */
-        .parallax-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
-            background-size: contain;
-            opacity: 0.4;
-            z-index: 1;
-            transform: translateZ(-1px) scale(2);
-            animation: rotate 60s linear infinite, glow 3s infinite alternate;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        @keyframes rotate {
-            from { transform: translateZ(-1px) scale(2) rotate(0deg); }
-            to { transform: translateZ(-1px) scale(2) rotate(360deg); }
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 20px #1E90FF; }
-            50% { box-shadow: 0 0 20px #32CD32; }
-            100% { box-shadow: 0 0 20px #FF4500; }
-        }
-
-        /* SAURAV AGRI-TECH Section */
-        .agri-tech-header {
-            padding: 60px 0 20px;
+        /* Heading Section */
+        .heading-section {
+            background-color: #1E90FF;
+            padding: 20px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            color: #333;
-            margin-top: 50px;
+            color: #fff;
             position: relative;
-            z-index: 2;
-            transition: padding 0.5s ease-in-out, background-color 0.5s ease-in-out;
         }
 
-        .agri-tech-header h1 {
+        .heading-section h1 {
             font-size: 36px;
             margin: 0;
         }
 
-        /* Narrow Header */
-        .narrow-header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: fixed;
+        .heading-section .nav-buttons {
+            position: absolute;
+            bottom: 10px;
             width: 100%;
-            top: 60px;
-            z-index: 1000;
-            transition: top 0.3s ease-in-out, background-color 0.5s ease-in-out;
-        }
-
-        .narrow-header nav {
             display: flex;
             justify-content: center;
             gap: 20px;
         }
 
-        .narrow-header nav a {
-            color: #fff;
+        .heading-section .nav-buttons a {
+            background-color: #fff;
+            color: #1E90FF;
             text-decoration: none;
-            padding: 5px 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
             font-size: 18px;
             transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
 
-        .narrow-header nav a:hover {
-            background-color: #1E90FF;
-            border-radius: 5px;
+        .heading-section .nav-buttons a:hover {
+            background-color: #333;
+            color: #fff;
         }
 
-        /* Hide header on scroll down */
-        .hidden-header {
-            top: -100px;
-        }
-
-        /* Middle Section */
+        /* Middle Section (Photo and Name Only) */
         .middle-section {
-            padding: 40px 0;
+            padding: 40px 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-            transition: padding 0.5s ease-in-out;
+            background-color: #fff;
+            color: #333;
         }
 
         .middle-section img.photo {
@@ -127,10 +82,37 @@
         .middle-section h1 {
             margin-top: 20px;
             font-size: 48px;
-            color: #333;
+            color: #1E90FF;
             position: relative;
             z-index: 3;
             transition: color 0.3s ease-in-out;
+        }
+
+        /* Parallax Background for Articles Section */
+        .parallax-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('depositphotos_3423508-stock-illustration-green-earth-globe.jpg') no-repeat center center;
+            background-size: contain;
+            opacity: 0.4;
+            z-index: 1;
+            transform: translateZ(-1px) scale(2);
+            animation: rotate 60s linear infinite, glow 3s infinite alternate;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        @keyframes rotate {
+            from { transform: translateZ(-1px) scale(2) rotate(0deg); }
+            to { transform: translateZ(-1px) scale(2) rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px #1E90FF; }
+            50% { box-shadow: 0 0 20px #32CD32; }
+            100% { box-shadow: 0 0 20px #FF4500; }
         }
 
         /* Articles Section */
@@ -139,7 +121,11 @@
             margin: 40px auto;
             position: relative;
             z-index: 2;
-            transition: margin 0.5s ease-in-out;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
         }
 
         .articles-section .article {
@@ -218,62 +204,64 @@
             transform: scale(1.2);
         }
 
-        /* About Me Sidebar */
-        .about-me-sidebar {
-            width: 300px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            z-index: 2;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
-        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .heading-section h1 {
+                font-size: 28px;
+            }
 
-        .about-me-sidebar h2 {
-            margin-top: 0;
-            color: #1E90FF;
-            transition: color 0.3s ease-in-out;
-        }
+            .heading-section .nav-buttons a {
+                padding: 8px 16px;
+                font-size: 16px;
+            }
 
-        .about-me-sidebar p {
-            font-size: 14px;
-            color: #333;
-            transition: color 0.3s ease-in-out;
+            .middle-section h1 {
+                font-size: 36px;
+            }
+
+            .middle-section img.photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .articles-section {
+                width: 90%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .articles-section .article {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .about-me-sidebar {
+                width: 100%;
+                position: static;
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Parallax Background Globe -->
-    <div class="parallax-background"></div>
-
-    <!-- SAURAV AGRI-TECH Section -->
-    <div class="agri-tech-header" id="agri-tech">
-        <h1>SAURAV AGRI-TECH</h1>
-    </div>
-
-    <!-- Narrow Header -->
-    <div class="narrow-header" id="narrow-header">
-        <nav>
+    <!-- Heading Section -->
+    <div class="heading-section">
+        <h1>SAURAV AGRO-TECH</h1>
+        <div class="nav-buttons">
             <a href="#home">Home</a>
             <a href="#articles">Articles</a>
-        </nav>
+        </div>
     </div>
 
-    <!-- About Me Sidebar -->
-    <div class="about-me-sidebar">
-        <h2>About Me</h2>
-        <p>Hi, I'm Saurav Kattel, a passionate agricultural technology advocate, striving to bring innovative solutions to the farming community in Nepal.</p>
-    </div>
-
-    <!-- Middle Section -->
+    <!-- Middle Section (Photo and Name Only) -->
     <div class="middle-section" id="home">
         <img src="images.jpg" alt="Saurav Kattel" class="photo">
         <h1>Saurav Kattel</h1>
     </div>
+
+    <!-- Parallax Background for Articles Section -->
+    <div class="parallax-background"></div>
 
     <!-- Articles Section -->
     <div class="articles-section" id="articles">
@@ -297,24 +285,6 @@
         <a href="https://www.facebook.com/yourprofile" target="_blank"><img src="facebook-logo.png" alt="Facebook"></a>
         <a href="https://www.instagram.com/yourprofile" target="_blank"><img src="instagram-logo.png" alt="Instagram"></a>
     </footer>
-
-    <script>
-        // Hide and Show Header on Scroll
-        let lastScrollTop = 0;
-        window.addEventListener("scroll", function(){
-            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            let header = document.getElementById("narrow-header");
-
-            if (currentScroll > lastScrollTop) {
-                // Scroll down
-                header.classList.add("hidden-header");
-            } else {
-                // Scroll up
-                header.classList.remove("hidden-header");
-            }
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
-        }, false);
-    </script>
 
 </body>
 </html>
