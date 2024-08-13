@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAURAV AGRI-TECH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #e0f7fa, #00695c);
+            overflow: hidden;
+        }
+
+        .globe {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #3b8b00, #2c6a00);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+            animation: rotateGlobe 60s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .seedling {
+            width: 50px;
+            height: 100px;
+            position: absolute;
+            bottom: 20%;
+            animation: rotateSeedling 5s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        .seedling::before {
+            content: "";
+            width: 10px;
+            height: 60px;
+            background: #4caf50;
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            border-radius: 5px;
+        }
+
+        .seedling::after {
+            content: "";
+            width: 60px;
+            height: 30px;
+            background: #4caf50;
+            position: absolute;
+            bottom: 60px;
+            left: -5px;
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        @keyframes rotateSeedling {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        @keyframes rotateGlobe {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .glowing-circle {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            box-shadow: 0 0 30px 10px violet;
+            position: absolute;
+            animation: spiralGlow 10s linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes spiralGlow {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1.1);
+            }
+        }
+
+        header {
+            background: rgba(76, 175, 80, 0.8); /* Green background with transparency */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+            padding: 10px;
+            background-color: rgba(59, 47, 47, 0.8); /* Chocolatey black background with transparency */
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* White background with transparency */
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h2 {
+            color: #1E90FF;
+            margin-top: 0;
+        }
+
+        p.date {
+            color: #999;
+            font-size: 14px;
+        }
+
+        p.summary {
+            font-size: 16px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        aside {
+            margin-top: 30px;
+        }
+
+        /* Social media section */
+        .social-media {
+            text-align: center;
+            margin-top: 40px;
+            padding-bottom: 20px;
+        }
+
+        .social-media img {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            transition: transform 0.3s;
+        }
+
+        .social-media img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            main, aside {
+                width: 100%;
+                float: none;
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="globe cycle">
+            <div class="seedling"></div>
+        </div>
+        <div class="glowing-circle"></div>
+    </div>
+
+    <header>
+        <h1>SAURAV AGRI-TECH</h1>
+    </header>
+
+    <div class="container">
+        <main>
+            <article>
+                <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
+                <p class="date">August 11, 2024</p>
+                <p class="summary">
+                    जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। 
+                    नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ। 
+                    यो लेखमा हामी जैविक खेतीको चुनौतीहरू र नेपालमा यसलाई सफलतापूर्वक लागू गर्नका लागि आवश्यक कदमहरूबारे छलफल गर्नेछौं।
+                </p>
+                <a href="full-article.html" class="read-more">Read More</a>
+            </article>
+        </main>
+
+        <aside>
+            <section class="about">
+                <h3>About Me</h3>
+                <p>This section is a brief introduction about yourself. You can mention your background, interests, and what you like to write about.</p>
+            </section>
+
+            <section class="recent-articles">
+                <h3>Recent Articles</h3>
+                <ul>
+                    <li><a href="#">नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</a></li>
+                    <li><a href="#">Article Title 2</a></li>
+                    <li><a href="#">Article Title 3</a></li>
+                </ul>
+            </section>
+        </aside>
+
+        <div class="social-media">
+            <a href="https://www.facebook.com/saurav.kattel.5" target="_blank">
+                <img src="images/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/saurav_3177?igsh=MWQ3YW9qZHpzZnlybA==" target="_blank">
+                <img src="images/instagram.png" alt="Instagram">
+            </a>
+        </div>
+    </div>
+</body>
+</html>
