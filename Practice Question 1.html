@@ -118,7 +118,7 @@
             position: relative;
         }
 
-        #view-answers-btn {
+        #view-answers-btn, #home-btn {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 18px;
@@ -163,6 +163,7 @@
             <h2>Your Score</h2>
             <div id="final-score"></div>
             <button id="view-answers-btn" onclick="viewAnswers()">View Answers</button>
+            <button id="home-btn" onclick="goHome()">Home</button>
             <div id="fireworks-container"></div>
         </div>
     </div>
@@ -278,6 +279,8 @@
         const submitButton = document.getElementById('submit');
         const resultSection = document.getElementById('result-section');
         const finalScoreDisplay = document.getElementById('final-score');
+        let score = 0;
+        let answeredCorrectly = Array(questions.length).fill(null); // Track correct/incorrect answers
 
         // Timer function
         function startTimer() {
@@ -341,6 +344,11 @@
             });
 
             updatePaginationButtons();
+
+            // If viewing answers, show the correct/incorrect indicators
+            if (resultSection.style.display === 'none' && score > 0) {
+                showAnswerIndicators();
+            }
         }
 
         // Pagination controls
@@ -381,20 +389,27 @@
 
                 alert('Please answer all questions before submitting.');
             } else {
+                calculateScore();
                 showFinalResult();
             }
         }
 
-        // Show the final result on a new page
-        function showFinalResult() {
-            let score = 0;
+        // Calculate the user's score
+        function calculateScore() {
+            score = 0;
 
             questions.forEach((question, index) => {
                 if (userAnswers[index] === question.answer) {
                     score++;
+                    answeredCorrectly[index] = true;
+                } else {
+                    answeredCorrectly[index] = false;
                 }
             });
+        }
 
+        // Show the final result on a new page
+        function showFinalResult() {
             document.getElementById('quiz-container').style.display = 'none';
             resultSection.style.display = 'block';
             finalScoreDisplay.textContent = `You answered ${score} out of ${questions.length} questions correctly.`;
@@ -407,6 +422,15 @@
             resultSection.style.display = 'none';
             document.getElementById('quiz-container').style.display = 'block';
 
+            // Show pagination to allow navigation through all answers
+            document.querySelector('.pagination').style.display = 'flex';
+            document.getElementById('submit').style.display = 'none';
+
+            loadQuestions();
+        }
+
+        // Show answer indicators (correct/incorrect) when viewing answers
+        function showAnswerIndicators() {
             questions.forEach((question, index) => {
                 const optionItems = document.querySelectorAll(`input[name="question${index}"]`);
 
@@ -423,17 +447,13 @@
 
                     if (option.value === question.answer) {
                         indicator.classList.add('correct');
-                    } else if (option.checked) {
+                    } else if (option.checked && !answeredCorrectly[index]) {
                         indicator.classList.add('incorrect');
                     }
 
                     optionLabel.appendChild(indicator);
                 });
             });
-
-            // Show pagination to allow navigation through all answers
-            document.querySelector('.pagination').style.display = 'flex';
-            document.getElementById('submit').style.display = 'none';
         }
 
         // Initialize
@@ -477,6 +497,11 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Home button action
+        function goHome() {
+            window.location.href = "https://sauravkattel.com.np/index.html";
+        }
     </script>
 </body>
 </html>
