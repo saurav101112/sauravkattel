@@ -115,6 +115,7 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             padding: 20px;
             text-align: center;
+            position: relative;
         }
 
         #view-answers-btn {
@@ -126,6 +127,16 @@
             color: white;
             border: none;
             border-radius: 5px;
+        }
+
+        #fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
         }
     </style>
 </head>
@@ -152,6 +163,7 @@
             <h2>Your Score</h2>
             <div id="final-score"></div>
             <button id="view-answers-btn" onclick="viewAnswers()">View Answers</button>
+            <div id="fireworks-container"></div>
         </div>
     </div>
 
@@ -386,13 +398,14 @@
             document.getElementById('quiz-container').style.display = 'none';
             resultSection.style.display = 'block';
             finalScoreDisplay.textContent = `You answered ${score} out of ${questions.length} questions correctly.`;
+
+            startFireworks();
         }
 
         // Show correct and incorrect answers
         function viewAnswers() {
             resultSection.style.display = 'none';
-            const questionsContainer = document.getElementById('quiz-container');
-            questionsContainer.style.display = 'block';
+            document.getElementById('quiz-container').style.display = 'block';
 
             questions.forEach((question, index) => {
                 const optionItems = document.querySelectorAll(`input[name="question${index}"]`);
@@ -418,15 +431,52 @@
                 });
             });
 
-            // Hide navigation and submission buttons after viewing answers
-            document.querySelector('.pagination').style.display = 'none';
+            // Show pagination to allow navigation through all answers
+            document.querySelector('.pagination').style.display = 'flex';
             document.getElementById('submit').style.display = 'none';
         }
 
         // Initialize
         loadQuestions();
         startTimer();
-    </script>
 
+        // Fireworks animation on result page
+        function startFireworks() {
+            const container = document.getElementById('fireworks-container');
+            const colors = ['#ff4b4b', '#ffde4b', '#4bff4b', '#4bffff', '#4b4bff'];
+
+            for (let i = 0; i < 30; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.position = 'absolute';
+                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.borderRadius = '50%';
+                firework.style.width = `${Math.random() * 10 + 5}px`;
+                firework.style.height = firework.style.width;
+                firework.style.left = `${Math.random() * 100}%`;
+                firework.style.top = `${Math.random() * 100}%`;
+                firework.style.animation = `explode 1s ease-in-out infinite`;
+                container.appendChild(firework);
+
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        // Fireworks animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes explode {
+                0% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(5);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
