@@ -105,6 +105,28 @@
         .hidden {
             display: none;
         }
+
+        #result-section {
+            display: none;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+        }
+
+        #view-answers-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -121,9 +143,15 @@
                 <button id="next-btn" onclick="nextPage()">Next</button>
             </div>
 
-            <button id="submit" onclick="showResult()" disabled>Submit Answers</button>
+            <button id="submit" onclick="validateAndSubmit()">Submit Answers</button>
 
             <div id="result"></div>
+        </div>
+
+        <div id="result-section">
+            <h2>Your Score</h2>
+            <div id="final-score"></div>
+            <button id="view-answers-btn" onclick="viewAnswers()">View Answers</button>
         </div>
     </div>
 
@@ -235,8 +263,9 @@
         let timeLeft = 90 * 60; // 1 hour 30 minutes in seconds
         const timerDisplay = document.getElementById('timer');
         const questionsContainer = document.getElementById('questions-container');
-        const resultDisplay = document.getElementById('result');
         const submitButton = document.getElementById('submit');
+        const resultSection = document.getElementById('result-section');
+        const finalScoreDisplay = document.getElementById('final-score');
 
         // Timer function
         function startTimer() {
@@ -246,7 +275,7 @@
                 timerDisplay.textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 if (timeLeft <= 0) {
                     clearInterval(timer);
-                    showResult();
+                    validateAndSubmit();
                 }
                 timeLeft--;
             }, 1000);
@@ -284,7 +313,6 @@
 
                     optionInput.addEventListener('change', () => {
                         userAnswers[start + index] = option;
-                        checkAllAnswered();
                     });
 
                     const optionLabel = document.createElement('label');
@@ -326,19 +354,47 @@
             }
         }
 
-        // Check if all questions have been answered to enable submission
-        function checkAllAnswered() {
-            const allAnswered = userAnswers.every(answer => answer !== null);
-            submitButton.disabled = !allAnswered;
+        // Validate answers and show result
+        function validateAndSubmit() {
+            const firstUnanswered = userAnswers.findIndex(answer => answer === null);
+
+            if (firstUnanswered !== -1) {
+                const pageIndex = Math.floor(firstUnanswered / questionsPerPage);
+                currentPage = pageIndex;
+                loadQuestions();
+
+                // Scroll to the first unanswered question
+                const questionDiv = document.querySelector(`#questions-container .question:nth-child(${(firstUnanswered % questionsPerPage) + 1})`);
+                questionDiv.scrollIntoView({ behavior: 'smooth' });
+
+                alert('Please answer all questions before submitting.');
+            } else {
+                showFinalResult();
+            }
         }
 
-        // Handle form submission
-        function showResult() {
+        // Show the final result on a new page
+        function showFinalResult() {
             let score = 0;
 
             questions.forEach((question, index) => {
-                const selectedAnswer = userAnswers[index];
-                const correctAnswer = question.answer;
+                if (userAnswers[index] === question.answer) {
+                    score++;
+                }
+            });
+
+            document.getElementById('quiz-container').style.display = 'none';
+            resultSection.style.display = 'block';
+            finalScoreDisplay.textContent = `You answered ${score} out of ${questions.length} questions correctly.`;
+        }
+
+        // Show correct and incorrect answers
+        function viewAnswers() {
+            resultSection.style.display = 'none';
+            const questionsContainer = document.getElementById('quiz-container');
+            questionsContainer.style.display = 'block';
+
+            questions.forEach((question, index) => {
                 const optionItems = document.querySelectorAll(`input[name="question${index}"]`);
 
                 optionItems.forEach(option => {
@@ -352,10 +408,7 @@
                         existingIndicator.remove();
                     }
 
-                    if (option.value === correctAnswer) {
-                        if (option.checked) {
-                            score++;
-                        }
+                    if (option.value === question.answer) {
                         indicator.classList.add('correct');
                     } else if (option.checked) {
                         indicator.classList.add('incorrect');
@@ -365,7 +418,9 @@
                 });
             });
 
-            resultDisplay.textContent = `Your score is: ${score}/${questions.length}`;
+            // Hide navigation and submission buttons after viewing answers
+            document.querySelector('.pagination').style.display = 'none';
+            document.getElementById('submit').style.display = 'none';
         }
 
         // Initialize
