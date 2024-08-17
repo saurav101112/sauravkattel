@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAURAV AGRO-TECH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: #333;
+            background: linear-gradient(135deg, #333, #1E90FF);
             color: #333;
             scroll-behavior: smooth;
             overflow-x: hidden;
@@ -23,6 +24,7 @@
             text-align: center;
             color: #fff;
             position: relative;
+            font-family: 'Roboto Condensed', sans-serif;
         }
 
         .heading-section h1 {
@@ -67,7 +69,7 @@
         .middle-section {
             padding: 40px 20px;
             text-align: center;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             color: #333;
             position: relative;
             z-index: 2;
@@ -96,107 +98,37 @@
             position: relative;
             z-index: 3;
             transition: color 0.3s ease-in-out;
+            font-family: 'Roboto Slab', serif;
         }
 
         .middle-section h1:hover {
             color: #FF4500;
         }
 
-        /* Newsletter Signup */
-        .newsletter-signup {
-            padding: 40px 20px;
-            background-color: #f7f7f7;
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .newsletter-signup h2 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .newsletter-signup input[type="email"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 300px;
-            max-width: 100%;
-            margin-right: 10px;
-        }
-
-        .newsletter-signup button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #1E90FF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .newsletter-signup button:hover {
-            background-color: #FF4500;
-        }
-
-        /* Testimonials Section */
-        .testimonials-section {
-            padding: 40px 20px;
-            background-color: #fff;
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .testimonials-section h2 {
-            font-size: 28px;
-            color: #1E90FF;
-            margin-bottom: 20px;
-        }
-
-        .testimonials-section .testimonial {
-            margin-bottom: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f7f7f7;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-            max-width: 80%;
-        }
-
-        .testimonials-section .testimonial p {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .testimonials-section .testimonial .author {
-            font-size: 14px;
-            color: #999;
-            text-align: right;
-        }
-
-        /* Social Media Feed */
-        .social-media-feed {
-            padding: 40px 20px;
-            background-color: #f7f7f7;
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .social-media-feed h2 {
-            font-size: 28px;
-            color: #1E90FF;
-            margin-bottom: 20px;
-        }
-
-        .social-media-feed iframe {
+        /* Parallax Background for Articles Section */
+        .parallax-background {
+            position: relative;
+            top: 0;
             width: 100%;
-            max-width: 500px;
-            height: 500px;
-            border: none;
-            overflow: hidden;
+            height: 100%;
+            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: 1;
+            transform: scale(1.2);
+            animation: rotate 60s linear infinite, glow 3s infinite alternate;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        @keyframes rotate {
+            from { transform: scale(1.2) rotate(0deg); }
+            to { transform: scale(1.2) rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px #1E90FF; }
+            50% { box-shadow: 0 0 20px #32CD32; }
+            100% { box-shadow: 0 0 20px #FF4500; }
         }
 
         /* Articles Section (Enhanced Blog) */
@@ -205,7 +137,7 @@
             margin: 40px auto;
             position: relative;
             z-index: 2;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -229,6 +161,7 @@
             margin-top: 0;
             color: #1E90FF;
             transition: color 0.3s ease-in-out;
+            font-family: 'Roboto Slab', serif;
         }
 
         .articles-section .article p.date {
@@ -247,45 +180,12 @@
             color: #1E90FF;
             text-decoration: none;
             transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+            font-family: 'Roboto Condensed', sans-serif;
         }
 
         .articles-section .read-more:hover {
             text-decoration: underline;
             color: #FF4500;
-        }
-
-        /* Image Gallery */
-        .image-gallery {
-            padding: 40px 20px;
-            background-color: #f7f7f7;
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .image-gallery h2 {
-            font-size: 28px;
-            color: #1E90FF;
-            margin-bottom: 20px;
-        }
-
-        .image-gallery .gallery-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .image-gallery .gallery-grid img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .image-gallery .gallery-grid img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer Section */
@@ -327,13 +227,19 @@
             width: 25%;
             padding: 20px;
             background-color: rgba(255, 255, 255, 0.8);
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            z-index: 2;
+            position: absolute;
+            top: 300px;
+            left: 20px;
+            z-index: 3;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .about-me-sidebar:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
         }
 
         .about-me-sidebar h2 {
@@ -350,8 +256,8 @@
 
         /* Chatbot Styles */
         .chat-container {
-            position: fixed;
-            top: 100px;
+            position: absolute;
+            top: 350px;
             left: -350px; /* Initially hide the chat container off-screen */
             width: 300px;
             background-color: #fff;
@@ -368,6 +274,7 @@
             color: #fff;
             padding: 10px;
             text-align: center;
+            font-family: 'Roboto Condensed', sans-serif;
         }
 
         .chat-body {
@@ -399,6 +306,7 @@
             padding: 5px 10px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-family: 'Roboto Condensed', sans-serif;
         }
 
         button:hover {
@@ -422,7 +330,7 @@
         /* Chatbot Icon */
         .chat-icon {
             position: fixed;
-            top: 100px;
+            top: 310px;
             left: 20px;
             width: 50px;
             height: 50px;
@@ -471,6 +379,7 @@
                 position: static;
                 margin-top: 20px;
                 text-align: center;
+                transform: none;
             }
 
             .chat-container {
@@ -480,19 +389,8 @@
             }
 
             .chat-icon {
-                top: 60px;
+                top: 250px;
                 left: 10px;
-            }
-
-            .newsletter-signup,
-            .testimonials-section,
-            .social-media-feed,
-            .image-gallery {
-                padding: 20px 10px;
-            }
-
-            .social-media-feed iframe {
-                height: 300px;
             }
         }
     </style>
@@ -516,41 +414,10 @@
         <h1>Saurav Kattel</h1>
     </div>
 
-    <!-- Newsletter Signup -->
-    <div class="newsletter-signup">
-        <h2>Subscribe to Our Newsletter</h2>
-        <input type="email" placeholder="Enter your email address">
-        <button>Subscribe</button>
-    </div>
-
-    <!-- Testimonials Section -->
-    <div class="testimonials-section">
-        <h2>What Our Clients Say</h2>
-        <div class="testimonial">
-            <p>"Saurav Agro-Tech has revolutionized our farming practices. Their innovative techniques and support have been invaluable!"</p>
-            <div class="author">- Farmer John Doe</div>
-        </div>
-        <div class="testimonial">
-            <p>"The expertise and dedication of Saurav Agro-Tech have greatly improved our crop yield. Highly recommend their services!"</p>
-            <div class="author">- Farmer Jane Smith</div>
-        </div>
-    </div>
-
-    <!-- Social Media Feed -->
-    <div class="social-media-feed">
-        <h2>Follow Us on Instagram</h2>
-        <iframe src="https://www.instagram.com/p/CGFKo2wADzp/embed" allowtransparency="true" frameborder="0"></iframe>
-    </div>
-
-    <!-- Image Gallery -->
-    <div class="image-gallery">
-        <h2>Our Projects</h2>
-        <div class="gallery-grid">
-            <img src="project1.jpg" alt="Project 1">
-            <img src="project2.jpg" alt="Project 2">
-            <img src="project3.jpg" alt="Project 3">
-            <img src="project4.jpg" alt="Project 4">
-        </div>
+    <!-- About Me Sidebar -->
+    <div class="about-me-sidebar">
+        <h2>About Me</h2>
+        <p>Hi, I'm Saurav Kattel, a passionate agricultural technology advocate, striving to bring innovative solutions to the farming community in Nepal.</p>
     </div>
 
     <!-- Articles Section -->
@@ -566,12 +433,6 @@
             </p>
             <a href="full-article.html" class="read-more">Read More</a>
         </div>
-    </div>
-
-    <!-- About Me Sidebar -->
-    <div class="about-me-sidebar">
-        <h2>About Me</h2>
-        <p>Hi, I'm Saurav Kattel, a passionate agricultural technology advocate, striving to bring innovative solutions to the farming community in Nepal.</p>
     </div>
 
     <!-- Footer Section -->
