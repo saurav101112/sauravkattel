@@ -245,9 +245,9 @@
 
         /* Chatbot Styles */
         .chat-container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+            position: fixed;
+            top: 100px;
+            left: -350px; /* Initially hide the chat container off-screen */
             width: 300px;
             background-color: #fff;
             border-radius: 10px;
@@ -255,6 +255,7 @@
             font-family: Arial, sans-serif;
             overflow: hidden;
             z-index: 3;
+            transition: left 0.3s ease-in-out;
         }
 
         .chat-header {
@@ -313,6 +314,22 @@
             color: #333;
         }
 
+        /* Chatbot Icon */
+        .chat-icon {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 4;
+            transition: transform 0.3s;
+        }
+
+        .chat-icon:hover {
+            transform: scale(1.1);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .heading-section h1 {
@@ -352,9 +369,14 @@
             }
 
             .chat-container {
-                position: static;
                 width: 100%;
-                margin-top: 20px;
+                left: -100%;
+                transition: left 0.3s ease-in-out;
+            }
+
+            .chat-icon {
+                top: 60px;
+                left: 10px;
             }
         }
     </style>
@@ -374,19 +396,6 @@
 
     <!-- Middle Section (Photo and Name Only) -->
     <div class="middle-section" id="home">
-        <!-- Chatbot HTML -->
-        <div class="chat-container">
-            <div class="chat-header">
-                <h3>Chat with Saurav Agro-Tech</h3>
-            </div>
-            <div class="chat-body" id="chat-body">
-                <!-- Messages will appear here -->
-            </div>
-            <div class="chat-footer">
-                <input type="text" id="user-input" placeholder="Type your message..." />
-                <button onclick="sendMessage()">Send</button>
-            </div>
-        </div>
         <img src="images.jpg" alt="Saurav Kattel" class="photo">
         <h1>Saurav Kattel</h1>
     </div>
@@ -423,25 +432,50 @@
         </a>
     </footer>
 
+    <!-- Chatbot HTML -->
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <h3>Chat with Saurav Agro-Tech</h3>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="user-input" placeholder="Type your message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot Icon -->
+    <img src="communication.png" alt="Chat Icon" class="chat-icon" id="chat-icon">
+
     <script>
+        const chatContainer = document.getElementById('chat-container');
+        const chatIcon = document.getElementById('chat-icon');
         const chatBody = document.getElementById('chat-body');
         const userInput = document.getElementById('user-input');
 
-        const predefinedResponses = {
-            "hello": "Hi! How can I assist you with agricultural technology today?",
-            "what is your name?": "I'm Saurav Agro-Tech's automated assistant.",
-            "what services do you offer?": "We provide innovative solutions for farming, including organic farming techniques and horticulture support.",
-            "bye": "Goodbye! Have a great day!"
-        };
+        const predefinedResponses = [
+            "I see you're interested in agricultural technology!",
+            "That's a great question. Here's something related.",
+            "Let's discuss something related to agriculture.",
+            "Agriculture is fascinating, don't you think?",
+            "This sounds like a question about farming techniques.",
+            "I'm here to help with your agricultural inquiries!"
+        ];
+
+        function generateResponse() {
+            return predefinedResponses[Math.floor(Math.random() * predefinedResponses.length)];
+        }
 
         function sendMessage() {
-            const message = userInput.value.toLowerCase().trim();
+            const message = userInput.value.trim();
             if (message) {
                 appendMessage('user', message);
                 userInput.value = '';
 
                 setTimeout(() => {
-                    const response = predefinedResponses[message] || "I'm sorry, I don't understand that question.";
+                    const response = generateResponse();
                     appendMessage('bot', response);
                 }, 500); // Simulate typing delay
             }
@@ -454,6 +488,14 @@
             chatBody.appendChild(messageElement);
             chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the latest message
         }
+
+        chatIcon.onclick = function() {
+            if (chatContainer.style.left === '20px') {
+                chatContainer.style.left = '-350px'; // Hide the chat container
+            } else {
+                chatContainer.style.left = '20px'; // Show the chat container
+            }
+        };
     </script>
 </body>
 </html>
