@@ -83,6 +83,7 @@
         }
 
         #home-btn {
+            display: none;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -165,7 +166,6 @@
 
             <div class="pagination">
                 <button id="prev-btn" onclick="prevPage()">Previous</button>
-                <button id="home-btn" onclick="goHome()">Home</button>
                 <button id="next-btn" onclick="nextPage()">Next</button>
             </div>
 
@@ -285,7 +285,7 @@
             { question: "The number of circles of a given radius that touches both of the axes is:", options: ["3", "4", "1", "2"], answer: "4" }
         ];
 
-        const questionsPerPage = 10; // Number of questions per page
+        const questionsPerPage = 2; // Number of questions per page
         let currentPage = 0;
         let userAnswers = Array(questions.length).fill(null); // Store user answers
         let timeLeft = 90 * 60; // 1 hour 30 minutes in seconds
@@ -429,6 +429,9 @@
             resultSection.style.display = 'block';
             finalScoreDisplay.textContent = `You answered ${score} out of ${questions.length} questions correctly.`;
 
+            document.getElementById('view-answers-btn').style.display = 'inline-block'; // Show the View Answers button
+            document.getElementById('home-btn').style.display = 'none'; // Hide the Home button for now
+
             startFireworks();
         }
 
@@ -442,6 +445,9 @@
             document.getElementById('submit').style.display = 'none';
 
             loadQuestions();
+
+            document.getElementById('view-answers-btn').style.display = 'none'; // Hide the View Answers button
+            document.getElementById('home-btn').style.display = 'inline-block'; // Show the Home button after viewing answers
         }
 
         // Show answer indicators (correct/incorrect) when viewing answers
@@ -518,6 +524,5 @@
             window.location.href = "https://sauravkattel.com.np/index.html";
         }
     </script>
-
 </body>
 </html>
