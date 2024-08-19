@@ -6,11 +6,42 @@
     <title>SAURAV AGRO-TECH</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* New Background Styling */
+        html {
+            --s:67px; /* shape size */
+            --m:4px;  /* line thickness */
+
+            --v1: #fff 119.5deg, #0000 120.5deg;
+            --v2: #000  119.5deg, #0000 120.5deg;
+            background:
+                conic-gradient(at var(--m)              calc(var(--s)*0.5777), transparent 270deg, #000 0deg),
+                conic-gradient(at calc(100% - var(--m)) calc(var(--s)*0.5777), #000 90deg,  transparent 0deg),
+                conic-gradient(from -60deg at 50% calc(var(--s)*0.8662)             , var(--v1)),
+                conic-gradient(from -60deg at 50% calc(var(--s)*0.8662 + 2*var(--m)), var(--v2)),
+                conic-gradient(from 120deg at 50% calc(var(--s)*1.4435 + 3*var(--m)), var(--v1)),
+                conic-gradient(from 120deg at 50% calc(var(--s)*1.4435 +   var(--m)), var(--v2)),
+                linear-gradient(90deg, #fff calc(50% - var(--m)),#000 0 calc(50% + var(--m)), #fff 0);
+            background-size: calc(var(--s) + 2*var(--m)) calc(var(--s)*1.732 + 3*var(--m)); 
+            mix-blend-mode:lighten;
+        }
+
+        html:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, red, blue, green) left/400% 100%;
+            animation: f 2s infinite alternate linear;
+        }
+
+        @keyframes f {
+            100% {background-position:right}
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #333, #1E90FF);
+            background: transparent; /* Changed to transparent to allow the background effect to show */
             color: #333;
             scroll-behavior: smooth;
             overflow-x: hidden;
@@ -67,11 +98,11 @@
 
         /* Middle Section (Photo and Name Only) */
         .middle-section {
+            position: relative;
             padding: 40px 20px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
-            position: relative;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 2;
         }
 
@@ -94,7 +125,7 @@
         .middle-section h1 {
             margin-top: 20px;
             font-size: 48px;
-            color: #1E90FF;
+            color: #fff;
             position: relative;
             z-index: 3;
             transition: color 0.3s ease-in-out;
@@ -461,7 +492,7 @@
     </div>
 
     <!-- Chatbot Icon -->
-    <img src="chat.png" alt="Chat Icon" class="chat-icon" id="chat-icon">
+    <img src="communication.png" alt="Chat Icon" class="chat-icon" id="chat-icon">
 
     <script>
         const chatContainer = document.getElementById('chat-container');
