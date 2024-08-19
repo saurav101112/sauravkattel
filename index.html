@@ -67,12 +67,25 @@
 
         /* Middle Section (Photo and Name Only) */
         .middle-section {
+            position: relative;
             padding: 40px 20px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
-            position: relative;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 2;
+        }
+
+        .middle-section video {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         .middle-section img.photo {
@@ -94,7 +107,7 @@
         .middle-section h1 {
             margin-top: 20px;
             font-size: 48px;
-            color: #1E90FF;
+            color: #fff;
             position: relative;
             z-index: 3;
             transition: color 0.3s ease-in-out;
@@ -410,6 +423,10 @@
 
     <!-- Middle Section (Photo and Name Only) -->
     <div class="middle-section" id="home">
+        <video autoplay muted loop>
+            <source src="9507e44e-d526-449d-b8b9-dea8fa26345c (online-video-cutter.com).mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <img src="images.jpg" alt="Saurav Kattel" class="photo">
         <h1>Saurav Kattel</h1>
     </div>
@@ -461,7 +478,7 @@
     </div>
 
     <!-- Chatbot Icon -->
-    <img src="chat.png" alt="Chat Icon" class="chat-icon" id="chat-icon">
+    <img src="communication.png" alt="Chat Icon" class="chat-icon" id="chat-icon">
 
     <script>
         const chatContainer = document.getElementById('chat-container');
