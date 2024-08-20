@@ -6,7 +6,7 @@
     <title>SAURAV AGRO-TECH</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* New Background Styling */
+        /* Updated Background Styling */
         html {
             --s:67px; /* shape size */
             --m:4px;  /* line thickness */
@@ -22,30 +22,21 @@
                 conic-gradient(from 120deg at 50% calc(var(--s)*1.4435 +   var(--m)), var(--v2)),
                 linear-gradient(90deg, #fff calc(50% - var(--m)),#000 0 calc(50% + var(--m)), #fff 0);
             background-size: calc(var(--s) + 2*var(--m)) calc(var(--s)*1.732 + 3*var(--m)); 
-            mix-blend-mode:lighten;
-        }
-
-        html:before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, red, blue, green) left/400% 100%;
-            animation: f 2s infinite alternate linear;
-        }
-
-        @keyframes f {
-            100% {background-position:right}
+            mix-blend-mode: lighten;
+            height: 100%;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: transparent; /* Changed to transparent to allow the background effect to show */
+            background: transparent; /* Transparent background to allow the effect to show */
             color: #333;
             scroll-behavior: smooth;
             overflow-x: hidden;
             transition: background-color 0.3s ease-in-out;
+            position: relative;
+            z-index: 1;
         }
 
         /* Heading Section */
