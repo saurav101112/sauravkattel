@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAURAV AGRO-TECH</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Courgette|Open+Sans&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -106,302 +106,26 @@
             color: #FF4500;
         }
 
-        /* New Section (Octoberfest) */
+        /* New Section (Octoberfest with Dynamic Greeting) */
         .october-section {
-            padding: 20px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             background: radial-gradient(#333, #000);
             color: #fff;
             position: relative;
             z-index: 2;
-            height: 250px; /* Reduced height */
+            height: 200px; /* Height reduced to fit text only */
             overflow: hidden;
         }
 
-        .october-section h2 {
-            font-family: 'Courgette', cursive;
-            font-size: 28px; /* Slightly smaller font size */
+        .title h1 {
+            font-size: 10vmin; /* Slightly larger font size */
+            font-weight: 900;
+            font-family: "Montserrat", sans-serif;
+            color: darkorange; /* Changed to dark orange */
             margin: 0;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-
-        .leaf {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden; /* Confine leaves to this section */
-        }
-
-        .leaf div {
-            position: absolute;
-            display: block;
-        }
-
-        .leaf div:nth-child(1) { left: 20%; animation: fall 15s linear infinite; animation-delay: -2s; }
-        .leaf div:nth-child(2) { left: 70%; animation: fall 15s linear infinite; animation-delay: -4s; }
-        .leaf div:nth-child(3) { left: 10%; animation: fall 20s linear infinite; animation-delay: -7s; }
-        .leaf div:nth-child(4) { left: 50%; animation: fall 18s linear infinite; animation-delay: -5s; }
-        .leaf div:nth-child(5) { left: 85%; animation: fall 14s linear infinite; animation-delay: -5s; }
-        .leaf div:nth-child(6) { left: 15%; animation: fall 16s linear infinite; animation-delay: -10s; }
-        .leaf div:nth-child(7) { left: 90%; animation: fall 15s linear infinite; animation-delay: -4s; }
-
-        @keyframes fall {
-            0% {
-                opacity: 1;
-                top: -10%;
-                transform: translateX(20px) rotate(0deg);
-            }
-            20% { opacity: 0.8; transform: translateX(-20px) rotate(45deg); }
-            40% { transform: translateX(-20px) rotate(90deg); }
-            60% { transform: translateX(-20px) rotate(135deg); }
-            80% { transform: translateX(-20px) rotate(180deg); }
-            100% {
-                top: 110%;
-                transform: translateX(-20px) rotate(225deg);
-            }
-        }
-
-        .leaf1 { transform: rotateX(180deg); }
-
-        /* Parallax Background for Articles Section */
-        .parallax-background {
-            position: relative;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
-            background-size: cover;
-            opacity: 0.3;
-            z-index: 1;
-            transform: scale(1.2);
-            animation: rotate 60s linear infinite, glow 3s infinite alternate;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        @keyframes rotate {
-            from { transform: scale(1.2) rotate(0deg); }
-            to { transform: scale(1.2) rotate(360deg); }
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 20px #1E90FF; }
-            50% { box-shadow: 0 0 20px #32CD32; }
-            100% { box-shadow: 0 0 20px #FF4500; }
-        }
-
-        /* Articles Section (Enhanced Blog) */
-        .articles-section {
-            width: 60%;
-            margin: 40px auto;
-            position: relative;
-            z-index: 2;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
-        }
-
-        .articles-section .article {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
-        }
-
-        .articles-section .article:hover {
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .articles-section .article h2 {
-            margin-top: 0;
-            color: #1E90FF;
-            transition: color 0.3s ease-in-out;
-            font-family: 'Roboto Slab', serif;
-        }
-
-        .articles-section .article p.date {
-            color: #999;
-            font-size: 14px;
-        }
-
-        .articles-section .article p.summary {
-            font-size: 16px;
-            margin: 20px 0;
-        }
-
-        .articles-section .read-more {
-            display: inline-block;
-            margin-top: 10px;
-            color: #1E90FF;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
-            font-family: 'Roboto Condensed', sans-serif;
-        }
-
-        .articles-section .read-more:hover {
-            text-decoration: underline;
-            color: #FF4500;
-        }
-
-        /* Footer Section */
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-        }
-
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-            color: #FF4500;
-        }
-
-        footer img {
-            width: 32px;
-            height: 32px;
-            vertical-align: middle;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        footer img:hover {
-            transform: scale(1.2);
-        }
-
-        /* About Me Sidebar */
-        .about-me-sidebar {
-            width: 25%;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            position: absolute;
-            top: 300px;
-            left: 20px;
-            z-index: 3;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .about-me-sidebar:hover {
-            transform: translateY(-10px);
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .about-me-sidebar h2 {
-            margin-top: 0;
-            color: #1E90FF;
-            transition: color 0.3s ease-in-out;
-        }
-
-        .about-me-sidebar p {
-            font-size: 14px;
-            color: #333;
-            transition: color 0.3s ease-in-out;
-        }
-
-        /* Chatbot Styles */
-        .chat-container {
-            position: absolute;
-            top: 350px;
-            left: -350px; /* Initially hide the chat container off-screen */
-            width: 300px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            z-index: 3;
-            transition: left 0.3s ease-in-out;
-        }
-
-        .chat-header {
-            background-color: #1E90FF;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            font-family: 'Roboto Condensed', sans-serif;
-        }
-
-        .chat-body {
-            height: 200px;
-            padding: 10px;
-            overflow-y: scroll;
-            border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .chat-footer {
-            padding: 10px;
-            display: flex;
-            gap: 10px;
-        }
-
-        #user-input {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #1E90FF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'Roboto Condensed', sans-serif;
-        }
-
-        button:hover {
-            background-color: #FF4500;
-        }
-
-        .message {
-            margin-bottom: 10px;
-        }
-
-        .message.bot {
-            text-align: left;
-            color: #1E90FF;
-        }
-
-        .message.user {
-            text-align: right;
-            color: #333;
-        }
-
-        /* Chatbot Icon */
-        .chat-icon {
-            position: fixed;
-            top: 310px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            z-index: 4;
-            transition: transform 0.3s;
-        }
-
-        .chat-icon:hover {
-            transform: scale(1.1);
         }
 
         /* Responsive Design */
@@ -424,42 +148,12 @@
                 height: 150px;
             }
 
-            .articles-section {
-                width: 90%;
-                margin: 20px auto;
-                padding: 15px;
-            }
-
-            .articles-section .article {
-                padding: 15px;
-                margin-bottom: 15px;
-            }
-
-            .about-me-sidebar {
-                width: 100%;
-                position: static;
-                margin-top: 20px;
-                text-align: center;
-                transform: none;
-            }
-
-            .october-section h2 {
-                font-size: 24px;
-            }
-
             .october-section {
-                height: 200px;
+                height: 150px;
             }
 
-            .chat-container {
-                width: 100%;
-                left: -100%;
-                transition: left 0.3s ease-in-out;
-            }
-
-            .chat-icon {
-                top: 250px;
-                left: 10px;
+            .title h1 {
+                font-size: 16vmin;
             }
         }
     </style>
@@ -483,35 +177,10 @@
         <h1>Saurav Kattel</h1>
     </div>
 
-    <!-- Octoberfest Section -->
+    <!-- Octoberfest Section with Dynamic Greeting -->
     <div class="october-section">
-        <h2 id="greeting"></h2> <!-- Placeholder for greeting based on time -->
-        <div class="leaf">
-            <div><img src="http://www.pngmart.com/files/1/Fall-Autumn-Leaves-Transparent-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Pictures-Collage-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Clip-Art-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Green-Leaves-PNG-File.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Transparent-Autumn-Leaves-Falling-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Realistic-Autumn-Fall-Leaves-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://cdn.clipart-db.ru/rastr/autumn_leaves_025.png" height="75px" width="75px"></div>
-        </div>
-        <div class="leaf leaf1">
-            <div><img src="http://www.pngmart.com/files/1/Fall-Autumn-Leaves-Transparent-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Pictures-Collage-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Clip-Art-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Green-Leaves-PNG-File.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Transparent-Autumn-Leaves-Falling-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Realistic-Autumn-Fall-Leaves-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://cdn.clipart-db.ru/rastr/autumn_leaves_025.png" height="75px" width="75px"></div>
-        </div>
-        <div class="leaf leaf2">
-            <div><img src="http://www.pngmart.com/files/1/Fall-Autumn-Leaves-Transparent-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Pictures-Collage-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Clip-Art-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Green-Leaves-PNG-File.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Transparent-Autumn-Leaves-Falling-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Realistic-Autumn-Fall-Leaves-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://cdn.clipart-db.ru/rastr/autumn_leaves_025.png" height="75px" width="75px"></div>
+        <div class="title">
+            <h1 id="greeting"></h1> <!-- Placeholder for dynamic greeting -->
         </div>
     </div>
 
@@ -577,55 +246,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', setGreeting);
-    </script>
-
-    <script>
-        const chatContainer = document.getElementById('chat-container');
-        const chatIcon = document.getElementById('chat-icon');
-        const chatBody = document.getElementById('chat-body');
-        const userInput = document.getElementById('user-input');
-
-        const predefinedResponses = [
-            "I see you're interested in agricultural technology!",
-            "That's a great question. Here's something related.",
-            "Let's discuss something related to agriculture.",
-            "Agriculture is fascinating, don't you think?",
-            "This sounds like a question about farming techniques.",
-            "I'm here to help with your agricultural inquiries!"
-        ];
-
-        function generateResponse() {
-            return predefinedResponses[Math.floor(Math.random() * predefinedResponses.length)];
-        }
-
-        function sendMessage() {
-            const message = userInput.value.trim();
-            if (message) {
-                appendMessage('user', message);
-                userInput.value = '';
-
-                setTimeout(() => {
-                    const response = generateResponse();
-                    appendMessage('bot', response);
-                }, 500); // Simulate typing delay
-            }
-        }
-
-        function appendMessage(sender, message) {
-            const messageElement = document.createElement('div');
-            messageElement.className = `message ${sender}`;
-            messageElement.innerText = message;
-            chatBody.appendChild(messageElement);
-            chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the latest message
-        }
-
-        chatIcon.onclick = function() {
-            if (chatContainer.style.left === '20px') {
-                chatContainer.style.left = '-350px'; // Hide the chat container
-            } else {
-                chatContainer.style.left = '20px'; // Show the chat container
-            }
-        };
     </script>
 </body>
 </html>
