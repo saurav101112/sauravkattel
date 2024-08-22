@@ -106,7 +106,7 @@
             color: #FF4500;
         }
 
-        /* New Section (Octoberfest with Dynamic Greeting) */
+        /* Octoberfest Section */
         .october-section {
             display: flex;
             justify-content: center;
@@ -116,16 +116,272 @@
             color: #fff;
             position: relative;
             z-index: 2;
-            height: 200px; /* Height reduced to fit text only */
+            height: 150px; /* Reduced height to fit text */
             overflow: hidden;
         }
 
-        .title h1 {
-            font-size: 10vmin; /* Slightly larger font size */
+        .october-section .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .october-section .title h1 {
+            font-size: 10vmin;
             font-weight: 900;
             font-family: "Montserrat", sans-serif;
-            color: darkorange; /* Changed to dark orange */
-            margin: 0;
+            color: darkorange; /* Set text color to dark orange */
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .ghost {
+            display: none; /* Hide ghost animation */
+        }
+
+        /* Parallax Background for Articles Section */
+        .parallax-background {
+            position: relative;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: 1;
+            transform: scale(1.2);
+            animation: rotate 60s linear infinite, glow 3s infinite alternate;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        @keyframes rotate {
+            from { transform: scale(1.2) rotate(0deg); }
+            to { transform: scale(1.2) rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px #1E90FF; }
+            50% { box-shadow: 0 0 20px #32CD32; }
+            100% { box-shadow: 0 0 20px #FF4500; }
+        }
+
+        /* Articles Section (Enhanced Blog) */
+        .articles-section {
+            width: 60%;
+            margin: 40px auto;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        .articles-section .article {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        .articles-section .article:hover {
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .articles-section .article h2 {
+            margin-top: 0;
+            color: #1E90FF;
+            transition: color 0.3s ease-in-out;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        .articles-section .article p.date {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .articles-section .article p.summary {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        .articles-section .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #1E90FF;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .articles-section .read-more:hover {
+            text-decoration: underline;
+            color: #FF4500;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #FF4500;
+        }
+
+        footer img {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        footer img:hover {
+            transform: scale(1.2);
+        }
+
+        /* About Me Sidebar */
+        .about-me-sidebar {
+            width: 25%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: absolute;
+            top: 300px;
+            left: 20px;
+            z-index: 3;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .about-me-sidebar:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-me-sidebar h2 {
+            margin-top: 0;
+            color: #1E90FF;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .about-me-sidebar p {
+            font-size: 14px;
+            color: #333;
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* Chatbot Styles */
+        .chat-container {
+            position: absolute;
+            top: 350px;
+            left: -350px; /* Initially hide the chat container off-screen */
+            width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            z-index: 3;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .chat-header {
+            background-color: #1E90FF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .chat-body {
+            height: 200px;
+            padding: 10px;
+            overflow-y: scroll;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .chat-footer {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #1E90FF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        button:hover {
+            background-color: #FF4500;
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .message.bot {
+            text-align: left;
+            color: #1E90FF;
+        }
+
+        .message.user {
+            text-align: right;
+            color: #333;
+        }
+
+        /* Chatbot Icon */
+        .chat-icon {
+            position: fixed;
+            top: 310px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 4;
+            transition: transform 0.3s;
+        }
+
+        .chat-icon:hover {
+            transform: scale(1.1);
         }
 
         /* Responsive Design */
@@ -152,8 +408,38 @@
                 height: 150px;
             }
 
-            .title h1 {
+            .october-section .title h1 {
                 font-size: 16vmin;
+            }
+
+            .articles-section {
+                width: 90%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .articles-section .article {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .about-me-sidebar {
+                width: 100%;
+                position: static;
+                margin-top: 20px;
+                text-align: center;
+                transform: none;
+            }
+
+            .chat-container {
+                width: 100%;
+                left: -100%;
+                transition: left 0.3s ease-in-out;
+            }
+
+            .chat-icon {
+                top: 250px;
+                left: 10px;
             }
         }
     </style>
@@ -177,7 +463,7 @@
         <h1>Saurav Kattel</h1>
     </div>
 
-    <!-- Octoberfest Section with Dynamic Greeting -->
+    <!-- Octoberfest Section -->
     <div class="october-section">
         <div class="title">
             <h1 id="greeting"></h1> <!-- Placeholder for dynamic greeting -->
