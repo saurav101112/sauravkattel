@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAURAV AGRO-TECH</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #333, #1E90FF);
+            background: linear-gradient(135deg, #2b2b2b, #1E90FF);
             color: #333;
             scroll-behavior: smooth;
             overflow-x: hidden;
@@ -20,12 +19,13 @@
 
         /* Heading Section */
         .heading-section {
-            background-color: #1E90FF;
+            background: linear-gradient(90deg, #1E90FF, #00BFFF);
             padding: 40px 20px 80px;
             text-align: center;
             color: #fff;
             position: relative;
             font-family: 'Roboto Condensed', sans-serif;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         .heading-section h1 {
@@ -33,13 +33,16 @@
             margin: 0;
             display: inline-block;
             vertical-align: middle;
+            letter-spacing: 1px;
         }
 
         .heading-section img.logo {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             vertical-align: middle;
             margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
         .heading-section .nav-buttons {
@@ -52,28 +55,34 @@
         }
 
         .heading-section .nav-buttons a {
-            background-color: #fff;
-            color: #1E90FF;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            color: #fff;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 10px 22px;
+            border-radius: 25px;
             font-size: 18px;
-            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .heading-section .nav-buttons a:hover {
-            background-color: #333;
-            color: #fff;
+            background: #fff;
+            color: #1E90FF;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* Middle Section (Photo and Name Only) */
+        /* Middle Section */
         .middle-section {
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.85);
             color: #333;
             position: relative;
             z-index: 2;
+            border-radius: 15px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .middle-section img.photo {
@@ -82,28 +91,26 @@
             height: 200px;
             object-fit: cover;
             margin-top: 20px;
-            position: relative;
-            z-index: 3;
-            transition: transform 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .middle-section img.photo:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #1E90FF;
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 0 25px #1E90FF;
         }
 
         .middle-section h1 {
             margin-top: 20px;
             font-size: 48px;
             color: #1E90FF;
-            position: relative;
-            z-index: 3;
-            transition: color 0.3s ease-in-out;
             font-family: 'Roboto Slab', serif;
+            transition: color 0.3s ease;
         }
 
         .middle-section h1:hover {
-            color: #FF4500;
+            color: #FF7F50;
         }
 
         /* Octoberfest Section */
@@ -112,335 +119,113 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(#333, #000);
+            background: radial-gradient(#222, #000);
             color: #fff;
-            position: relative;
-            z-index: 2;
-            height: 150px; /* Reduced height to fit text */
+            height: 150px;
             overflow: hidden;
-        }
-
-        .october-section .title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
         }
 
         .october-section .title h1 {
             font-size: 10vmin;
             font-weight: 900;
             font-family: "Montserrat", sans-serif;
-            color: darkorange; /* Set text color to dark orange */
+            color: darkorange;
+            text-shadow: 0 0 15px rgba(255,140,0,0.7);
         }
 
-        .container {
-            width: 100%;
-            height: 100%;
-            display: grid;
-            place-items: center;
-            overflow: hidden;
-        }
-
-        .ghost {
-            display: none; /* Hide ghost animation */
-        }
-
-        /* Parallax Background for Articles Section */
-        .parallax-background {
-            position: relative;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: url('depositphotos_3423508-stock-illustration-green-earth-globe-Photoroom.png') no-repeat center center;
-            background-size: cover;
-            opacity: 0.3;
-            z-index: 1;
-            transform: scale(1.2);
-            animation: rotate 60s linear infinite, glow 3s infinite alternate;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        @keyframes rotate {
-            from { transform: scale(1.2) rotate(0deg); }
-            to { transform: scale(1.2) rotate(360deg); }
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 20px #1E90FF; }
-            50% { box-shadow: 0 0 20px #32CD32; }
-            100% { box-shadow: 0 0 20px #FF4500; }
-        }
-
-        /* Articles Section (Enhanced Blog) */
+        /* Articles Section */
         .articles-section {
             width: 60%;
             margin: 40px auto;
             position: relative;
             z-index: 2;
-            background-color: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
         }
 
         .articles-section .article {
             background-color: #fff;
             padding: 20px;
             margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .articles-section .article:hover {
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 20px rgba(0,0,0,0.15);
         }
 
         .articles-section .article h2 {
-            margin-top: 0;
             color: #1E90FF;
-            transition: color 0.3s ease-in-out;
             font-family: 'Roboto Slab', serif;
         }
 
-        .articles-section .article p.date {
-            color: #999;
-            font-size: 14px;
-        }
-
-        .articles-section .article p.summary {
-            font-size: 16px;
-            margin: 20px 0;
-        }
-
         .articles-section .read-more {
-            display: inline-block;
-            margin-top: 10px;
             color: #1E90FF;
             text-decoration: none;
-            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
-            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 600;
         }
 
         .articles-section .read-more:hover {
             text-decoration: underline;
-            color: #FF4500;
+            color: #FF7F50;
         }
 
-        /* Footer Section */
+        /* Footer */
         footer {
-            background-color: #333;
+            background: linear-gradient(90deg, #1E90FF, #00BFFF);
             color: #fff;
             padding: 20px 0;
             text-align: center;
-            position: relative;
-            z-index: 2;
-            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+            font-size: 14px;
         }
 
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-            color: #FF4500;
-        }
-
-        footer img {
+        footer a img {
             width: 32px;
             height: 32px;
-            vertical-align: middle;
-            transition: transform 0.3s ease-in-out;
+            margin: 0 5px;
+            transition: transform 0.3s;
         }
 
-        footer img:hover {
-            transform: scale(1.2);
+        footer a img:hover {
+            transform: scale(1.2) rotate(5deg);
         }
 
-        /* About Me Sidebar */
-        .about-me-sidebar {
-            width: 25%;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            position: absolute;
-            top: 300px;
-            left: 20px;
-            z-index: 3;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .about-me-sidebar:hover {
-            transform: translateY(-10px);
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .about-me-sidebar h2 {
-            margin-top: 0;
-            color: #1E90FF;
-            transition: color 0.3s ease-in-out;
-        }
-
-        .about-me-sidebar p {
-            font-size: 14px;
-            color: #333;
-            transition: color 0.3s ease-in-out;
-        }
-
-        /* Chatbot Styles */
+        /* Chatbot */
         .chat-container {
             position: absolute;
             top: 350px;
-            left: -350px; /* Initially hide the chat container off-screen */
+            left: -350px;
             width: 300px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            font-family: Arial, sans-serif;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             overflow: hidden;
-            z-index: 3;
             transition: left 0.3s ease-in-out;
         }
 
         .chat-header {
-            background-color: #1E90FF;
+            background: linear-gradient(90deg, #1E90FF, #00BFFF);
             color: #fff;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
-            font-family: 'Roboto Condensed', sans-serif;
         }
 
-        .chat-body {
-            height: 200px;
-            padding: 10px;
-            overflow-y: scroll;
-            border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .chat-footer {
-            padding: 10px;
-            display: flex;
-            gap: 10px;
-        }
-
-        #user-input {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #1E90FF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'Roboto Condensed', sans-serif;
-        }
-
-        button:hover {
-            background-color: #FF4500;
-        }
-
-        .message {
-            margin-bottom: 10px;
-        }
-
-        .message.bot {
-            text-align: left;
-            color: #1E90FF;
-        }
-
-        .message.user {
-            text-align: right;
-            color: #333;
-        }
-
-        /* Chatbot Icon */
         .chat-icon {
-            position: fixed;
-            top: 310px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             cursor: pointer;
-            z-index: 4;
             transition: transform 0.3s;
         }
 
         .chat-icon:hover {
             transform: scale(1.1);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .heading-section h1 {
-                font-size: 28px;
-            }
-
-            .heading-section .nav-buttons a {
-                padding: 8px 16px;
-                font-size: 16px;
-            }
-
-            .middle-section h1 {
-                font-size: 36px;
-            }
-
-            .middle-section img.photo {
-                width: 150px;
-                height: 150px;
-            }
-
-            .october-section {
-                height: 150px;
-            }
-
-            .october-section .title h1 {
-                font-size: 16vmin;
-            }
-
-            .articles-section {
-                width: 90%;
-                margin: 20px auto;
-                padding: 15px;
-            }
-
-            .articles-section .article {
-                padding: 15px;
-                margin-bottom: 15px;
-            }
-
-            .about-me-sidebar {
-                width: 100%;
-                position: static;
-                margin-top: 20px;
-                text-align: center;
-                transform: none;
-            }
-
-            .chat-container {
-                width: 100%;
-                left: -100%;
-                transition: left 0.3s ease-in-out;
-            }
-
-            .chat-icon {
-                top: 250px;
-                left: 10px;
-            }
         }
     </style>
 </head>
@@ -457,7 +242,7 @@
         </div>
     </div>
 
-    <!-- Middle Section (Photo and Name Only) -->
+    <!-- Middle Section -->
     <div class="middle-section" id="home">
         <img src="images.jpg" alt="Saurav Kattel" class="photo">
         <h1>Saurav Kattel</h1>
@@ -466,13 +251,12 @@
     <!-- Octoberfest Section -->
     <div class="october-section">
         <div class="title">
-            <h1 id="greeting"></h1> <!-- Placeholder for dynamic greeting -->
+            <h1 id="greeting"></h1>
         </div>
     </div>
 
     <!-- Articles Section -->
     <div class="articles-section" id="articles">
-        <div class="parallax-background"></div>
         <div class="article">
             <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
             <p class="date">August 11, 2024</p>
@@ -485,7 +269,7 @@
         </div>
     </div>
 
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer>
         <p>Connect with me on social media:</p>
         <a href="https://www.facebook.com/saurav.kattel.5" target="_blank">
@@ -496,30 +280,25 @@
         </a>
     </footer>
 
-    <!-- Chatbot HTML -->
+    <!-- Chatbot -->
     <div class="chat-container" id="chat-container">
         <div class="chat-header">
             <h3>Chat with Saurav Agro-Tech</h3>
         </div>
-        <div class="chat-body" id="chat-body">
-            <!-- Messages will appear here -->
-        </div>
+        <div class="chat-body" id="chat-body"></div>
         <div class="chat-footer">
             <input type="text" id="user-input" placeholder="Type your message..." />
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
-
-    <!-- Chatbot Icon -->
     <img src="chat.png" alt="Chat Icon" class="chat-icon" id="chat-icon">
 
-    <!-- Script to set greeting based on time -->
+    <!-- Script -->
     <script>
         function setGreeting() {
             const greetingElement = document.getElementById('greeting');
             const hour = new Date().getHours();
             let greeting = 'Hello October!';
-
             if (hour >= 5 && hour < 12) {
                 greeting = 'Good Morning!';
             } else if (hour >= 12 && hour < 17) {
@@ -527,10 +306,8 @@
             } else {
                 greeting = 'Good Evening!';
             }
-
             greetingElement.innerText = greeting;
         }
-
         document.addEventListener('DOMContentLoaded', setGreeting);
     </script>
 </body>
