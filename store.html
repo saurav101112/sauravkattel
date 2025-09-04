@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAURAV STORE - Authentic Nepali Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #e25822;
+            --secondary: #346934;
+            --accent: #cc0000;
+            --light: #f8f3e6;
+            --dark: #2c1810;
+            --success: #28a745;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="rgba(204,0,0,0.05)" stroke-width="1"/></svg>');
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffd166, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #ffd166, #ffffff);
+            border-radius: 3px;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 36px;
+            color: #ffd166;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd166;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        nav ul li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--dark);
+            text-decoration: none;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .dropdown a:hover {
+            background: var(--light-gray);
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 22px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .user-account {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+        }
+
+        .user-account i {
+            margin-right: 5px;
+            font-size: 18px;
+        }
+
+        /* Search bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin: 0 15px;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 5px;
+            width: 150px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-bar button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1544735716-392fe2489ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 150px;
+            color: white;
+        }
+
+        .badge i {
+            font-size: 40px;
+            color: #ffd166;
+            margin-bottom: 10px;
+        }
+
+        .badge span {
+            font-size: 14px;
+        }
+
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            font-size: 32px;
+            color: var(--dark);
+            position: relative;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 1px solid #ddd;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 16px;
+            margin-right: 10px;
+            font-weight: 400;
+        }
+
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .rating-count {
+            color: #777;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-to-cart i {
+            margin-right: 8px;
+            pointer-events: none;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+        }
+
+        .view-details {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .view-details:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Search results */
+        .search-results {
+            display: none;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-results h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        /* Quick view modal */
+        .quick-view-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quick-view-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 30px;
+        }
+
+        .quick-view-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .quick-view-img img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .quick-view-details {
+            flex: 1;
+        }
+
+        .quick-view-details h2 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .quick-view-price {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .quick-view-desc {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .cart-items {
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 3px;
+        }
+
+        .remove-item {
+            color: #dc3545;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+
+        .remove-item:hover {
+            color: #c82333;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: right;
+            margin: 20px 0;
+            color: var(--dark);
+        }
+
+        .checkout-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .checkout-btn {
+            background: var(--success);
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkout-btn i {
+            margin-right: 10px;
+        }
+
+        .checkout-btn:hover {
+            background: #218838;
+        }
+
+        /* Payment Modal */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .payment-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .payment-option {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover, .payment-option.selected {
+            border-color: var(--primary);
+            background: rgba(226, 88, 34, 0.1);
+        }
+
+        .payment-option i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .payment-option.selected i {
+            color: var(--primary);
+        }
+
+        .payment-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .phone-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .country-code {
+            flex: 0 0 120px;
+        }
+
+        .phone-number {
+            flex: 1;
+        }
+
+        /* Order Confirmation Page */
+        .confirmation-page {
+            display: none;
+            padding: 50px 0;
+        }
+
+        .confirmation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .confirmation-icon {
+            font-size: 80px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .confirmation-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .confirmation-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .confirmation-details h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            flex: 2;
+        }
+
+        .rating-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .star {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+            margin: 0 5px;
+        }
+
+        .star:hover, .star.active {
+            color: #ffc107;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .toast i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .toast.success {
+            background: var(--success);
+        }
+
+        .toast.error {
+            background: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            margin-top: 10px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 10px 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .quick-view-content {
+                flex-direction: column;
+            }
+
+            .payment-options {
+                flex-direction: column;
+            }
+            
+            .phone-input {
+                flex-direction: column;
+            }
+            
+            .country-code {
+                flex: 1;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Operation completed successfully</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-mountain"></i>
+                    <div class="logo-text">SAURAV STORE</div>
+                </a>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search products..." id="searchInput">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Categories <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown">
+                                <a href="#">Khukuri & Weapons</a>
+                                <a href="#">Mad Honey</a>
+                                <a href="#">Traditional Crafts</a>
+                                <a href="#">Pashmina Shawls</a>
+                                <a href="#">Nepali Tea</a>
+                            </div>
+                        </li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Sale</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="user-account">
+                        <i class="fas fa-user"></i>
+                        <span>नमस्ते, Guest</span>
+                    </div>
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Authentic Nepali Products</h1>
+                <p>Discover the finest Khukuri, Mad Honey, and traditional crafts from the Himalayas</p>
+                <a href="#" class="btn"><i class="fas fa-gifts"></i> Explore Products</a>
+                
+                <div class="trust-badges">
+                    <div class="badge">
+                        <i class="fas fa-truck"></i>
+                        <span>Free Shipping on orders over Rs 5000</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure Payment</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-undo"></i>
+                        <span>30-Day Returns</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-headset"></i>
+                        <span>24/7 Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results -->
+    <section class="container search-results" id="searchResults">
+        <h3>Search Results for "<span id="searchTerm"></span>"</h3>
+        <div class="products" id="searchResultsContainer">
+            <!-- Search results will be displayed here -->
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products" id="productsContainer">
+            <!-- Product 1 -->
+            <div class="product">
+                <div class="product-badge">BESTSELLER</div>
+                <img src="https://images.unsplash.com/photo-1610859922695-4e9be310c30c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Traditional Khukuri" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Handmade Traditional Khukuri</h3>
+                    <div class="product-price">
+                        <span class="original-price">Rs 8,500</span>
+                        <span>Rs 6,999</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(128)</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-product="Handmade Traditional Khukuri" data-price="6999" data-id="1">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <button class="view-details" data-product="1">
+                            <i class="fas fa-info"></i> Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product">
+                <div class="product-badge">HIMALAYAN</div>
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mad Honey" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Pure Himalayan Mad Honey</h3>
+                    <div class="product-price">Rs 4,500</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(86)</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-product="Pure Himalayan Mad Honey" data-price="4500" data-id="2">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <button class="view-details" data-product="2">
+                            <i class="fas fa-info"></i> Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product">
+                <div class="product-badge">NEW</div>
+                <img src="https://images.unsplash.com/photo-1597040663346-794814d1315e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gurkha Dagger" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Gurkha Traditional Dagger</h3>
+                    <div class="product-price">Rs 3,999</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="rating-count">(215)</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-product="Gurkha Traditional Dagger" data-price="3999" data-id="3">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <button class="view-details" data-product="3">
+                            <i class="fas fa-info"></i> Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1549109755-ef5e64e5a51f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nepali Singing Bowl" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Handcrafted Singing Bowl</h3>
+                    <div class="product-price">Rs 5,500</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(64)</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-product="Handcrafted Singing Bowl" data-price="5500" data-id="4">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <button class="view-details" data-product="4">
+                            <i class="fas fa-info"></i> Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="quick-view-content">
+            <span class="close">&times;</span>
+            <div class="quick-view-img">
+                <img src="" alt="" id="quickViewImage">
+            </div>
+            <div class="quick-view-details">
+                <h2 id="quickViewTitle"></h2>
+                <div class="quick-view-price" id="quickViewPrice"></div>
+                <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="rating-count">(128)</span>
+                </div>
+                <p class="quick-view-desc" id="quickViewDesc"></p>
+                <div class="product-actions">
+                    <button class="add-to-cart" id="quickViewAddToCart">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                    <button class="btn-outline">
+                        <i class="fas fa-heart"></i> Add to Wishlist
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Shopping Cart</h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be added here dynamically -->
+                <p>Your cart is currently empty.</p>
+            </div>
+            <div class="cart-total">Total: Rs <span id="cartTotal">0.00</span></div>
+            <div class="checkout-section">
+                <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-lock"></i> Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <span class="close">&times;</span>
+            <h2>Complete Your Order</h2>
+            
+            <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <div class="phone-input">
+                    <div class="form-group country-code">
+                        <select id="countryCode" required>
+                            <option value="+977">🇳🇵 +977 (Nepal)</option>
+                            <option value="+91">🇮🇳 +91 (India)</option>
+                            <option value="+86">🇨🇳 +86 (China)</option>
+                            <option value="+1">🇺🇸 +1 (USA)</option>
+                            <option value="+44">🇬🇧 +44 (UK)</option>
+                            <option value="+61">🇦🇺 +61 (Australia)</option>
+                            <option value="+81">🇯🇵 +81 (Japan)</option>
+                            <option value="+82">🇰🇷 +82 (South Korea)</option>
+                            <option value="+65">🇸🇬 +65 (Singapore)</option>
+                            <option value="+60">🇲🇾 +60 (Malaysia)</option>
+                            <option value="+971">🇦🇪 +971 (UAE)</option>
+                            <option value="+966">🇸🇦 +966 (Saudi Arabia)</option>
+                            <option value="+974">🇶🇦 +974 (Qatar)</option>
+                            <option value="+973">🇧🇭 +973 (Bahrain)</option>
+                            <option value="+968">🇴🇲 +968 (Oman)</option>
+                            <option value="+965">🇰🇼 +965 (Kuwait)</option>
+                        </select>
+                    </div>
+                    <div class="form-group phone-number">
+                        <input type="tel" id="phone" placeholder="Phone number" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Delivery Address *</label>
+                <textarea id="address" rows="3" placeholder="Enter your complete delivery address" required></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" placeholder="City" required>
+                </div>
+                <div class="form-group">
+                    <label for="zipCode">ZIP Code *</label>
+                    <input type="text" id="zipCode" placeholder="ZIP Code" required>
+                </div>
+            </div>
+            
+            <h3>Select Payment Method</h3>
+            <div class="payment-options">
+                <div class="payment-option" data-method="esewa">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>eSewa</div>
+                </div>
+                <div class="payment-option" data-method="khalti">
+                    <i class="fas fa-wallet"></i>
+                    <div>Khalti</div>
+                </div>
+                <div class="payment-option" data-method="cod">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div>Cash on Delivery</div>
+                </div>
+            </div>
+            
+            <div class="payment-form" id="esewaForm">
+                <div class="form-group">
+                    <label for="esewaId">eSewa ID *</label>
+                    <input type="text" id="esewaId" placeholder="Your eSewa ID">
+                </div>
+                <div class="form-group">
+                    <label for="esewaPassword">eSewa Password *</label>
+                    <input type="password" id="esewaPassword" placeholder="Your eSewa password">
+                </div>
+                <button class="btn" id="payWithEsewa"><i class="fas fa-mobile-alt"></i> Pay with eSewa</button>
+            </div>
+            
+            <div class="payment-form" id="khaltiForm">
+                <div class="form-group">
+                    <label for="khaltiId">Khalti ID *</label>
+                    <input type="text" id="khaltiId" placeholder="Your Khalti ID">
+                </div>
+                <div class="form-group">
+                    <label for="khaltiPassword">Khalti MPIN *</label>
+                    <input type="password" id="khaltiPassword" placeholder="Your Khalti MPIN">
+                </div>
+                <button class="btn" id="payWithKhalti"><i class="fas fa-wallet"></i> Pay with Khalti</button>
+            </div>
+            
+            <div class="payment-form" id="codForm">
+                <p>Pay with cash when your order is delivered.</p>
+                <button class="btn" id="confirmOrder"><i class="fas fa-check-circle"></i> Confirm Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Page -->
+    <div class="confirmation-page" id="confirmationPage">
+        <div class="container">
+            <div class="confirmation-container">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="confirmation-title">Order Confirmed!</h2>
+                <p>Thank you for your purchase. Your order has been confirmed and will be shipped soon.</p>
+                
+                <div class="confirmation-details">
+                    <h3>Order Details</h3>
+                    <div class="detail-row">
+                        <div class="detail-label">Order ID:</div>
+                        <div class="detail-value" id="confirmOrderId">NP98765</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Customer Name:</div>
+                        <div class="detail-value" id="confirmCustomerName">John Doe</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Delivery Address:</div>
+                        <div class="detail-value" id="confirmAddress">Kathmandu, Nepal</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Phone Number:</div>
+                        <div class="detail-value" id="confirmPhone">+977 9801234567</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Total Amount:</div>
+                        <div class="detail-value" id="confirmTotal">Rs 0.00</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Payment Method:</div>
+                        <div class="detail-value" id="confirmPayment">eSewa</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Estimated Delivery:</div>
+                        <div class="detail-value">2-3 business days</div>
+                    </div>
+                </div>
+                
+                <div class="rating-section">
+                    <h3>Rate Your Purchase</h3>
+                    <p>How would you rate your shopping experience?</p>
+                    <div class="stars">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Your Review (Optional)</label>
+                        <textarea id="review" rows="3" placeholder="Share your experience with this product"></textarea>
+                    </div>
+                    <button class="btn" id="submitReview"><i class="fas fa-paper-plane"></i> Submit Review</button>
+                </div>
+                
+                <p>A confirmation message with tracking details has been sent to your phone.</p>
+                <button class="btn" id="backToShopping"><i class="fas fa-shopping-bag"></i> Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About SAURAV STORE</h3>
+                    <p>We offer authentic Nepali products including Khukuri, Mad Honey, and traditional crafts. Direct from Nepal to your doorstep.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#">Home</a>
+                        <a href="#">Khukuri Collection</a>
+                        <a href="#">Mad Honey</a>
+                        <a href="#">Traditional Crafts</a>
+                        <a href="#">Shipping Policy</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <div class="footer-links">
+                        <a href="#">Contact Us</a>
+                        <a href="#">FAQs</a>
+                        <a href="#">Returns & Exchanges</a>
+                        <a href="#">Shipping Information</a>
+                        <a href="#">Track Order</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Kathmandu, Nepal</p>
+                    <p><i class="fas fa-phone"></i> +977 1 4123456</p>
+                    <p><i class="fas fa-envelope"></i> info@sauravstore.com</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SAURAV STORE. All Rights Reserved. | Proudly Nepali</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product data
+        const products = {
+            1: {
+                title: "Handmade Traditional Khukuri",
+                price: 6999,
+                image: "https://images.unsplash.com/photo-1610859922695-4e9be310c30c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Authentic handmade Khukuri knife from Nepal. Crafted by skilled artisans using traditional methods. Features a sharp blade made from high-carbon steel and a handle made from water buffalo horn. Includes a leather sheath.",
+                category: "khukuri"
+            },
+            2: {
+                title: "Pure Himalayan Mad Honey",
+                price: 4500,
+                image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Pure Himalayan Mad Honey harvested from the cliffs of Nepal. This rare honey has unique properties and a distinct flavor. Collected by traditional methods by the Gurung community.",
+                category: "honey"
+            },
+            3: {
+                title: "Gurkha Traditional Dagger",
+                price: 3999,
+                image: "https://images.unsplash.com/photo-1597040663346-794814d1315e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Traditional Gurkha dagger with intricate carvings. Made by skilled Nepalese craftsmen. Features a sharp stainless steel blade and carved wooden handle. A perfect collectible item.",
+                category: "weapons"
+            },
+            4: {
+                title: "Handcrafted Singing Bowl",
+                price: 5500,
+                image: "https://images.unsplash.com/photo-1549109755-ef5e64e5a51f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Handcrafted Tibetan singing bowl made in Nepal. Produces a soothing sound when played. Perfect for meditation, relaxation, and sound therapy. Comes with a mallet and cushion.",
+                category: "crafts"
+            },
+            5: {
+                title: "Nepali Pashmina Shawl",
+                price: 7999,
+                image: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Genuine Nepali Pashmina shawl made from the finest cashmere wool. Handwoven by skilled artisans with traditional patterns. Soft, warm, and luxurious.",
+                category: "clothing"
+            },
+            6: {
+                title: "Himalayan Herbal Tea",
+                price: 1200,
+                image: "https://images.unsplash.com/photo-1556678891919-e0e7d61a4b15?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Organic Himalayan herbal tea blend. Contains rare herbs from the Nepalese mountains known for their health benefits and unique flavor.",
+                category: "tea"
+            }
+        };
+
+        // Cart functionality
+        let cartCount = 0;
+        let cartItems = [];
+        let total = 0;
+        let selectedPaymentMethod = '';
+        let currentOrderId = '';
+
+        const cartIcon = document.getElementById('cartIcon');
+        const cartModal = document.getElementById('cartModal');
+        const paymentModal = document.getElementById('paymentModal');
+        const quickViewModal = document.getElementById('quickViewModal');
+        const confirmationPage = document.getElementById('confirmationPage');
+        const closeModal = document.querySelectorAll('.close');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const viewDetailsButtons = document.querySelectorAll('.view-details');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const payWithEsewa = document.getElementById('payWithEsewa');
+        const payWithKhalti = document.getElementById('payWithKhalti');
+        const confirmOrder = document.getElementById('confirmOrder');
+        const backToShopping = document.getElementById('backToShopping');
+        const stars = document.querySelectorAll('.star');
+        const submitReview = document.getElementById('submitReview');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const searchTerm = document.getElementById('searchTerm');
+        const searchResultsContainer = document.getElementById('searchResultsContainer');
+        const productsContainer = document.getElementById('productsContainer');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCartFromStorage();
+            updateCartDisplay();
+            initPaymentForms();
+        });
+
+        // Open modal when cart icon is clicked
+        cartIcon.addEventListener('click', () => {
+            cartModal.style.display = 'flex';
+        });
+
+        // Close modal when X is clicked
+        closeModal.forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+                paymentModal.style.display = 'none';
+                quickViewModal.style.display = 'none';
+            });
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+            if (e.target === paymentModal) {
+                paymentModal.style.display = 'none';
+            }
+            if (e.target === quickViewModal) {
+                quickViewModal.style.display = 'none';
+            }
+        });
+
+        // Add to cart functionality
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = button.getAttribute('data-id');
+                const product = products[id];
+                
+                // Play cart sound
+                const cartSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3');
+                cartSound.play();
+                
+                // Update cart count
+                cartCount++;
+                document.querySelector('.cart-count').textContent = cartCount;
+                
+                // Check if product already in cart
+                const existingItem = cartItems.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity++;
+                    existingItem.total = existingItem.quantity * existingItem.price;
+                } else {
+                    cartItems.push({ 
+                        id,
+                        title: product.title, 
+                        price: product.price, 
+                        quantity: 1, 
+                        total: product.price,
+                        img: product.image
+                    });
+                }
+                
+                // Update cart display
+                updateCartDisplay();
+                
+                // Save to localStorage
+                saveCartToStorage();
+                
+                // Show success message
+                showToast(`${product.title} added to cart!`);
+            });
+        });
+
+        // View details functionality
+        viewDetailsButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = button.getAttribute('data-product');
+                const product = products[id];
+                
+                // Update quick view modal
+                document.getElementById('quickViewImage').src = product.image;
+                document.getElementById('quickViewTitle').textContent = product.title;
+                document.getElementById('quickViewPrice').textContent = `Rs ${product.price}`;
+                document.getElementById('quickViewDesc').textContent = product.description;
+                
+                // Set up add to cart button in quick view
+                const quickViewAddToCart = document.getElementById('quickViewAddToCart');
+                quickViewAddToCart.setAttribute('data-id', id);
+                quickViewAddToCart.setAttribute('data-price', product.price);
+                quickViewAddToCart.setAttribute('data-product', product.title);
+                
+                // Show quick view modal
+                quickViewModal.style.display = 'flex';
+            });
+        });
+
+        // Update cart display
+        function updateCartDisplay() {
+            // Clear current cart items
+            cartItemsContainer.innerHTML = '';
+            
+            // Reset total
+            total = 0;
+            
+            // Add items to cart display
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is currently empty.</p>';
+            } else {
+                cartItems.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <div class="cart-item-info">
+                            <img src="${item.img}" alt="${item.title}" class="cart-item-img">
+                            <div class="cart-item-details">
+                                <div class="cart-item-name">${item.title}</div>
+                                <div class="cart-item-price">Rs ${item.price.toFixed(2)}</div>
+                                <div class="cart-item-quantity">
+                                    <button class="quantity-btn" onclick="updateQuantity(${index}, ${item.quantity - 1})">-</button>
+                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, parseInt(this.value))">
+                                    <button class="quantity-btn" onclick="updateQuantity(${index}, ${item.quantity + 1})">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                    total += item.total;
+                });
+            }
+            
+            // Update total
+            cartTotal.textContent = total.toFixed(2);
+        }
+
+        // Update item quantity
+        function updateQuantity(index, newQuantity) {
+            if (newQuantity < 1) newQuantity = 1;
+            
+            cartItems[index].quantity = newQuantity;
+            cartItems[index].total = newQuantity * cartItems[index].price;
+            
+            // Update cart count
+            cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = cartCount;
+            
+            updateCartDisplay();
+            saveCartToStorage();
+        }
+
+        // Remove item from cart
+        function removeFromCart(index) {
+            // Update cart count
+            cartCount -= cartItems[index].quantity;
+            document.querySelector('.cart-count').textContent = cartCount;
+            
+            // Remove item
+            const removedItem = cartItems.splice(index, 1)[0];
+            
+            // Update cart display
+            updateCartDisplay();
+            saveCartToStorage();
+            
+            // Show notification
+            showToast(`${removedItem.title} removed from cart!`, 'error');
+        }
+
+        // Save cart to localStorage
+        function saveCartToStorage() {
+            localStorage.setItem('sauravStoreCart', JSON.stringify(cartItems));
+            localStorage.setItem('sauravStoreCartCount', cartCount);
+        }
+
+        // Load cart from localStorage
+        function loadCartFromStorage() {
+            const savedCart = localStorage.getItem('sauravStoreCart');
+            const savedCount = localStorage.getItem('sauravStoreCartCount');
+            
+            if (savedCart) {
+                cartItems = JSON.parse(savedCart);
+            }
+            
+            if (savedCount) {
+                cartCount = parseInt(savedCount);
+                document.querySelector('.cart-count').textContent = cartCount;
+            }
+        }
+
+        // Checkout button
+        checkoutBtn.addEventListener('click', () => {
+            if (cartItems.length === 0) {
+                showToast('Your cart is empty!', 'error');
+                return;
+            }
+            
+            cartModal.style.display = 'none';
+            paymentModal.style.display = 'flex';
+        });
+
+        // Initialize payment forms
+        function initPaymentForms() {
+            // Hide all payment forms initially
+            document.getElementById('esewaForm').style.display = 'none';
+            document.getElementById('khaltiForm').style.display = 'none';
+            document.getElementById('codForm').style.display = 'none';
+            
+            // Payment method selection
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    
+                    // Get selected payment method
+                    selectedPaymentMethod = option.getAttribute('data-method');
+                    
+                    // Hide all payment forms
+                    document.getElementById('esewaForm').style.display = 'none';
+                    document.getElementById('khaltiForm').style.display = 'none';
+                    document.getElementById('codForm').style.display = 'none';
+                    
+                    // Show selected payment form
+                    document.getElementById(`${selectedPaymentMethod}Form`).style.display = 'block';
+                });
+            });
+            
+            // Payment processing
+            payWithEsewa.addEventListener('click', processPayment);
+            payWithKhalti.addEventListener('click', processPayment);
+            confirmOrder.addEventListener('click', processPayment);
+        }
+
+        function processPayment(e) {
+            e.preventDefault();
+            
+            // Validate form
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const zipCode = document.getElementById('zipCode').value;
+            const countryCode = document.getElementById('countryCode').value;
+            
+            if (!fullName || !email || !phone || !address || !city || !zipCode) {
+                showToast('Please fill all required fields', 'error');
+                return;
+            }
+            
+            if (selectedPaymentMethod === 'esewa') {
+                const esewaId = document.getElementById('esewaId').value;
+                const esewaPassword = document.getElementById('esewaPassword').value;
+                
+                if (!esewaId || !esewaPassword) {
+                    showToast('Please enter your eSewa credentials', 'error');
+                    return;
+                }
+            }
+            
+            if (selectedPaymentMethod === 'khalti') {
+                const khaltiId = document.getElementById('khaltiId').value;
+                const khaltiPassword = document.getElementById('khaltiPassword').value;
+                
+                if (!khaltiId || !khaltiPassword) {
+                    showToast('Please enter your Khalti credentials', 'error');
+                    return;
+                }
+            }
+            
+            // Generate random order ID
+            currentOrderId = 'NP' + Math.floor(10000 + Math.random() * 90000);
+            
+            // Show confirmation page
+            paymentModal.style.display = 'none';
+            document.querySelector('main').style.display = 'none';
+            confirmationPage.style.display = 'block';
+            
+            // Update confirmation details
+            document.getElementById('confirmOrderId').textContent = currentOrderId;
+            document.getElementById('confirmCustomerName').textContent = fullName;
+            document.getElementById('confirmAddress').textContent = address;
+            document.getElementById('confirmPhone').textContent = countryCode + ' ' + phone;
+            document.getElementById('confirmTotal').textContent = 'Rs ' + total.toFixed(2);
+            document.getElementById('confirmPayment').textContent = 
+                selectedPaymentMethod === 'esewa' ? 'eSewa' : 
+                selectedPaymentMethod === 'khalti' ? 'Khalti' : 'Cash on Delivery';
+            
+            // Simulate sending SMS
+            simulateSMS(countryCode + phone, currentOrderId);
+            
+            showToast('Order placed successfully! Payment processed.');
+        }
+
+        // Simulate sending SMS
+        function simulateSMS(phoneNumber, orderId) {
+            console.log(`SMS sent to ${phoneNumber}: Your order ${orderId} has been confirmed. Track your order at https://sauraustore.com/track?order=${orderId}`);
+            // In a real application, you would integrate with an SMS API here
+        }
+
+        // Star rating
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                
+                // Update stars
+                stars.forEach(s => {
+                    if (s.getAttribute('data-value') <= value) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+                
+                // Update product rating (in a real app, this would be sent to the server)
+                const productId = cartItems[0]?.id; // For demo, use first product in cart
+                if (productId) {
+                    console.log(`Rating ${value} stars for product ${productId}`);
+                }
+            });
+        });
+
+        // Submit review
+        submitReview.addEventListener('click', () => {
+            const reviewText = document.getElementById('review').value;
+            const rating = document.querySelectorAll('.star.active').length;
+            
+            if (rating === 0) {
+                showToast('Please select a rating', 'error');
+                return;
+            }
+            
+            console.log(`Review submitted: ${rating} stars, ${reviewText}`);
+            showToast('Thank you for your review!');
+        });
+
+        // Back to shopping
+        backToShopping.addEventListener('click', () => {
+            // Reset cart
+            cartItems = [];
+            cartCount = 0;
+            total = 0;
+            document.querySelector('.cart-count').textContent = '0';
+            
+            // Show main content
+            confirmationPage.style.display = 'none';
+            document.querySelector('main').style.display = 'block';
+            
+            // Save empty cart
+            saveCartToStorage();
+            
+            showToast('Welcome back! Continue shopping.');
+        });
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            toast.classList.add(type);
+            toast.classList.add('visible');
+            
+            setTimeout(() => {
+                toast.classList.remove('visible');
+            }, 3000);
+        }
+
+        // Search functionality
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    searchResults.style.display = 'none';
+                    productsContainer.style.display = 'grid';
+                    return;
+                }
+                
+                // Update search term display
+                document.getElementById('searchTerm').textContent = searchTerm;
+                
+                // Filter products
+                const filteredProducts = Object.entries(products).filter(([id, product]) => {
+                    return product.title.toLowerCase().includes(searchTerm) || 
+                           product.description.toLowerCase().includes(searchTerm) ||
+                           product.category.toLowerCase().includes(searchTerm);
+                });
+                
+                // Display search results
+                if (filteredProducts.length > 0) {
+                    searchResultsContainer.innerHTML = '';
+                    
+                    filteredProducts.forEach(([id, product]) => {
+                        const productElement = document.createElement('div');
+                        productElement.classList.add('product');
+                        productElement.innerHTML = `
+                            <img src="${product.image}" alt="${product.title}" class="product-img">
+                            <div class="product-content">
+                                <h3 class="product-title">${product.title}</h3>
+                                <div class="product-price">Rs ${product.price}</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="rating-count">(128)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="add-to-cart" data-product="${product.title}" data-price="${product.price}" data-id="${id}">
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                    </button>
+                                    <button class="view-details" data-product="${id}">
+                                        <i class="fas fa-info"></i> Details
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Add event listeners
+                        const addToCartBtn = productElement.querySelector('.add-to-cart');
+                        addToCartBtn.addEventListener('click', function() {
+                            const id = this.getAttribute('data-id');
+                            const product = products[id];
+                            
+                            // Play cart sound
+                            const cartSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3');
+                            cartSound.play();
+                            
+                            // Update cart count
+                            cartCount++;
+                            document.querySelector('.cart-count').textContent = cartCount;
+                            
+                            // Check if product already in cart
+                            const existingItem = cartItems.find(item => item.id === id);
+                            
+                            if (existingItem) {
+                                existingItem.quantity++;
+                                existingItem.total = existingItem.quantity * existingItem.price;
+                            } else {
+                                cartItems.push({ 
+                                    id,
+                                    title: product.title, 
+                                    price: product.price, 
+                                    quantity: 1, 
+                                    total: product.price,
+                                    img: product.image
+                                });
+                            }
+                            
+                            // Update cart display
+                            updateCartDisplay();
+                            
+                            // Save to localStorage
+                            saveCartToStorage();
+                            
+                            // Show success message
+                            showToast(`${product.title} added to cart!`);
+                        });
+                        
+                        const viewDetailsBtn = productElement.querySelector('.view-details');
+                        viewDetailsBtn.addEventListener('click', function() {
+                            const id = this.getAttribute('data-product');
+                            const product = products[id];
+                            
+                            // Update quick view modal
+                            document.getElementById('quickViewImage').src = product.image;
+                            document.getElementById('quickViewTitle').textContent = product.title;
+                            document.getElementById('quickViewPrice').textContent = `Rs ${product.price}`;
+                            document.getElementById('quickViewDesc').textContent = product.description;
+                            
+                            // Set up add to cart button in quick view
+                            const quickViewAddToCart = document.getElementById('quickViewAddToCart');
+                            quickViewAddToCart.setAttribute('data-id', id);
+                            quickViewAddToCart.setAttribute('data-price', product.price);
+                            quickViewAddToCart.setAttribute('data-product', product.title);
+                            
+                            // Show quick view modal
+                            quickViewModal.style.display = 'flex';
+                        });
+                        
+                        searchResultsContainer.appendChild(productElement);
+                    });
+                    
+                    searchResults.style.display = 'block';
+                    productsContainer.style.display = 'none';
+                    
+                    showToast(`Found ${filteredProducts.length} products for "${searchTerm}"`);
+                } else {
+                    searchResults.style.display = 'block';
+                    productsContainer.style.display = 'none';
+                    searchResultsContainer.innerHTML = '<p>No products found. Try a different search term.</p>';
+                    showToast(`No products found for "${searchTerm}"`, 'error');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
