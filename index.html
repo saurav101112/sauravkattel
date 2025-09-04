@@ -16,7 +16,6 @@
             overflow-x: hidden;
             transition: background-color 0.3s ease-in-out;
         }
-
         /* Heading Section */
         .heading-section {
             background: linear-gradient(90deg, #1E90FF, #00BFFF);
@@ -27,7 +26,6 @@
             font-family: 'Roboto Condensed', sans-serif;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-
         .heading-section h1 {
             font-size: 36px;
             margin: 0;
@@ -35,7 +33,6 @@
             vertical-align: middle;
             letter-spacing: 1px;
         }
-
         .heading-section img.logo {
             width: 55px;
             height: 55px;
@@ -44,7 +41,6 @@
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
-
         .heading-section .nav-buttons {
             position: absolute;
             bottom: 10px;
@@ -53,7 +49,6 @@
             justify-content: center;
             gap: 20px;
         }
-
         .heading-section .nav-buttons a {
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(8px);
@@ -64,13 +59,11 @@
             font-size: 18px;
             transition: all 0.3s ease-in-out;
         }
-
         .heading-section .nav-buttons a:hover {
             background: #fff;
             color: #1E90FF;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
         /* Middle Section */
         .middle-section {
             padding: 50px 20px;
@@ -84,7 +77,6 @@
             width: 80%;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-
         .middle-section img.photo {
             border-radius: 50%;
             width: 200px;
@@ -95,12 +87,10 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
-
         .middle-section img.photo:hover {
             transform: scale(1.08) rotate(2deg);
             box-shadow: 0 0 25px #1E90FF;
         }
-
         .middle-section h1 {
             margin-top: 20px;
             font-size: 48px;
@@ -108,11 +98,9 @@
             font-family: 'Roboto Slab', serif;
             transition: color 0.3s ease;
         }
-
         .middle-section h1:hover {
             color: #FF7F50;
         }
-
         /* Octoberfest Section */
         .october-section {
             display: flex;
@@ -125,7 +113,6 @@
             overflow: hidden;
             box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
         }
-
         .october-section .title h1 {
             font-size: 10vmin;
             font-weight: 900;
@@ -133,7 +120,6 @@
             color: darkorange;
             text-shadow: 0 0 15px rgba(255,140,0,0.7);
         }
-
         /* Articles Section */
         .articles-section {
             width: 60%;
@@ -146,7 +132,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             backdrop-filter: blur(8px);
         }
-
         .articles-section .article {
             background-color: #fff;
             padding: 20px;
@@ -155,28 +140,23 @@
             box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .articles-section .article:hover {
             transform: translateY(-5px);
             box-shadow: 0px 6px 20px rgba(0,0,0,0.15);
         }
-
         .articles-section .article h2 {
             color: #1E90FF;
             font-family: 'Roboto Slab', serif;
         }
-
         .articles-section .read-more {
             color: #1E90FF;
             text-decoration: none;
             font-weight: 600;
         }
-
         .articles-section .read-more:hover {
             text-decoration: underline;
             color: #FF7F50;
         }
-
         /* Footer */
         footer {
             background: linear-gradient(90deg, #1E90FF, #00BFFF);
@@ -185,18 +165,15 @@
             text-align: center;
             font-size: 14px;
         }
-
         footer a img {
             width: 32px;
             height: 32px;
             margin: 0 5px;
             transition: transform 0.3s;
         }
-
         footer a img:hover {
             transform: scale(1.2) rotate(5deg);
         }
-
         /* Chatbot */
         .chat-container {
             position: absolute;
@@ -209,28 +186,24 @@
             overflow: hidden;
             transition: left 0.3s ease-in-out;
         }
-
         .chat-header {
             background: linear-gradient(90deg, #1E90FF, #00BFFF);
             color: #fff;
             padding: 12px;
             text-align: center;
         }
-
         .chat-icon {
             width: 55px;
             height: 55px;
             cursor: pointer;
             transition: transform 0.3s;
         }
-
         .chat-icon:hover {
             transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-
     <!-- Heading Section -->
     <div class="heading-section">
         <img src="agriculture-farm-logo-vector.jpg" alt="Logo" class="logo">
@@ -239,36 +212,33 @@
             <a href="#home">Home</a>
             <a href="bridge.html">B.SC Horticulture</a>
             <a href="#articles">Articles</a>
+            <a href="store.html">Store</a>
         </div>
     </div>
-
     <!-- Middle Section -->
     <div class="middle-section" id="home">
         <img src="images.jpg" alt="Saurav Kattel" class="photo">
         <h1>Saurav Kattel</h1>
     </div>
-
     <!-- Octoberfest Section -->
     <div class="october-section">
         <div class="title">
             <h1 id="greeting"></h1>
         </div>
     </div>
-
     <!-- Articles Section -->
     <div class="articles-section" id="articles">
         <div class="article">
             <h2>नेपालमा जैविक खेती प्रविधि यसका चुनौतीहरू र अबको बाटो</h2>
             <p class="date">August 11, 2024</p>
             <p class="summary">
-                जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। 
-                नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ। 
+                जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्।
+                नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ।
                 यो लेखमा हामी जैविक खेतीको चुनौतीहरू र नेपालमा यसलाई सफलतापूर्वक लागू गर्नका लागि आवश्यक कदमहरूबारे छलफल गर्नेछौं।
             </p>
             <a href="full-article.html" class="read-more">Read More</a>
         </div>
     </div>
-
     <!-- Footer -->
     <footer>
         <p>Connect with me on social media:</p>
@@ -279,7 +249,6 @@
             <img src="instagram.png" alt="Instagram">
         </a>
     </footer>
-
     <!-- Chatbot -->
     <div class="chat-container" id="chat-container">
         <div class="chat-header">
@@ -292,7 +261,6 @@
         </div>
     </div>
     <img src="chat.png" alt="Chat Icon" class="chat-icon" id="chat-icon">
-
     <!-- Script -->
     <script>
         function setGreeting() {
