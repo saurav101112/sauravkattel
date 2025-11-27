@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAURAV AGRO-TECH | Modern Agriculture</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght=300;400;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            /* NEW GREEN & ORANGE THEME */
-            --primary: #004d40; /* Deep Forest Green (Nature) */
-            --accent: #ff6f00; /* Vibrant Orange (Energy/Harvest) */
-            --highlight: #c6ff00; /* Fresh Lime Green (Tech/Growth) */
-            --dark: #000000;
+            --primary: #0f3d3e; /* Deep Agro Green */
+            --accent: #28a745; /* Fresh Leaf Green */
+            --highlight: #00d2ff; /* Tech Blue */
+            --dark: #000000; /* Pure Black */
             --light: #f4f7f6;
-            --glass: rgba(255, 255, 255, 0.05);
+            --glass: rgba(255, 255, 255, 0.05); /* Very subtle glass */
             --glass-border: rgba(255, 255, 255, 0.1);
-            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7); /* Darker shadow */
             --neon-glow: 0 0 5px var(--highlight), 0 0 10px var(--highlight);
         }
 
@@ -25,6 +24,7 @@
             box-sizing: border-box;
         }
 
+        /* --- Global Body & Grid Background --- */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -34,18 +34,27 @@
             background-image: 
                 linear-gradient(to right, #111 1px, transparent 1px),
                 linear-gradient(to bottom, #111 1px, transparent 1px);
-            background-size: 50px 50px;
+            background-size: 50px 50px; /* Adjust grid size */
             background-attachment: fixed;
             color: var(--light);
             overflow-x: hidden;
             transition: background-color 0.5s ease;
         }
 
-        /* --- Scroll Bar Customization (Unchanged) --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--dark); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--highlight); }
+        /* --- Scroll Bar Customization --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--highlight); /* Tech Blue Scrollbar */
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
 
         /* --- Navigation --- */
         nav {
@@ -53,104 +62,317 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.7); /* Blacker background for contrast */
+            backdrop-filter: blur(15px); /* Stronger blur */
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--glass-border);
             box-shadow: 0 4px 25px rgba(0,0,0,0.5);
         }
-        
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--highlight); /* Tech Blue Border */
+            transition: transform 0.3s ease;
+        }
+        .logo-container img:hover {
+            transform: rotate(-10deg) scale(1.05);
+        }
+
+        .logo-container h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, #fff, var(--highlight));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: var(--neon-glow); /* NEON GLOW */
+        }
+
         .nav-links {
             display: flex;
             gap: 25px;
         }
-        
-        .nav-toggle {
-            display: none; /* Hidden by default, shown on mobile */
-            font-size: 1.5rem;
-            color: var(--highlight);
-            cursor: pointer;
-        }
 
-        /* --- MAIN LAYOUT WITH SIDEBAR --- */
-        .main-content-wrapper {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0;
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
             transition: all 0.3s ease;
-        }
-
-        /* --- Sidebar (Collapsible) --- */
-        .sidebar {
-            width: 280px; /* Wider for better content */
-            padding: 40px 0 20px 0;
-            position: sticky;
-            top: 80px; 
-            height: calc(100vh - 80px);
-            overflow-y: auto;
-            border-right: 1px solid var(--glass-border);
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-        
-        /* Sidebar Hidden State */
-        .sidebar.hidden {
-            width: 0;
-            padding: 0;
-            border-right: none;
+            font-size: 0.95rem;
+            position: relative;
             overflow: hidden;
         }
-        .sidebar.hidden * {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .sidebar-item {
-            padding: 15px 20px;
-            margin: 0 15px 10px 15px; /* Added horizontal margin */
-            border-radius: 8px;
-            background: rgba(0, 77, 64, 0.2); 
-            color: var(--light);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .sidebar-toggle-btn {
-            background: var(--primary);
-            color: var(--highlight);
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block; /* Ensure it's visible */
-            margin: 10px auto;
-            transition: background 0.3s;
-        }
-        
-        /* --- Main Content Area --- */
-        .main-content {
-            flex-grow: 1;
-            padding-left: 50px;
-            transition: padding 0.3s ease;
-        }
-        
-        /* Adjust main content when sidebar is hidden */
-        .sidebar.hidden + .main-content {
-            padding-left: 0;
+
+        .nav-links a::after { /* Gradient underglow on hover */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--highlight), transparent);
+            border-radius: 2px;
+            transition: transform 0.3s ease-out;
         }
 
-        /* --- Hero Section & Profile Card (Styles Unchanged for brevity, focusing on layout fixes) --- */
-        .hero { min-height: 80vh; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; overflow: hidden; }
-        .profile-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; text-align: center; box-shadow: var(--shadow); max-width: 600px; width: 100%; transform-style: preserve-3d; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .profile-card:hover { transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.8); }
-        /* ... other hero/card styles ... */
+        .nav-links a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .nav-links a:hover {
+            color: var(--highlight);
+        }
+
+        /* --- Hero Section (Including 3D Tilt Effect) --- */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: var(--accent);
+            filter: blur(200px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .profile-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 50px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            width: 100%;
+            transform-style: preserve-3d; /* Enable 3D transform */
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .profile-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-5px); /* 3D Tilt on Hover */
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+        }
+
+        .profile-pic-wrapper {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 25px;
+            transform: translateZ(20px); /* Move image forward in 3D space */
+        }
+
+        .profile-pic-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--highlight);
+            box-shadow: 0 0 30px rgba(0,0,0,0.8), 0 0 15px var(--accent); /* Enhanced shadow/glow */
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-pic-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 2px dashed var(--highlight);
+            animation: spin 10s linear infinite;
+        }
+
+        .profile-card h1 {
+            font-size: 3.5rem;
+            margin: 10px 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--highlight);
+            text-shadow: var(--neon-glow);
+            transform: translateZ(10px);
+        }
+
+        .profile-card p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 0;
+            transform: translateZ(5px);
+        }
+
+        /* --- Greeting Ticker Section --- */
+        .greeting-bar {
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.5), transparent);
+            padding: 40px 0;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            margin: 40px 0;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .greeting-bar h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4vw;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+            margin: 0;
+            position: relative;
+            display: inline-block;
+            animation: textFlow 10s linear infinite alternate; /* New text animation */
+        }
+
+        .greeting-bar h2 span {
+            color: var(--highlight); /* Accent is now tech blue */
+            text-shadow: 0 0 10px var(--highlight);
+            -webkit-text-stroke: 0px;
+        }
+
+        /* --- Articles Section --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--highlight);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .article-card {
+            background: #181818; /* Darker card background */
+            color: #e0e0e0;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0; 
+            transform: translateY(50px);
+        }
+
+        .article-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(40, 167, 69, 0.1), rgba(0, 210, 255, 0.1));
+            z-index: -1;
+        }
+
+        .article-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 20px var(--highlight);
+        }
+
+        .article-card h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--accent);
+            font-size: 1.6rem;
+            margin-top: 0;
+            text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+
+        .date {
+            font-size: 0.85rem;
+            color: var(--highlight);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .read-more-btn:hover {
+            transform: scale(1.05) rotate(1deg);
+            background: linear-gradient(45deg, var(--highlight), var(--accent));
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.4);
+        }
         
         /* --- Footer --- */
         footer {
@@ -168,30 +390,32 @@
             margin-top: 20px;
         }
 
-        /* Social Icon Fix: Reverting size to original and ensuring hover works */
         .social-icons a {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 50px; 
+            width: 50px;
             height: 50px;
             background: #222;
             border-radius: 50%;
             transition: all 0.3s ease;
-            animation: pulse 2s infinite; 
+            animation: pulse 2s infinite; /* PULSE EFFECT */
         }
+        
+        .social-icons a:nth-child(1) { animation-delay: 0s; }
+        .social-icons a:nth-child(2) { animation-delay: 0.5s; }
 
         .social-icons img {
-            width: 24px; /* Default Icon Size */
+            width: 24px;
             height: 24px;
             filter: brightness(0) invert(1);
         }
 
         .social-icons a:hover {
-            background: var(--accent);
+            background: var(--highlight);
             transform: scale(1.2);
-            box-shadow: 0 0 15px var(--accent);
-            animation: none; 
+            box-shadow: 0 0 15px var(--highlight);
+            animation: none; /* Stop pulse on hover */
         }
 
         /* --- Chatbot Widget --- */
@@ -205,79 +429,189 @@
             align-items: flex-end;
         }
 
+        .chat-button {
+            width: 65px; /* Slightly larger */
+            height: 65px;
+            background: linear-gradient(135deg, var(--highlight), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .chat-button img {
+            width: 35px;
+            height: 35px;
+            filter: brightness(0) invert(1);
+        }
+
+        .chat-button:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 4px 30px var(--highlight);
+        }
+
         .chat-window {
             width: 350px;
-            background: #222;
+            background: #222; /* Dark chat window */
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             margin-bottom: 15px;
             overflow: hidden;
-            display: none; /* Hidden by default, only shown with .active class */
+            display: none;
             flex-direction: column;
             border: 1px solid var(--glass-border);
             transform-origin: bottom right;
+            animation: popIn 0.3s ease;
         }
 
         .chat-window.active {
             display: flex;
-            animation: popIn 0.3s ease;
         }
 
-        /* --- Mobile Responsive Optimizations --- */
-        @media (max-width: 992px) {
-            
-            /* General Layout Stack */
-            .main-content-wrapper {
-                flex-direction: column;
-                padding: 0;
-            }
-            .main-content {
-                padding-left: 0; /* Remove padding when sidebar is stacked */
-            }
-            
-            /* Sidebar Handling on Tablet/Mobile */
-            .sidebar {
-                position: static; /* No sticky on mobile */
-                width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid var(--glass-border);
-                padding: 20px 0;
-                transition: height 0.3s ease, padding 0.3s ease;
-            }
-            
-            /* Make Sidebar Collapsible on Mobile (Initial Hidden State) */
-            .sidebar-content-wrapper {
-                display: none;
-            }
-            .sidebar.expanded .sidebar-content-wrapper {
-                display: block;
-            }
-            
-            .sidebar-toggle-btn {
-                display: none; /* Hide desktop toggle button */
-            }
-            
-            /* Nav bar for Mobile */
+        .chat-header {
+            background: linear-gradient(90deg, var(--primary), var(--dark));
+            color: var(--light);
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chat-body {
+            height: 250px;
+            padding: 15px;
+            background: #111;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+        
+        .chat-body::-webkit-scrollbar {
+            width: 5px;
+        }
+        .chat-body::-webkit-scrollbar-thumb {
+            background: var(--primary);
+        }
+
+        .chat-footer {
+            padding: 10px;
+            background: #000;
+            border-top: 1px solid #111;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--primary);
+            background: #000;
+            color: #fff;
+            border-radius: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .chat-footer input:focus {
+            border-color: var(--highlight);
+        }
+
+        .chat-footer button {
+            background: var(--highlight);
+            color: #000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.1s;
+        }
+        .chat-footer button:hover {
+            background: #fff;
+        }
+        .chat-footer button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Message Styles inside chat */
+        .chat-body > div {
+            margin: 10px 0;
+            display: flex;
+        }
+        .chat-body > div.user-msg {
+            justify-content: flex-end;
+        }
+        .chat-body > div.bot-msg {
+            justify-content: flex-start;
+        }
+        .chat-body span {
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+            display: inline-block;
+        }
+        .chat-body .user-msg span {
+            background: var(--highlight);
+            color: #000;
+            border-bottom-right-radius: 2px;
+        }
+        .chat-body .bot-msg span {
+            background: #333;
+            color: #fff;
+            border-bottom-left-radius: 2px;
+        }
+
+        /* --- Animations --- */
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
+        }
+        
+        @keyframes textFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
             nav {
-                padding: 15px 20px;
+                padding: 15px 5%;
             }
             .nav-links {
-                display: none;
+                display: none; 
             }
-            .nav-toggle {
-                display: block; /* Show menu toggle icon */
+            .greeting-bar h2 {
+                font-size: 1.5rem;
+                white-space: nowrap;
             }
-            
-            /* Ensure the hero section is not too tall on small screens */
-            .hero {
-                min-height: 50vh;
+            .hero::after {
+                width: 300px;
+                height: 300px;
             }
-            
+            .profile-card {
+                padding: 30px;
+            }
             .profile-card h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
-
             .chat-window {
                 width: 280px;
             }
@@ -288,76 +622,54 @@
 
     <nav>
         <div class="logo-container">
-            <img src="agriculture-farm-logo-vector.jpg" alt="Logo" onerror="this.src='https://via.placeholder.com/50/004d40/ffffff?text=SA'">
+            <img src="agriculture-farm-logo-vector.jpg" alt="Logo" onerror="this.src='https://via.placeholder.com/50/0f3d3e/ffffff?text=SA'">
             <h1>SAURAV AGRO-TECH</h1>
         </div>
-        <div class="nav-links" id="nav-links">
+        <div class="nav-links">
             <a href="#home">Home</a>
             <a href="bridge.html">B.SC Horticulture</a>
             <a href="#articles">Articles</a>
             <a href="store.html">Store</a>
         </div>
-        <div class="nav-toggle" id="nav-toggle">
-             <i class="fas fa-bars"></i>
-        </div>
     </nav>
-    
-    <div class="main-content-wrapper">
-        <aside class="sidebar" id="sidebar">
-            <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
-                <i class="fas fa-chevron-left" id="sidebar-icon"></i> Hide Menu
-            </button>
-            
-            <div class="sidebar-content-wrapper">
-                <h3>Quick Agro Links 🔗</h3>
-                <a href="#"><div class="sidebar-item"><i class="fas fa-seedling"></i> Seed Calculator</div></a>
-                <a href="#"><div class="sidebar-item"><i class="fas fa-hand-holding-water"></i> Irrigation Guides</div></a>
-                <a href="#"><div class="sidebar-item"><i class="fas fa-sun"></i> Weather Forecast</div></a>
-                <a href="#"><div class="sidebar-item"><i class="fas fa-truck"></i> Supplier Directory</div></a>
-                <a href="#"><div class="sidebar-item"><i class="fas fa-phone-alt"></i> Contact Support</div></a>
+
+    <section class="hero" id="home">
+        <div class="profile-card">
+            <div class="profile-pic-wrapper">
+                <img src="images.jpg" alt="Saurav Kattel" onerror="this.src='https://via.placeholder.com/220/28a745/ffffff?text=SK'">
             </div>
-        </aside>
+            <h1>Saurav Kattel</h1>
+            <p>Innovating Agriculture for a Sustainable Future</p>
+        </div>
+    </section>
 
-        <main class="main-content">
-            <section class="hero" id="home">
-                <div class="profile-card">
-                    <div class="profile-pic-wrapper">
-                        <img src="images.jpg" alt="Saurav Kattel" onerror="this.src='https://via.placeholder.com/220/ff6f00/ffffff?text=SK'">
-                    </div>
-                    <h1>Saurav Kattel</h1>
-                    <p>Innovating Agriculture for a Sustainable Future</p>
-                </div>
-            </section>
+    <div class="greeting-bar">
+        <h2 id="dynamic-greeting">HELLO <span id="time-greeting">OCTOBER!</span></h2>
+    </div>
 
-            <div class="greeting-bar">
-                <h2 id="dynamic-greeting">HELLO <span id="time-greeting">OCTOBER!</span></h2>
+    <div class="container" id="articles">
+        <h2 class="section-title">Latest Insights</h2>
+        
+        <div class="article-grid">
+            <div class="article-card scroll-reveal">
+                <h2>नेपालमा जैविक खेती प्रविधि: चुनौती र अबको बाटो</h2>
+                <span class="date">August 11, 2024</span>
+                <p>
+                    जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्।
+                    नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ...
+                </p>
+                <a href="full-article.html" class="read-more-btn">Read Full Article <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <div class="container" id="articles">
-                <h2 class="section-title">Latest Insights</h2>
-                
-                <div class="article-grid">
-                    <div class="article-card scroll-reveal">
-                        <h2>नेपालमा जैविक खेती प्रविधि: चुनौती र अबको बाटो</h2>
-                        <span class="date">August 11, 2024</span>
-                        <p>
-                            जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्।
-                            नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ...
-                        </p>
-                        <a href="full-article.html" class="read-more-btn">Read Full Article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-
-                    <div class="article-card scroll-reveal">
-                        <h2>Sustainable Farming Techniques</h2>
-                        <span class="date">September 05, 2024</span>
-                        <p>
-                            Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal...
-                        </p>
-                        <a href="#" class="read-more-btn">Read Full Article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <div class="article-card scroll-reveal">
+                <h2>Sustainable Farming Techniques</h2>
+                <span class="date">September 05, 2024</span>
+                <p>
+                    Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal...
+                </p>
+                <a href="#" class="read-more-btn">Read Full Article <i class="fas fa-arrow-right"></i></a>
             </div>
-        </main>
+        </div>
     </div>
 
     <footer>
@@ -376,14 +688,14 @@
     <div class="chat-widget">
         <div class="chat-window" id="chat-window">
             <div class="chat-header">
-                <span>Gemini-GPT Agro Assistant</span>
+                <span>Chat with Saurav</span>
                 <span style="cursor:pointer;" onclick="toggleChat()">×</span>
             </div>
             <div class="chat-body" id="chat-body">
-                <div class="bot-msg"><span>Hello! I am your AI Agro Assistant, ready to answer questions about farming, horticulture, and crop science.</span></div>
+                <div class="bot-msg"><span>Welcome! How can I help you with agriculture today?</span></div>
             </div>
             <div class="chat-footer">
-                <input type="text" id="user-input" placeholder="Ask about organic farming..." onkeypress="handleEnter(event)">
+                <input type="text" id="user-input" placeholder="Type message..." onkeypress="handleEnter(event)">
                 <button onclick="sendMessage()">Send</button>
             </div>
         </div>
@@ -393,8 +705,9 @@
     </div>
 
     <script>
-        // 1. Dynamic Greeting Logic (Unchanged)
+        // 1. Dynamic Greeting Logic
         function updateGreeting() {
+            const greetingElement = document.getElementById('time-greeting');
             const mainGreeting = document.getElementById('dynamic-greeting');
             const date = new Date();
             const hour = date.getHours();
@@ -405,49 +718,11 @@
             else if (hour >= 12 && hour < 17) timeText = "GOOD AFTERNOON";
             else timeText = "GOOD EVENING";
 
+            // Displays: GOOD EVENING OCTOBER! (or whatever month/time it is)
             mainGreeting.innerHTML = `${timeText} <span>${month.toUpperCase()}!</span>`;
         }
 
-        // 2. Sidebar Toggle Logic (NEW)
-        const sidebar = document.getElementById('sidebar');
-        const sidebarIcon = document.getElementById('sidebar-icon');
-        const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
-        const isMobile = window.innerWidth <= 992;
-        
-        // Initial state: Hidden on mobile, expanded on desktop
-        if (!isMobile) {
-            sidebar.classList.remove('hidden');
-            sidebarIcon.classList.remove('fa-chevron-right');
-            sidebarIcon.classList.add('fa-chevron-left');
-        } else {
-             // For mobile, the entire sidebar is hidden initially (controlled by CSS)
-             // We need a separate toggle for the sidebar content wrapper
-             document.getElementById('nav-toggle').addEventListener('click', () => {
-                 sidebar.classList.toggle('expanded');
-             });
-        }
-
-        function toggleSidebar() {
-            if (isMobile) {
-                // For mobile, toggle the 'expanded' class to show/hide content
-                sidebar.classList.toggle('expanded');
-            } else {
-                // For desktop, toggle the 'hidden' class and update icon
-                sidebar.classList.toggle('hidden');
-                
-                if (sidebar.classList.contains('hidden')) {
-                    sidebarIcon.classList.remove('fa-chevron-left');
-                    sidebarIcon.classList.add('fa-chevron-right');
-                    sidebarToggleBtn.innerHTML = '<i class="fas fa-chevron-right" id="sidebar-icon"></i> Show Menu';
-                } else {
-                    sidebarIcon.classList.remove('fa-chevron-right');
-                    sidebarIcon.classList.add('fa-chevron-left');
-                    sidebarToggleBtn.innerHTML = '<i class="fas fa-chevron-left" id="sidebar-icon"></i> Hide Menu';
-                }
-            }
-        }
-        
-        // 3. Chatbot Toggle Logic (Ensures it only appears when clicked)
+        // 2. Chatbot Toggle Logic & Enhanced Message Styling
         function toggleChat() {
             const chatWindow = document.getElementById('chat-window');
             chatWindow.classList.toggle('active');
@@ -455,51 +730,30 @@
                 document.getElementById('user-input').focus();
             }
         }
-        
-        // 4. Simulated Gemini-GPT Response Logic (Unchanged)
-        function getGeminiResponse(userText) {
-            const text = userText.toLowerCase();
-            let response = "";
-
-            if (text.includes("organic") || text.includes("जैविक")) {
-                response = "Organic farming focuses on natural processes, like compost and crop rotation, to enrich soil and manage pests without synthetic chemicals. It's vital for long-term soil health and biodiversity. Do you want to know about a specific organic technique?";
-            } else if (text.includes("horticulture") || text.includes("बागवानी")) {
-                response = "Horticulture is the art and science of cultivating plants, especially fruits, vegetables, flowers, and ornamental trees. Saurav specializes in B.SC. Horticulture, focusing on innovative techniques for high-yield crops. How can I help with your garden or farm?";
-            } else if (text.includes("sustainable") || text.includes("irrigation") || text.includes("water")) {
-                response = "Sustainable irrigation often involves drip systems, which deliver water directly to the plant roots, reducing waste by up to 60%. This is crucial in water-scarce regions. What crops are you growing?";
-            } else if (text.includes("hello") || text.includes("hi") || text.includes("namaste")) {
-                response = "Namaste! I'm the Gemini-GPT Agro Assistant. Ask me anything about agriculture, crops, or Saurav Agro-Tech!";
-            } else if (text.includes("saurav") || text.includes("owner")) {
-                response = "Saurav Kattel is the innovator behind Saurav Agro-Tech, dedicated to bridging modern technology with traditional farming practices for a sustainable future.";
-            } else {
-                response = "I'm still learning, but I can assist with common agro-tech questions. Try asking about 'organic farming' or 'horticulture'!";
-            }
-            
-            return response;
-        }
 
         function sendMessage() {
             const input = document.getElementById('user-input');
             const body = document.getElementById('chat-body');
-            const userText = input.value.trim();
+            const text = input.value.trim();
             
-            if(userText) {
+            if(text) {
+                // Add User Message
                 const userMsg = document.createElement('div');
                 userMsg.classList.add('user-msg');
-                userMsg.innerHTML = `<span>${userText}</span>`;
+                userMsg.innerHTML = `<span>${text}</span>`;
                 body.appendChild(userMsg);
                 
                 input.value = '';
-                body.scrollTop = body.scrollHeight; 
+                body.scrollTop = body.scrollHeight; // Scroll to bottom immediately
                 
+                // Simulate Auto Reply
                 setTimeout(() => {
-                    const botResponse = getGeminiResponse(userText);
                     const botMsg = document.createElement('div');
                     botMsg.classList.add('bot-msg');
-                    botMsg.innerHTML = `<span>${botResponse}</span>`;
+                    botMsg.innerHTML = `<span>Thanks for asking! I'll get back to you soon.</span>`;
                     body.appendChild(botMsg);
-                    body.scrollTop = body.scrollHeight; 
-                }, 1200);
+                    body.scrollTop = body.scrollHeight; // Scroll to bottom after reply
+                }, 1000);
             }
         }
 
@@ -507,7 +761,7 @@
             if(e.key === 'Enter') sendMessage();
         }
 
-        // 5. Scroll Reveal Animation (Unchanged)
+        // 3. Scroll Reveal Animation
         const observerOptions = {
             threshold: 0.2
         };
@@ -516,7 +770,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
+                    observer.unobserve(entry.target); // Stop observing once visible
                 }
             });
         }, observerOptions);
