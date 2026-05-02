@@ -335,6 +335,201 @@
         .scroll-reveal.delay-3 { transition-delay: 0.3s; }
         .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
 
+        /* ═══════════════════════════════════════════
+           ✨ ANIMATIONS LAYER
+        ═══════════════════════════════════════════ */
+
+        /* Respect reduced-motion users */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* — Hero choreography — staggered reveal of the inner pieces — */
+        .profile-card { animation: heroReveal 1.2s var(--ease) both; }
+        .profile-pic-wrapper { opacity: 0; transform: scale(0.85); animation: picPop 1s var(--ease) 0.35s forwards; }
+        .profile-eyebrow      { opacity: 0; transform: translateY(8px); animation: fadeUp 0.7s var(--ease) 0.6s forwards; }
+        .profile-card h1      { opacity: 0; transform: translateY(14px); animation: fadeUp 0.9s var(--ease) 0.75s forwards; }
+        .profile-card h1 em   { display: inline-block; opacity: 0; transform: translateX(-20px); animation: slideRight 0.9s var(--ease) 1.05s forwards; }
+        .profile-divider      { opacity: 0; transform: scaleX(0); animation: divGrow 0.8s var(--ease) 1.1s forwards; }
+        .profile-tagline      { opacity: 0; transform: translateY(8px); animation: fadeUp 0.7s var(--ease) 1.25s forwards; }
+
+        @keyframes picPop { to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideRight { to { opacity: 1; transform: translateX(0); } }
+        @keyframes divGrow { to { opacity: 0.5; transform: scaleX(1); } }
+
+        /* — Subtle floating motion for the profile card after entrance — */
+        .profile-card { animation: heroReveal 1.2s var(--ease) both, cardFloat 7s ease-in-out 1.4s infinite; }
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-6px); }
+        }
+
+        /* — Hero side lines: draw down on load — */
+        .hero-line-l, .hero-line-r {
+            transform-origin: top;
+            animation: lineDraw 1.4s var(--ease) 0.2s both;
+        }
+        @keyframes lineDraw { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+
+        /* — Profile pic gentle breathing glow — */
+        .profile-pic-wrapper::before {
+            animation: breathRing 4.5s ease-in-out infinite;
+        }
+        @keyframes breathRing {
+            0%, 100% { box-shadow: 0 0 0 rgba(201,168,76,0); }
+            50%      { box-shadow: 0 0 30px rgba(201,168,76,0.18); }
+        }
+
+        /* — Nav link micro slide on hover — */
+        .nav-links a { transition: color 0.25s ease, transform 0.25s ease; }
+        .nav-links a:hover { transform: translateY(-1px); }
+
+        /* — Logo subtle hover lift — */
+        .logo-container { transition: transform 0.3s var(--ease); }
+        .logo-container:hover { transform: translateX(2px); }
+        .logo-img-wrap { transition: transform 0.5s var(--ease), box-shadow 0.3s ease; }
+        .logo-container:hover .logo-img-wrap { transform: rotate(-6deg) scale(1.05); box-shadow: 0 6px 18px rgba(201,168,76,0.18); }
+
+        /* — Greeting bar background word slow drift — */
+        .greeting-bar::before { animation: bgDrift 18s ease-in-out infinite; }
+        @keyframes bgDrift {
+            0%, 100% { transform: translateY(-50%) translateX(0); opacity: 0.03; }
+            50%      { transform: translateY(-52%) translateX(-12px); opacity: 0.05; }
+        }
+
+        /* — Timeline: line draws in, dots pop, items fade up sequentially — */
+        .timeline.scroll-reveal::before { transform: scaleY(0); transform-origin: top; }
+        .timeline.scroll-reveal.visible::before {
+            transform: scaleY(1);
+            transition: transform 1.2s var(--ease);
+        }
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+        .timeline.visible .timeline-item { opacity: 1; transform: translateX(0); }
+        .timeline.visible .timeline-item:nth-child(1) { transition-delay: 0.35s; }
+        .timeline.visible .timeline-item:nth-child(2) { transition-delay: 0.55s; }
+        .timeline.visible .timeline-item:nth-child(3) { transition-delay: 0.75s; }
+        .timeline.visible .timeline-item:nth-child(4) { transition-delay: 0.95s; }
+
+        .timeline-dot { transform: scale(0); transition: transform 0.5s var(--ease), background 0.45s ease; }
+        .timeline.visible .timeline-item:nth-child(1) .timeline-dot { transition-delay: 0.6s;  transform: scale(1); }
+        .timeline.visible .timeline-item:nth-child(2) .timeline-dot { transition-delay: 0.8s;  transform: scale(1); }
+        .timeline.visible .timeline-item:nth-child(3) .timeline-dot { transition-delay: 1.0s;  transform: scale(1); }
+        .timeline.visible .timeline-item:nth-child(4) .timeline-dot { transition-delay: 1.2s;  transform: scale(1); }
+
+        .timeline-item.current .timeline-dot { animation: pulseDot 2.4s ease-in-out 1.5s infinite; }
+        @keyframes pulseDot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(61,107,82,0.55); }
+            50%      { box-shadow: 0 0 0 10px rgba(61,107,82,0); }
+        }
+
+        /* — Article card subtle lift + arrow nudge on hover — */
+        .article-card { transition: background 0.35s ease, transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+        .article-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -20px rgba(0,0,0,0.45); }
+
+        /* — Calendar cell sequential reveal — */
+        .cal-block:not(.empty) {
+            transform: scaleX(0);
+            transform-origin: left;
+            opacity: 0;
+            transition: transform 0.55s var(--ease), opacity 0.4s ease;
+        }
+        .calendar-wrap.cells-in .cal-block:not(.empty) {
+            transform: scaleX(1);
+            opacity: 0.82;
+        }
+        .crop-calendar tbody tr { transition: background 0.2s ease, transform 0.25s var(--ease); }
+        .crop-calendar tbody tr:not(.detail-row):hover { transform: translateX(3px); }
+
+        /* — Legend dots gentle breathe — */
+        .legend-dot { animation: legendPop 0.5s var(--ease) both; }
+        .calendar-section.scroll-revealed .legend-dot:nth-child(1) { animation-delay: 0.05s; }
+        @keyframes legendPop { from { transform: scale(0); } to { transform: scale(1); } }
+
+        /* — FAQ items: subtle slide + smoother answer reveal — */
+        .faq-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.55s var(--ease), transform 0.55s var(--ease), background 0.25s ease;
+        }
+        .faq-list.visible .faq-item { opacity: 1; transform: translateY(0); }
+        .faq-list.visible .faq-item:nth-child(1) { transition-delay: 0.1s; }
+        .faq-list.visible .faq-item:nth-child(2) { transition-delay: 0.18s; }
+        .faq-list.visible .faq-item:nth-child(3) { transition-delay: 0.26s; }
+        .faq-list.visible .faq-item:nth-child(4) { transition-delay: 0.34s; }
+        .faq-list.visible .faq-item:nth-child(5) { transition-delay: 0.42s; }
+        .faq-list.visible .faq-item:nth-child(6) { transition-delay: 0.5s; }
+
+        .faq-item.open .faq-q-text { color: var(--sage-light); transition: color 0.3s ease; }
+
+        /* — Section title: italic word slides + a thin underline grows — */
+        .section-title em {
+            display: inline-block;
+            transform: translateY(0);
+            transition: transform 0.6s var(--ease);
+        }
+        .section-header.scroll-reveal .section-title em { transform: translateY(20px); opacity: 0; transition: transform 0.7s var(--ease) 0.15s, opacity 0.7s ease 0.15s; }
+        .section-header.scroll-reveal.visible .section-title em { transform: translateY(0); opacity: 1; }
+
+        .section-rule { transform: scaleX(0); transform-origin: left; transition: transform 0.9s var(--ease) 0.3s; }
+        .section-header.scroll-reveal.visible .section-rule { transform: scaleX(1); }
+
+        /* — Social icon bounce-in on intersection — */
+        footer { overflow: hidden; }
+        .social-link {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.5s ease, transform 0.5s var(--ease), border-color 0.3s ease, background 0.3s ease;
+        }
+        footer.in-view .social-link { opacity: 1; transform: translateY(0); }
+        footer.in-view .social-link:nth-child(1) { transition-delay: 0.1s; }
+        footer.in-view .social-link:nth-child(2) { transition-delay: 0.22s; }
+
+        /* — Chat button gentle attention pulse (idle) — */
+        .chat-button { animation: chatIdle 4.5s ease-in-out 2s infinite; }
+        @keyframes chatIdle {
+            0%, 92%, 100% { transform: translateY(0) scale(1); box-shadow: 0 8px 30px rgba(61,107,82,0.35); }
+            96%           { transform: translateY(-2px) scale(1.04); box-shadow: 0 12px 36px rgba(61,107,82,0.5); }
+        }
+        .chat-button:hover { animation: none; }
+
+        /* — Section enter base — */
+        section { scroll-margin-top: 80px; }
+
+        /* — Number counter for hero (subtle attention to the divider) — */
+        .profile-divider { transform-origin: center; }
+
+        /* — Article card image-less placeholder shimmer accent on hover — */
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; height: 1px; width: 0;
+            background: var(--gold);
+            transition: width 0.5s var(--ease);
+            opacity: 0.6;
+        }
+        .article-card:hover::before { width: 100%; }
+
+        /* — FAQ icon hover spin — */
+        .faq-question:hover .faq-icon { transform: rotate(90deg); }
+        .faq-item.open .faq-question:hover .faq-icon { transform: rotate(135deg); }
+
+        /* — Greeting bar entrance — */
+        .greeting-bar h2 {
+            opacity: 0;
+            transform: translateX(-12px);
+            animation: gFade 1s var(--ease) 0.6s forwards;
+        }
+        @keyframes gFade { to { opacity: 1; transform: translateX(0); } }
+
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
         @media (max-width: 768px) {
@@ -347,6 +542,58 @@
             .faq-answer-inner { margin: 0 1rem 1.5rem 1rem; }
             .chat-window { width: 300px; }
         }
+
+        /* ═══ TWEAKS PANEL ═══ */
+        .tw-panel {
+            position: fixed; bottom: 28px; right: 96px; z-index: 2100;
+            width: 280px; background: var(--surface); color: var(--text);
+            border: 1px solid var(--border); border-radius: 4px;
+            box-shadow: var(--shadow);
+            font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+            display: none; flex-direction: column; overflow: hidden;
+        }
+        .tw-panel.active { display: flex; animation: chatSlide 0.35s var(--ease); }
+        .tw-head { padding: 0.7rem 1rem; background: var(--surface-2); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .tw-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); }
+        .tw-close { color: var(--text-muted); cursor: pointer; font-size: 1.1rem; line-height: 1; }
+        .tw-close:hover { color: var(--text); }
+        .tw-body { padding: 0.9rem 1rem 1rem; display: flex; flex-direction: column; gap: 0.85rem; max-height: 60vh; overflow-y: auto; }
+        .tw-section-label { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.18em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem; }
+        .tw-presets { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .tw-preset {
+            background: var(--bg); border: 1px solid var(--border); border-radius: 2px;
+            padding: 8px 6px; cursor: pointer; color: var(--text);
+            font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .tw-preset:hover { border-color: var(--gold); transform: translateY(-1px); }
+        .tw-preset.active { border-color: var(--gold); background: var(--surface-2); }
+        .tw-swatches { display: flex; gap: 3px; }
+        .tw-sw { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
+        .tw-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        .tw-row label { font-size: 0.78rem; color: var(--text-muted); flex: 1; }
+        .tw-row input[type="color"] { width: 36px; height: 28px; border: 1px solid var(--border); background: transparent; cursor: pointer; padding: 0; border-radius: 2px; }
+        .tw-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+        .tw-row input[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
+        .tw-reset {
+            margin-top: 0.4rem;
+            background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+            padding: 7px 10px; cursor: pointer; border-radius: 2px;
+            font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .tw-reset:hover { border-color: var(--harvest); color: var(--harvest); }
+        .tw-toggle-btn {
+            position: fixed; bottom: 28px; right: 96px; z-index: 2050;
+            width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+            display: none; align-items: center; justify-content: center; cursor: pointer;
+            color: var(--text-muted); font-size: 0.85rem;
+            transition: border-color 0.2s, color 0.2s, background 0.45s;
+        }
+        .tw-toggle-btn.show { display: flex; }
+        .tw-toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .tw-toggle-btn.active { border-color: var(--gold); color: var(--gold); }
     </style>
 </head>
 <body>
@@ -795,13 +1042,324 @@ Keep responses concise (2–4 sentences), practical, and Nepal-context-aware. Re
         }, { threshold: 0.08 });
         document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
 
+        /* ════ CALENDAR — sequential cell fill on view ════ */
+        function animateCalendarOnView() {
+            const wrap = document.querySelector('.calendar-wrap');
+            if (!wrap) return;
+            const cells = wrap.querySelectorAll('.cal-block:not(.empty)');
+            cells.forEach((c) => {
+                const month = c.closest('td')?.cellIndex ?? 0;
+                const row   = c.closest('tr')?.rowIndex ?? 0;
+                const delay = (month * 35) + (row * 50);
+                c.style.transitionDelay = `${Math.min(delay, 1400)}ms`;
+            });
+            const calObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { wrap.classList.add('cells-in'); calObs.disconnect(); }
+                });
+            }, { threshold: 0.18 });
+            calObs.observe(wrap);
+        }
+
+        /* ════ FOOTER in-view ════ */
+        function watchFooter() {
+            const f = document.querySelector('footer');
+            if (!f) return;
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { f.classList.add('in-view'); obs.disconnect(); } });
+            }, { threshold: 0.2 });
+            obs.observe(f);
+        }
+
+        /* ════ Hero parallax — subtle mouse-follow on profile card ════ */
+        function heroParallax() {
+            const card = document.querySelector('.profile-card');
+            const hero = document.querySelector('.hero');
+            if (!card || !hero) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            let raf = null;
+            hero.addEventListener('mousemove', (ev) => {
+                const r = hero.getBoundingClientRect();
+                const x = ((ev.clientX - r.left) / r.width  - 0.5) * 6;
+                const y = ((ev.clientY - r.top)  / r.height - 0.5) * 6;
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(() => {
+                    card.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+                });
+            });
+            hero.addEventListener('mouseleave', () => { card.style.transform = ''; });
+        }
+
+        /* ════ Active-section nav highlight on scroll ════ */
+        function activeNavOnScroll() {
+            const links = document.querySelectorAll('.nav-links a[href^="#"]');
+            if (!links.length) return;
+            const map = {};
+            links.forEach(a => {
+                const id = a.getAttribute('href').slice(1);
+                const sec = document.getElementById(id);
+                if (sec) map[id] = { link: a, sec };
+            });
+            const navObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        const id = e.target.id;
+                        Object.values(map).forEach(v => v.link.classList.remove('active'));
+                        if (map[id]) map[id].link.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+            Object.values(map).forEach(v => navObs.observe(v.sec));
+        }
+
         /* ════ INIT ════ */
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
             updateGreeting();
             buildCalendar();
             buildFAQ();
+            animateCalendarOnView();
+            watchFooter();
+            heroParallax();
+            activeNavOnScroll();
         });
     </script>
+
+    <!-- ════ TWEAKS ════ -->
+    <button class="tw-toggle-btn" id="tw-toggle" aria-label="Tweaks" title="Color tweaks">
+        <i class="fas fa-palette"></i>
+    </button>
+    <div class="tw-panel" id="tw-panel" role="dialog" aria-label="Tweaks">
+        <div class="tw-head">
+            <span class="tw-title">Tweaks · Colors</span>
+            <span class="tw-close" id="tw-close">×</span>
+        </div>
+        <div class="tw-body">
+            <div>
+                <div class="tw-section-label">Palette Preset</div>
+                <div class="tw-presets" id="tw-presets"></div>
+            </div>
+            <div>
+                <div class="tw-section-label">Custom Accents</div>
+                <div class="tw-row">
+                    <label for="tw-bg">Background</label>
+                    <input type="color" id="tw-bg" />
+                </div>
+                <div class="tw-row">
+                    <label for="tw-accent">Primary accent</label>
+                    <input type="color" id="tw-accent" />
+                </div>
+                <div class="tw-row">
+                    <label for="tw-accent2">Secondary accent</label>
+                    <input type="color" id="tw-accent2" />
+                </div>
+                <div class="tw-row">
+                    <label for="tw-text">Text</label>
+                    <input type="color" id="tw-text" />
+                </div>
+            </div>
+            <button class="tw-reset" id="tw-reset">Reset to default</button>
+        </div>
+    </div>
+
+    <script>
+        const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+          "preset": "sky-mint",
+          "bg": "",
+          "accent": "",
+          "accent2": "",
+          "text": ""
+        }/*EDITMODE-END*/;
+
+        const TW_PRESETS = {
+            'default': {
+                label: 'Default',
+                vars: {} // use existing :root
+            },
+            'sky-mint': {
+                label: 'Sky · Mint',
+                // sky blue + light white + light green
+                vars: {
+                    '--bg':         '#f4fbff',
+                    '--surface':    '#e8f4fb',
+                    '--surface-2':  '#dcecf3',
+                    '--text':       '#0e2a35',
+                    '--text-muted': 'rgba(14,42,53,0.6)',
+                    '--text-label': 'rgba(14,42,53,0.32)',
+                    '--sage':       '#6fb89a',
+                    '--sage-light': '#4a9b7c',
+                    '--gold':       '#3b9bc4',
+                    '--harvest':    '#5fa8d4',
+                    '--teal':       '#7ac4b5',
+                    '--border':     'rgba(14,42,53,0.13)',
+                    '--border-2':   'rgba(14,42,53,0.06)',
+                    '--nav-bg':     'rgba(244,251,255,0.9)'
+                }
+            },
+            'sky-deep': {
+                label: 'Sky · Deep',
+                vars: {
+                    '--bg':         '#0a1620',
+                    '--surface':    '#0f2030',
+                    '--surface-2':  '#152d40',
+                    '--text':       '#eaf4fb',
+                    '--text-muted': 'rgba(234,244,251,0.55)',
+                    '--text-label': 'rgba(234,244,251,0.25)',
+                    '--sage':       '#5fa890',
+                    '--sage-light': '#7cc4ac',
+                    '--gold':       '#5cb6e0',
+                    '--harvest':    '#7fc6e8',
+                    '--teal':       '#7ac4b5',
+                    '--border':     'rgba(234,244,251,0.12)',
+                    '--border-2':   'rgba(234,244,251,0.05)',
+                    '--nav-bg':     'rgba(10,22,32,0.88)'
+                }
+            },
+            'mint-paper': {
+                label: 'Mint · Paper',
+                vars: {
+                    '--bg':         '#f6fbf6',
+                    '--surface':    '#ecf4ec',
+                    '--surface-2':  '#dfecdf',
+                    '--text':       '#152419',
+                    '--text-muted': 'rgba(21,36,25,0.6)',
+                    '--text-label': 'rgba(21,36,25,0.32)',
+                    '--sage':       '#5ba37e',
+                    '--sage-light': '#3f8862',
+                    '--gold':       '#7aa55c',
+                    '--harvest':    '#a85f3a',
+                    '--teal':       '#5fb89c',
+                    '--border':     'rgba(21,36,25,0.13)',
+                    '--border-2':   'rgba(21,36,25,0.06)',
+                    '--nav-bg':     'rgba(246,251,246,0.9)'
+                }
+            }
+        };
+
+        const TW_KEY = 'sat-tweaks-v1';
+        let twState = Object.assign({}, TWEAK_DEFAULTS, JSON.parse(localStorage.getItem(TW_KEY) || '{}'));
+
+        function twHexToRgba(hex, alpha) {
+            const r = parseInt(hex.slice(1,3), 16);
+            const g = parseInt(hex.slice(3,5), 16);
+            const b = parseInt(hex.slice(5,7), 16);
+            return `rgba(${r},${g},${b},${alpha})`;
+        }
+
+        function twApply() {
+            const root = document.documentElement;
+            // 1. clear inline overrides we manage
+            const managed = ['--bg','--surface','--surface-2','--text','--text-muted','--text-label',
+                             '--sage','--sage-light','--gold','--harvest','--teal','--border','--border-2','--nav-bg'];
+            managed.forEach(v => root.style.removeProperty(v));
+
+            // 2. apply preset
+            const preset = TW_PRESETS[twState.preset] || TW_PRESETS['default'];
+            Object.entries(preset.vars).forEach(([k,v]) => root.style.setProperty(k, v));
+
+            // 3. apply custom overrides
+            if (twState.bg)      { root.style.setProperty('--bg', twState.bg); root.style.setProperty('--nav-bg', twHexToRgba(twState.bg, 0.9)); }
+            if (twState.accent)  { root.style.setProperty('--gold', twState.accent); }
+            if (twState.accent2) { root.style.setProperty('--sage', twState.accent2); root.style.setProperty('--sage-light', twState.accent2); }
+            if (twState.text)    { root.style.setProperty('--text', twState.text); root.style.setProperty('--text-muted', twHexToRgba(twState.text, 0.55)); root.style.setProperty('--text-label', twHexToRgba(twState.text, 0.3)); }
+
+            // 4. reflect in active preset card
+            document.querySelectorAll('.tw-preset').forEach(el => {
+                el.classList.toggle('active', el.dataset.key === twState.preset);
+            });
+        }
+
+        function twPersist() {
+            localStorage.setItem(TW_KEY, JSON.stringify(twState));
+            try {
+                window.parent.postMessage({ type: '__edit_mode_set_keys', edits: twState }, '*');
+            } catch(e) {}
+        }
+
+        function twBuildPresets() {
+            const wrap = document.getElementById('tw-presets');
+            wrap.innerHTML = '';
+            Object.entries(TW_PRESETS).forEach(([key, p]) => {
+                const btn = document.createElement('button');
+                btn.className = 'tw-preset';
+                btn.dataset.key = key;
+                const sw = p.vars && p.vars['--bg'] ? [p.vars['--bg'], p.vars['--gold'], p.vars['--sage']] : ['#0a0f0d', '#c9a84c', '#3d6b52'];
+                btn.innerHTML = `
+                    <div class="tw-swatches">
+                        <span class="tw-sw" style="background:${sw[0]}"></span>
+                        <span class="tw-sw" style="background:${sw[1]}"></span>
+                        <span class="tw-sw" style="background:${sw[2]}"></span>
+                    </div>
+                    <span>${p.label}</span>`;
+                btn.addEventListener('click', () => {
+                    twState.preset = key;
+                    // clear customs when picking a preset
+                    twState.bg = ''; twState.accent = ''; twState.accent2 = ''; twState.text = '';
+                    twSyncInputs();
+                    twApply();
+                    twPersist();
+                });
+                wrap.appendChild(btn);
+            });
+        }
+
+        function twSyncInputs() {
+            const root = getComputedStyle(document.documentElement);
+            function pick(varName, fallback) {
+                const v = root.getPropertyValue(varName).trim();
+                if (v.startsWith('#') && v.length === 7) return v;
+                return fallback;
+            }
+            document.getElementById('tw-bg').value     = twState.bg     || pick('--bg', '#0a0f0d');
+            document.getElementById('tw-accent').value = twState.accent || pick('--gold', '#c9a84c');
+            document.getElementById('tw-accent2').value= twState.accent2|| pick('--sage', '#3d6b52');
+            document.getElementById('tw-text').value   = twState.text   || pick('--text', '#f5f0e8');
+        }
+
+        function twToggle(open) {
+            const panel = document.getElementById('tw-panel');
+            const btn   = document.getElementById('tw-toggle');
+            const isOpen = open === undefined ? !panel.classList.contains('active') : open;
+            panel.classList.toggle('active', isOpen);
+            btn.classList.toggle('active', isOpen);
+            if (isOpen) twSyncInputs();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            twBuildPresets();
+            twApply();
+            twSyncInputs();
+
+            // Show the toggle button by default (works standalone, outside the host)
+            document.getElementById('tw-toggle').classList.add('show');
+
+            document.getElementById('tw-toggle').addEventListener('click', () => twToggle());
+            document.getElementById('tw-close').addEventListener('click', () => twToggle(false));
+
+            ['bg','accent','accent2','text'].forEach(key => {
+                document.getElementById('tw-' + key).addEventListener('input', (e) => {
+                    twState[key] = e.target.value;
+                    twApply();
+                    twPersist();
+                });
+            });
+
+            document.getElementById('tw-reset').addEventListener('click', () => {
+                twState = { preset: 'default', bg: '', accent: '', accent2: '', text: '' };
+                twApply();
+                twSyncInputs();
+                twPersist();
+            });
+
+            // Host protocol — register listener BEFORE announcing availability
+            window.addEventListener('message', (ev) => {
+                const d = ev.data || {};
+                if (d.type === '__activate_edit_mode')   twToggle(true);
+                if (d.type === '__deactivate_edit_mode') twToggle(false);
+            });
+            try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch(e) {}
+        });
+    </script>
+
 </body>
 </html>
