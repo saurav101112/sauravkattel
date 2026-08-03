@@ -361,6 +361,29 @@
         .chat-icon-btn:hover { border-color: var(--sage); color: var(--sage); }
         .chat-send { flex-shrink: 0; width: 40px; height: 40px; background: var(--sage); border: none; border-radius: 12px; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: background .2s, transform .2s; }
         .chat-send:hover { background: var(--sage-light); transform: translateY(-1px); }
+        /* ═══ ARTICLE READER MODAL ═══ */
+        .reader-overlay { position: fixed; inset: 0; z-index: 3000; background: rgba(12,12,24,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: flex-start; justify-content: center; padding: 5vh 1rem; overflow-y: auto; }
+        .reader-overlay.active { display: flex; }
+        .reader { position: relative; width: 100%; max-width: 760px; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); animation: chatSlide 0.35s var(--ease); margin: auto; }
+        .reader-scroll { padding: 3rem clamp(1.4rem, 4vw, 3.2rem) 3.5rem; }
+        .reader-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-muted); font-size: 1.3rem; line-height: 1; cursor: pointer; z-index: 2; transition: color 0.2s, border-color 0.2s; }
+        .reader-close:hover { color: var(--sage); border-color: var(--sage); }
+        .reader-meta { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.8rem; }
+        .reader-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.6rem; }
+        .reader-cover { width: 100%; border-radius: 16px; margin-bottom: 1.6rem; display: block; }
+        .reader-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; }
+        .reader-body h1, .reader-body h2, .reader-body h3 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); font-weight: 700; line-height: 1.25; margin: 1.8rem 0 0.8rem; letter-spacing: -0.01em; }
+        .reader-body h2 { font-size: 1.4rem; }
+        .reader-body h3 { font-size: 1.15rem; }
+        .reader-body p { margin-bottom: 1.1rem; }
+        .reader-body a { color: var(--sage); text-decoration: underline; }
+        .reader-body ul, .reader-body ol { margin: 0 0 1.1rem 1.3rem; }
+        .reader-body li { margin-bottom: 0.4rem; }
+        .reader-body img { max-width: 100%; border-radius: 12px; margin: 1rem 0; }
+        .reader-body blockquote { border-left: 3px solid var(--sage); padding-left: 1rem; margin: 1.2rem 0; color: var(--text); }
+        .reader-body strong { color: var(--text); font-weight: 700; }
+        .reader-body code { background: var(--surface-2); padding: 2px 6px; border-radius: 5px; font-size: 0.9em; }
+        body.reader-open { overflow: hidden; }
         /* ═══ SCROLL REVEAL ═══ */
         .scroll-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .scroll-reveal.delay-1 { transition-delay: 0.1s; }
@@ -749,25 +772,8 @@
                 </div>
                 <div class="section-rule"></div>
             </div>
-            <div class="article-grid" style="margin-bottom:5rem;">
-                <div class="article-card scroll-reveal">
-                    <span class="card-num">01 / 02</span>
-                    <div>
-                        <div class="article-meta">August 11, 2024</div>
-                        <h2>नेपालमा जैविक खेती प्रविधि: चुनौती र अबको बाटो</h2>
-                        <p>जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ...</p>
-                    </div>
-                    <a href="full-article.html" class="btn-link">Read Full Article <span class="arrow-line"></span></a>
-                </div>
-                <div class="article-card scroll-reveal delay-1">
-                    <span class="card-num">02 / 02</span>
-                    <div>
-                        <div class="article-meta">September 05, 2024</div>
-                        <h2>Sustainable Farming Techniques</h2>
-                        <p>Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal. A deep dive into sustainable practices...</p>
-                    </div>
-                    <a href="#" class="btn-link">Read Full Article <span class="arrow-line"></span></a>
-                </div>
+            <div class="article-grid" id="article-grid" style="margin-bottom:5rem;">
+                <!-- Articles load here automatically from the /articles folder (written by the /admin editor). -->
             </div>
         </div>
     </section>
@@ -836,6 +842,18 @@
     <button class="back-to-top" id="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+    <!-- ════ ARTICLE READER ════ -->
+    <div class="reader-overlay" id="reader-overlay" onclick="closeReader(event)">
+        <div class="reader" role="dialog" aria-modal="true" aria-label="Article">
+            <button class="reader-close" onclick="closeReader()" aria-label="Close article">×</button>
+            <div class="reader-scroll">
+                <div class="reader-meta" id="reader-meta"></div>
+                <h1 class="reader-title" id="reader-title"></h1>
+                <img class="reader-cover" id="reader-cover" alt="" hidden>
+                <div class="reader-body" id="reader-body"></div>
+            </div>
+        </div>
+    </div>
     <!-- ════ AI CHAT WIDGET (#6) ════ -->
     <div class="chat-widget">
         <div class="chat-window" id="chat-window">
@@ -881,6 +899,8 @@
     </div>
     <!-- ════ THREE.JS (added) ════ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- ════ Markdown renderer for articles ════ -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         /* ════════════════════════════════════════════
            3D SCROLL SCENE — rotating globe → soil strata
@@ -1469,9 +1489,88 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
             }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
             Object.values(map).forEach(v => navObs.observe(v.sec));
         }
+        /* ════ ARTICLES — loaded from the /articles folder written by /admin ════ */
+        const ARTICLES_REPO   = 'saurav101112/sauravkattel';
+        const ARTICLES_BRANCH = 'main';
+        const ARTICLES_DIR    = 'articles';
+        let ARTICLES = [];
+        function fmtDate(d) { if (!d) return ''; const dt = new Date(d); return isNaN(dt) ? d : dt.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' }); }
+        function parseFrontmatter(raw) {
+            const m = raw.match(/^﻿?---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+            if (!m) return { data: {}, body: raw };
+            const data = {};
+            m[1].split('\n').forEach(line => {
+                const i = line.indexOf(':');
+                if (i > 0) { const k = line.slice(0, i).trim(); const v = line.slice(i + 1).trim().replace(/^["']|["']$/g, ''); data[k] = v; }
+            });
+            return { data, body: m[2] };
+        }
+        function renderArticleBody(md) {
+            if (window.marked && typeof window.marked.parse === 'function') return window.marked.parse(md);
+            return '<p>' + escapeHtml(md).replace(/\n{2,}/g, '</p><p>').replace(/\n/g, '<br>') + '</p>';
+        }
+        function renderArticles(posts) {
+            ARTICLES = posts;
+            const grid = document.getElementById('article-grid');
+            if (!grid) return;
+            const n = posts.length;
+            grid.innerHTML = posts.map((p, i) => `
+                <div class="article-card scroll-reveal visible${i % 2 ? ' delay-1' : ''}">
+                    <span class="card-num">${String(i + 1).padStart(2, '0')} / ${String(n).padStart(2, '0')}</span>
+                    <div>
+                        <div class="article-meta">${escapeHtml(fmtDate(p.date))}</div>
+                        <h2>${escapeHtml(p.title)}</h2>
+                        <p>${escapeHtml(p.summary || '')}</p>
+                    </div>
+                    <a href="#" class="btn-link" onclick="openReader(${i});return false;">Read Full Article <span class="arrow-line"></span></a>
+                </div>`).join('');
+        }
+        function renderFallbackArticles() {
+            renderArticles([
+                { title: 'नेपालमा जैविक खेती प्रविधि: चुनौती र अबको बाटो', date: '2024-08-11', summary: 'जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ...', body: 'जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ।\n\n*(Publish the full version any time from the /admin editor.)*' },
+                { title: 'Sustainable Farming Techniques', date: '2024-09-05', summary: 'Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal. A deep dive into sustainable practices...', body: 'Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal. A deep dive into sustainable practices.\n\n*(Publish the full version any time from the /admin editor.)*' }
+            ]);
+        }
+        async function loadArticles() {
+            const grid = document.getElementById('article-grid');
+            if (!grid) return;
+            try {
+                const res = await fetch(`https://api.github.com/repos/${ARTICLES_REPO}/contents/${ARTICLES_DIR}?ref=${ARTICLES_BRANCH}`, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+                if (!res.ok) throw new Error('no articles dir');
+                const files = (await res.json()).filter(f => /\.(md|markdown)$/i.test(f.name));
+                if (!files.length) throw new Error('empty');
+                const posts = await Promise.all(files.map(async f => {
+                    const raw = await (await fetch(f.download_url)).text();
+                    const { data, body } = parseFrontmatter(raw);
+                    return { title: data.title || f.name.replace(/\.(md|markdown)$/i, ''), date: data.date || '', summary: data.summary || '', cover: data.cover || '', body };
+                }));
+                posts.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+                renderArticles(posts);
+            } catch (e) {
+                renderFallbackArticles();   // keeps the site looking normal before the CMS is set up
+            }
+        }
+        function openReader(i) {
+            const p = ARTICLES[i]; if (!p) return;
+            document.getElementById('reader-meta').textContent = fmtDate(p.date);
+            document.getElementById('reader-title').textContent = p.title;
+            const cover = document.getElementById('reader-cover');
+            if (p.cover) { cover.src = p.cover; cover.hidden = false; } else { cover.hidden = true; cover.removeAttribute('src'); }
+            document.getElementById('reader-body').innerHTML = renderArticleBody(p.body || '');
+            document.getElementById('reader-body').scrollTop = 0;
+            document.getElementById('reader-overlay').classList.add('active');
+            document.body.classList.add('reader-open');
+        }
+        function closeReader(e) {
+            if (e && e.target && !e.target.classList.contains('reader-overlay') && !e.target.classList.contains('reader-close')) return;
+            document.getElementById('reader-overlay').classList.remove('active');
+            document.body.classList.remove('reader-open');
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeReader(); });
         /* ════ INIT ════ */
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
+            loadArticles();
             updateGreeting();
             buildCalendar();
             buildFAQ();

@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: saurav101112/sauravkattel
+  branch: main
+  # 👇 REPLACE with your deployed auth Worker URL (the login bridge). No trailing slash.
+  base_url: https://YOUR-AUTH-WORKER.workers.dev
+
+# Where uploaded images are stored in the repo, and how the site links to them
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: articles
+    label: "Articles"
+    label_singular: "Article"
+    folder: "articles"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Short summary (shown on the card)", name: "summary", widget: "text" }
+      - { label: "Cover image (optional)", name: "cover", widget: "image", required: false }
+      - { label: "Article body", name: "body", widget: "markdown" }
