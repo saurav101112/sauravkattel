@@ -1107,15 +1107,13 @@
     </script>
     <script>
         /* ════════════════════════════════════════════
-           AI CONFIG — FREE Google Gemini API (text + vision)
-           1. Get a free key: https://aistudio.google.com/apikey
-           2. Paste it into GEMINI_API_KEY below.
-           3. (Recommended) In Google AI Studio / Cloud Console,
-              restrict the key to your website's domain so no one
-              else can use it — the key is visible in client code.
+           AI CONFIG — calls a Cloudflare Worker that keeps the
+           Gemini API key SECRET (server-side). The key never
+           appears in this file, so it can't be leaked/disabled.
+           Paste your deployed Worker URL below. Inside the Worker,
+           the key is stored as a secret named GEMINI_KEY.
         ════════════════════════════════════════════ */
-        const GEMINI_API_KEY = 'AIzaSyAuU6l1r_iYQeKWn75BHS2uQfr1La90FM0';
-        const GEMINI_MODEL   = 'gemini-flash-latest';   // free, fast, supports image analysis (always-current alias)
+        const GEMINI_PROXY_URL = 'https://plant-doctor.sauravkattel130.workers.dev';
         const AI_SYSTEM = `You are "AI Plant Doctor", an expert agriculture and plant-pathology assistant for Saurav Agro-Tech (run by Saurav Kattel, B.Sc Horticulture, Nepal).
 
 SCOPE: Only help with agriculture, horticulture, crops, soil, plant pests & diseases, and gardening — tailored to Nepal (Terai, Mid-hills, High-hills). If asked anything unrelated, politely say you only help with farming and plants.
@@ -1282,10 +1280,10 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
             aiLoading = false; setTyping(false);
         }
         async function askAI(text, img) {
-            const keyReady = GEMINI_API_KEY && GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY';
-            if (!keyReady) {
+            const ready = GEMINI_PROXY_URL && !/YOUR_.*WORKER/i.test(GEMINI_PROXY_URL);
+            if (!ready) {
                 await new Promise(r => setTimeout(r, 700 + Math.random() * 400));
-                if (img) return "📷 I received your photo! To analyse plant images I need a free AI key configured (Google Gemini). In the meantime: look for leaf spots/discolouration, remove and destroy badly infected parts, isolate affected plants, and try a neem-oil spray (5ml per litre). Once the Gemini API key is added, I'll give a full diagnosis with the Nepali disease name and treatment.";
+                if (img) return "📷 I received your photo! Photo diagnosis isn't connected yet. In the meantime: look for leaf spots/discolouration, remove and destroy badly infected parts, isolate affected plants, and try a neem-oil spray (5ml per litre). Once the AI is connected, I'll give a full diagnosis with the Nepali disease name and treatment.";
                 return getFallback(text);
             }
             // Build the request: prior text history + this turn (with image if any)
@@ -1301,10 +1299,9 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
                 contents,
                 generationConfig: { temperature: 0.4, maxOutputTokens: 900 }
             };
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
-            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            const res = await fetch(GEMINI_PROXY_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
             const data = await res.json();
-            if (data.error) return 'AI error: ' + (data.error.message || 'request failed') + '. Please check the API key or model name.';
+            if (data.error) return 'AI error: ' + (data.error.message || 'request failed') + '. Please try again in a moment.';
             const reply = (data.candidates?.[0]?.content?.parts || []).map(p => p.text).filter(Boolean).join('\n')
                         || "Sorry, I couldn't read that clearly. Please try again with a closer, well-lit photo of the affected leaf or stem.";
             // Persist text-only history (don't resend image bytes every turn)
