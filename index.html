@@ -736,6 +736,7 @@
                 <a href="#articles">Articles</a>
                 <a href="#calendar">Calendar</a>
                 <a href="#" onclick="openCalc();return false;">Calculator</a>
+                <a href="weather.html">Weather</a>
             </div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark">
                 <i class="fas fa-moon" id="theme-icon"></i>
@@ -1779,6 +1780,7 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
             initTheme();
             loadArticles();
             buildCalc();
+            if (location.hash === '#calculator') openCalc();   // deep-link from other pages
             updateGreeting();
             buildCalendar();
             buildFAQ();
