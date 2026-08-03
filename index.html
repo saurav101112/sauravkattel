@@ -402,6 +402,38 @@
         .signup-msg.ok { color: var(--sage); }
         .signup-msg.err { color: var(--harvest); }
         @media (max-width: 560px) { .signup-row { flex-direction: column; } }
+        /* ═══ FERTILIZER CALCULATOR MODAL ═══ */
+        .calc-overlay { position: fixed; inset: 0; z-index: 3000; background: rgba(12,12,24,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: flex-start; justify-content: center; padding: 5vh 1rem; overflow-y: auto; }
+        .calc-overlay.active { display: flex; }
+        .calc { position: relative; width: 100%; max-width: 640px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); animation: chatSlide 0.35s var(--ease); margin: auto; }
+        .calc-scroll { padding: 2.6rem clamp(1.4rem, 4vw, 2.8rem) 3rem; }
+        .calc-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-muted); font-size: 1.3rem; line-height: 1; cursor: pointer; z-index: 2; transition: color 0.2s, border-color 0.2s; }
+        .calc-close:hover { color: var(--sage); border-color: var(--sage); }
+        .calc-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3.4vw, 2.4rem); letter-spacing: -0.02em; color: var(--text); line-height: 1.12; margin: 0.6rem 0 0.7rem; }
+        .calc-title em { font-style: normal; color: var(--sage); }
+        .calc-sub { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.8rem; }
+        .calc-fields { display: flex; flex-direction: column; gap: 1rem; }
+        .calc-area-row { display: flex; gap: 1rem; }
+        .calc-field { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 0; }
+        .calc-field > span { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+        .calc-field select, .calc-field input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s ease, background 0.45s ease; }
+        .calc-field select:focus, .calc-field input:focus { border-color: var(--sage); }
+        .calc-btn { margin-top: 1.4rem; width: 100%; background: var(--sage); color: #fff; border: none; border-radius: 999px; padding: 15px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 12px 26px -12px rgba(79,70,229,0.7); transition: background 0.2s ease, transform 0.2s ease; }
+        .calc-btn:hover { background: var(--sage-light); transform: translateY(-2px); }
+        .calc-result { margin-top: 1.8rem; }
+        .calc-result[hidden] { display: none; }
+        .calc-note { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 15px; font-size: 0.9rem; color: var(--text); margin-bottom: 1.4rem; line-height: 1.55; }
+        .calc-note b { color: var(--sage); }
+        .calc-block { margin-bottom: 1.4rem; }
+        .calc-block h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.7rem; }
+        .calc-block h4 b { color: var(--sage); }
+        .calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+        .calc-cell { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px 10px; text-align: center; }
+        .calc-cell.fert { background: var(--surface-2); }
+        .calc-val { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--sage); line-height: 1.1; }
+        .calc-lab { display: block; font-size: 0.62rem; color: var(--text-muted); margin-top: 5px; line-height: 1.35; }
+        .calc-disclaimer { font-size: 0.78rem; color: var(--text-label); line-height: 1.6; margin-top: 0.4rem; }
+        @media (max-width: 520px) { .calc-area-row { flex-direction: column; } .calc-grid { grid-template-columns: 1fr 1fr; } }
         /* ═══ SCROLL REVEAL ═══ */
         .scroll-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .scroll-reveal.delay-1 { transition-delay: 0.1s; }
@@ -701,9 +733,9 @@
         <div class="nav-right">
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
-                <a href="bridge.html">B.Sc Horticulture</a>
                 <a href="#articles">Articles</a>
-                <a href="store.html">Store</a>
+                <a href="#calendar">Calendar</a>
+                <a href="#" onclick="openCalc();return false;">Calculator</a>
             </div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark">
                 <i class="fas fa-moon" id="theme-icon"></i>
@@ -888,6 +920,35 @@
                 <h1 class="reader-title" id="reader-title"></h1>
                 <img class="reader-cover" id="reader-cover" alt="" hidden>
                 <div class="reader-body" id="reader-body"></div>
+            </div>
+        </div>
+    </div>
+    <!-- ════ FERTILIZER CALCULATOR ════ -->
+    <div class="calc-overlay" id="calc-overlay" onclick="closeCalc(event)">
+        <div class="calc" role="dialog" aria-modal="true" aria-label="Fertilizer calculator">
+            <button class="calc-close" onclick="closeCalc()" aria-label="Close calculator">×</button>
+            <div class="calc-scroll">
+                <div class="section-label">Farmer Tool</div>
+                <h2 class="calc-title">Fertilizer <em>Calculator</em></h2>
+                <p class="calc-sub">Pick your crop and land area to get the recommended nutrients (N‑P‑K) and exactly how much Urea, DAP and MOP to apply.</p>
+                <div class="calc-fields">
+                    <label class="calc-field">
+                        <span>Crop</span>
+                        <select id="calc-crop"></select>
+                    </label>
+                    <div class="calc-area-row">
+                        <label class="calc-field">
+                            <span>Area</span>
+                            <input type="number" id="calc-area" min="0" step="any" placeholder="e.g. 5" value="1">
+                        </label>
+                        <label class="calc-field">
+                            <span>Unit</span>
+                            <select id="calc-unit"></select>
+                        </label>
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="runCalc()">Calculate</button>
+                <div class="calc-result" id="calc-result" hidden></div>
             </div>
         </div>
     </div>
@@ -1633,10 +1694,91 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
             btn.disabled = false; btn.textContent = original;
             return false;
         }
+        /* ════ FERTILIZER CALCULATOR ════ */
+        // Recommended dose (kg/ha) as N : P2O5 : K2O — general Nepal guidelines
+        const CALC_CROPS = [
+            { name: 'Rice (धान)',        n: 100, p: 30,  k: 30 },
+            { name: 'Maize (मकै)',       n: 120, p: 60,  k: 40 },
+            { name: 'Wheat (गहुँ)',      n: 100, p: 50,  k: 25 },
+            { name: 'Potato (आलु)',      n: 100, p: 100, k: 60 },
+            { name: 'Vegetables (तरकारी)', n: 120, p: 80,  k: 60 },
+            { name: 'Millet (कोदो)',     n: 40,  p: 20,  k: 20 },
+            { name: 'Mustard (तोरी)',    n: 60,  p: 40,  k: 20 },
+            { name: 'Lentil (मसुरो)',    n: 20,  p: 40,  k: 20 }
+        ];
+        // Area unit → square metres (for converting to hectares)
+        const CALC_UNITS = [
+            { name: 'Ropani',        m2: 508.72 },
+            { name: 'Kattha',        m2: 338.63 },
+            { name: 'Bigha',         m2: 6772.63 },
+            { name: 'Hectare',       m2: 10000 },
+            { name: 'Square metre',  m2: 1 }
+        ];
+        // Main fertilizers and their nutrient content (fraction)
+        const FERT = { urea: { N: 0.46 }, dap: { N: 0.18, P: 0.46 }, mop: { K: 0.60 } };
+        function buildCalc() {
+            const cs = document.getElementById('calc-crop');
+            const us = document.getElementById('calc-unit');
+            if (cs && !cs.options.length) CALC_CROPS.forEach((c, i) => cs.add(new Option(c.name, i)));
+            if (us && !us.options.length) { CALC_UNITS.forEach((u, i) => us.add(new Option(u.name, i))); us.value = '0'; }
+        }
+        function calcFmt(x) {
+            const v = x < 100 ? Math.round(x * 10) / 10 : Math.round(x);
+            return v.toLocaleString('en-US');
+        }
+        function runCalc() {
+            const crop = CALC_CROPS[+document.getElementById('calc-crop').value];
+            const unit = CALC_UNITS[+document.getElementById('calc-unit').value];
+            const area = parseFloat(document.getElementById('calc-area').value);
+            const box  = document.getElementById('calc-result');
+            box.hidden = false;
+            if (!crop || !unit || !area || area <= 0) {
+                box.innerHTML = '<p class="calc-disclaimer">Please enter a land area greater than 0.</p>';
+                return;
+            }
+            const ha = area * unit.m2 / 10000;
+            const N = crop.n * ha, P = crop.p * ha, K = crop.k * ha;
+            // DAP supplies all P2O5 (and some N); Urea covers the rest of N; MOP supplies K2O
+            const dap = P / FERT.dap.P;
+            const nFromDap = dap * FERT.dap.N;
+            const urea = Math.max(0, N - nFromDap) / FERT.urea.N;
+            const mop = K / FERT.mop.K;
+            box.innerHTML = `
+                <div class="calc-note">Recommended dose for <b>${crop.name}</b>: <b>${crop.n} : ${crop.p} : ${crop.k}</b> kg/ha (N : P₂O₅ : K₂O)</div>
+                <div class="calc-block">
+                    <h4>Nutrients needed for <b>${calcFmt(area)} ${unit.name}</b> (≈ ${ha.toFixed(3)} ha)</h4>
+                    <div class="calc-grid">
+                        <div class="calc-cell"><span class="calc-val">${calcFmt(N)} kg</span><span class="calc-lab">Nitrogen (N)</span></div>
+                        <div class="calc-cell"><span class="calc-val">${calcFmt(P)} kg</span><span class="calc-lab">Phosphorus (P₂O₅)</span></div>
+                        <div class="calc-cell"><span class="calc-val">${calcFmt(K)} kg</span><span class="calc-lab">Potassium (K₂O)</span></div>
+                    </div>
+                </div>
+                <div class="calc-block">
+                    <h4>Fertilizer to apply</h4>
+                    <div class="calc-grid">
+                        <div class="calc-cell fert"><span class="calc-val">${calcFmt(dap)} kg</span><span class="calc-lab">DAP<br>(18% N, 46% P₂O₅)</span></div>
+                        <div class="calc-cell fert"><span class="calc-val">${calcFmt(urea)} kg</span><span class="calc-lab">Urea<br>(46% N)</span></div>
+                        <div class="calc-cell fert"><span class="calc-val">${calcFmt(mop)} kg</span><span class="calc-lab">MOP<br>(60% K₂O)</span></div>
+                    </div>
+                </div>
+                <p class="calc-disclaimer">DAP covers the phosphorus (and part of the nitrogen); Urea supplies the remaining nitrogen; MOP supplies the potassium. These are general guidelines — always adjust to your soil test and local advice.</p>`;
+        }
+        function openCalc() {
+            buildCalc();
+            document.getElementById('calc-overlay').classList.add('active');
+            document.body.classList.add('reader-open');
+        }
+        function closeCalc(e) {
+            if (e && e.target && !e.target.classList.contains('calc-overlay') && !e.target.classList.contains('calc-close')) return;
+            document.getElementById('calc-overlay').classList.remove('active');
+            document.body.classList.remove('reader-open');
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCalc(); });
         /* ════ INIT ════ */
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
             loadArticles();
+            buildCalc();
             updateGreeting();
             buildCalendar();
             buildFAQ();
