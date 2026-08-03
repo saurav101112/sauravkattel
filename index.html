@@ -384,6 +384,24 @@
         .reader-body strong { color: var(--text); font-weight: 700; }
         .reader-body code { background: var(--surface-2); padding: 2px 6px; border-radius: 5px; font-size: 0.9em; }
         body.reader-open { overflow: hidden; }
+        /* ═══ SIGNUP / JOIN FORM ═══ */
+        .signup-section { padding: 2rem 0 5rem; }
+        .signup-card { max-width: 640px; margin: 0 auto; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); padding: clamp(2rem, 5vw, 3.5rem); }
+        .signup-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.6vw, 2.6rem); letter-spacing: -0.02em; color: var(--text); line-height: 1.1; margin: 0.6rem 0 0.8rem; }
+        .signup-title em { font-style: normal; color: var(--sage); }
+        .signup-sub { color: var(--text-muted); font-size: 0.98rem; line-height: 1.7; margin: 0 auto 2rem; max-width: 460px; }
+        .signup-form { display: flex; flex-direction: column; gap: 0.8rem; text-align: left; }
+        .signup-row { display: flex; gap: 0.8rem; }
+        .signup-form input { flex: 1; min-width: 0; width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s ease, background 0.45s ease; }
+        .signup-form input::placeholder { color: var(--text-label); }
+        .signup-form input:focus { border-color: var(--sage); }
+        .signup-btn { margin-top: 0.4rem; background: var(--sage); color: #fff; border: none; border-radius: 999px; padding: 15px 22px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.01em; cursor: pointer; box-shadow: 0 12px 26px -12px rgba(79,70,229,0.7); transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; }
+        .signup-btn:hover { background: var(--sage-light); transform: translateY(-2px); box-shadow: 0 16px 32px -12px rgba(79,70,229,0.8); }
+        .signup-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+        .signup-msg { min-height: 1.1rem; font-size: 0.85rem; margin: 0.3rem 0 0; text-align: center; }
+        .signup-msg.ok { color: var(--sage); }
+        .signup-msg.err { color: var(--harvest); }
+        @media (max-width: 560px) { .signup-row { flex-direction: column; } }
         /* ═══ SCROLL REVEAL ═══ */
         .scroll-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .scroll-reveal.delay-1 { transition-delay: 0.1s; }
@@ -820,6 +838,25 @@
                 <div class="section-rule"></div>
             </div>
             <div class="faq-list scroll-reveal" id="faq-list"></div>
+        </div>
+    </section>
+    <!-- ════ SIGNUP / JOIN ════ -->
+    <section class="signup-section" id="join">
+        <div class="container">
+            <div class="signup-card scroll-reveal">
+                <div class="section-label">Join Us</div>
+                <h2 class="signup-title">Stay in the <em>loop</em></h2>
+                <p class="signup-sub">Sign up for farming tips, new articles and updates from Saurav Agro-Tech.</p>
+                <form class="signup-form" id="signup-form" onsubmit="return submitSignup(event)">
+                    <div class="signup-row">
+                        <input type="text" id="su-name" name="name" placeholder="Your name" autocomplete="name" required>
+                        <input type="email" id="su-email" name="email" placeholder="Email address" autocomplete="email" required>
+                    </div>
+                    <input type="text" id="su-address" name="address" placeholder="Address (optional)" autocomplete="street-address">
+                    <button type="submit" class="signup-btn" id="su-btn">Sign Up</button>
+                    <p class="signup-msg" id="su-msg" role="status" aria-live="polite"></p>
+                </form>
+            </div>
         </div>
     </section>
     <!-- ════ FOOTER ════ -->
@@ -1567,6 +1604,35 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
             document.body.classList.remove('reader-open');
         }
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeReader(); });
+        /* ════ SIGNUP FORM → Google Sheet ════ */
+        const SIGNUP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxc0IvcgtzdZxSDpnYb7FdoN9z2rIEk7V_IoYLAGBDXkrnhaFU2KCra_iO_2uWA6cNUMg/exec';
+        async function submitSignup(e) {
+            e.preventDefault();
+            const btn = document.getElementById('su-btn');
+            const msg = document.getElementById('su-msg');
+            const name    = document.getElementById('su-name').value.trim();
+            const email   = document.getElementById('su-email').value.trim();
+            const address = document.getElementById('su-address').value.trim();
+            if (!name || !email) { msg.className = 'signup-msg err'; msg.textContent = 'Please enter your name and email.'; return false; }
+            if (!SIGNUP_ENDPOINT || /YOUR_/.test(SIGNUP_ENDPOINT)) { msg.className = 'signup-msg err'; msg.textContent = 'Sign-up is not connected yet.'; return false; }
+            const original = btn.textContent;
+            btn.disabled = true; btn.textContent = 'Signing up…';
+            msg.className = 'signup-msg'; msg.textContent = '';
+            try {
+                await fetch(SIGNUP_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ name, email, address, source: 'website' })
+                });
+                document.getElementById('signup-form').reset();
+                msg.className = 'signup-msg ok'; msg.textContent = "🎉 Thank you — you're signed up!";
+            } catch (err) {
+                msg.className = 'signup-msg err'; msg.textContent = 'Something went wrong. Please try again.';
+            }
+            btn.disabled = false; btn.textContent = original;
+            return false;
+        }
         /* ════ INIT ════ */
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
