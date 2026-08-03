@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
             --bg: #f4f4fd; --surface: #ffffff; --surface-2: #f2f2fb;
@@ -91,6 +92,19 @@
         .day-temp b { color: var(--text); }
         .day-act { font-size: 0.85rem; color: var(--text); line-height: 1.45; }
         .disclaimer { margin-top: 2rem; font-size: 0.78rem; color: var(--text-label); line-height: 1.6; }
+        /* AI report */
+        .ai-report { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); padding: 1.5rem 1.6rem; font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); }
+        .ai-report h1, .ai-report h2, .ai-report h3 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); font-weight: 700; margin: 1.1rem 0 0.5rem; font-size: 1.05rem; }
+        .ai-report h1:first-child, .ai-report h2:first-child, .ai-report h3:first-child, .ai-report p:first-child { margin-top: 0; }
+        .ai-report p { margin-bottom: 0.7rem; }
+        .ai-report ul, .ai-report ol { margin: 0 0 0.9rem 1.2rem; }
+        .ai-report li { margin-bottom: 0.4rem; }
+        .ai-report strong { color: var(--text); font-weight: 700; }
+        .ai-report hr { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+        .ai-loading { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.92rem; }
+        .spin { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--sage); border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; flex-shrink: 0; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .ai-note { font-size: 0.75rem; color: var(--text-label); margin-top: 0.8rem; }
         /* FOOTER */
         footer { border-top: 1px solid var(--border-2); padding: 2.5rem 5%; text-align: center; }
         .foot-brand { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.3em; color: var(--text-label); text-transform: uppercase; }
@@ -158,15 +172,15 @@
 
     <script>
         const CROPS = [
-            { name: 'Rice (धान)',        tip: 'Keep 3–5 cm water in the field; drain before heavy rain and after.' },
-            { name: 'Maize (मकै)',       tip: 'Top‑dress nitrogen at knee‑high stage; never let water stand around roots.' },
-            { name: 'Wheat (गहुँ)',      tip: 'Irrigate at crown‑root & flowering; watch for yellow rust in cool, humid spells.' },
-            { name: 'Potato (आलु)',      tip: 'Late‑blight risk is HIGH in cool, wet, humid weather — scout leaves and spray preventively.' },
-            { name: 'Tomato (गोलभेडा)',  tip: 'Prune lower leaves for airflow; blight & leaf‑spot rise after wet weather.' },
-            { name: 'Vegetables (तरकारी)', tip: 'Stake & mulch; scout for fungal spots and caterpillars after rain.' },
-            { name: 'Millet (कोदो)',     tip: 'Drought‑tolerant — weed early, minimal irrigation needed.' },
-            { name: 'Mustard (तोरी)',    tip: 'Watch for aphids in dry, warm spells; irrigate at flowering & pod fill.' },
-            { name: 'Lentil (मसुरो)',    tip: 'Avoid waterlogging; watch for wilt in warm, wet soil.' }
+            { name: 'Rice (धान)',        season: 'Monsoon (kharif) crop: nursery June, transplant June–July, harvest October.', tip: 'Keep 3–5 cm water in the field; drain before heavy rain and after.' },
+            { name: 'Maize (मकै)',       season: 'Two seasons: spring (sow Feb–Mar, harvest Jun–Jul) and autumn (sow Aug–Sep, harvest Nov–Dec).', tip: 'Top‑dress nitrogen at knee‑high stage; never let water stand around roots.' },
+            { name: 'Wheat (गहुँ)',      season: 'Winter (rabi) crop: sow late Oct–Nov after rice, harvest Mar–Apr.', tip: 'Irrigate at crown‑root & flowering; watch for yellow rust in cool, humid spells.' },
+            { name: 'Potato (आलु)',      season: 'Autumn planting Aug–Sep (harvest Nov–Dec) and winter/spring planting Nov (harvest Feb–Mar).', tip: 'Late‑blight risk is HIGH in cool, wet, humid weather — scout leaves and spray preventively.' },
+            { name: 'Tomato (गोलभेडा)',  season: 'Summer crop (transplant Feb–Apr); grown off‑season in plastic tunnels other months.', tip: 'Prune lower leaves for airflow; blight & leaf‑spot rise after wet weather.' },
+            { name: 'Vegetables (तरकारी)', season: 'Grown year‑round; winter veg Oct–Feb, summer veg Mar–Jun.', tip: 'Stake & mulch; scout for fungal spots and caterpillars after rain.' },
+            { name: 'Millet (कोदो)',     season: 'Monsoon crop: sow June, harvest Sep–Oct.', tip: 'Drought‑tolerant — weed early, minimal irrigation needed.' },
+            { name: 'Mustard (तोरी)',    season: 'Winter oilseed: sow Oct–Nov, harvest Feb–Mar.', tip: 'Watch for aphids in dry, warm spells; irrigate at flowering & pod fill.' },
+            { name: 'Lentil (मसुरो)',    season: 'Winter pulse: sow Oct–Nov after rice, harvest Feb–Mar.', tip: 'Avoid waterlogging; watch for wilt in warm, wet soil.' }
         ];
         const PLACES = [
             { name: 'Kathmandu', lat: 27.7172, lon: 85.3240 },
@@ -229,7 +243,7 @@
             setStatus('⛅ Loading forecast…');
             document.getElementById('wx-result').classList.remove('show');
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&timezone=auto&forecast_days=6`;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&timezone=auto&forecast_days=14`;
                 const wx = await (await fetch(url)).json();
                 if (!wx || !wx.current) throw new Error('no data');
                 let loc = placeName;
@@ -263,11 +277,10 @@
             if (tmin <= 4) return '❄️ Cold night — protect young plants from frost.';
             return '✅ Good field day — sow, weed, transplant or spray as needed.';
         }
-        function render(wx, loc, crop) {
-            const cur = wx.current;
-            const wc = wcode(cur.weather_code);
-            const box = document.getElementById('wx-result');
-            const days = wx.daily.time.map((t, i) => ({
+        // Cloudflare Workers AI endpoint (free edge LLM). Paste your weather-ai Worker URL here.
+        const WEATHER_AI_URL = 'https://weather-ai.sauravkattel130.workers.dev';
+        function dayObjs(wx) {
+            return wx.daily.time.map((t, i) => ({
                 time: t, i,
                 code: wx.daily.weather_code[i],
                 tmax: wx.daily.temperature_2m_max[i],
@@ -275,8 +288,9 @@
                 psum: wx.daily.precipitation_sum[i],
                 pprob: wx.daily.precipitation_probability_max[i]
             }));
-            const nowList = nowAdvice(cur, crop);
-            box.innerHTML = `
+        }
+        function nowCardHTML(cur, wc, loc, crop) {
+            return `
                 <div class="now-card">
                     <div class="now-emoji">${wc.e}</div>
                     <div class="now-temp">${Math.round(cur.temperature_2m)}°C</div>
@@ -289,31 +303,78 @@
                         <div class="now-stat"><b>${cur.wind_speed_10m} km/h</b> Wind</div>
                         <div class="now-stat"><b>${cur.precipitation} mm</b> Rain (now)</div>
                     </div>
-                </div>
-                <div class="block">
-                    <h3>🌱 Tip for ${crop.name}</h3>
-                    <div class="crop-tip">${crop.tip}</div>
-                </div>
-                <div class="block">
-                    <h3>⚡ Do right now</h3>
-                    <div class="now-advice">${nowList.map(a => `<div class="advice">${a}</div>`).join('')}</div>
-                </div>
-                <div class="block">
-                    <h3>📅 Next few days</h3>
-                    <div class="days">
-                        ${days.map(d => {
-                            const w = wcode(d.code);
-                            return `<div class="day">
-                                <div class="day-top"><span class="day-date">${fmtDay(d.time, d.i)}</span><span class="day-emoji">${w.e}</span></div>
-                                <div class="day-temp"><b>${Math.round(d.tmax)}°</b> / ${Math.round(d.tmin)}° · ${d.pprob != null ? d.pprob + '% rain' : ''}</div>
-                                <div class="day-act">${dayAct(d, crop)}</div>
-                            </div>`;
-                        }).join('')}
-                    </div>
                 </div>`;
+        }
+        function render(wx, loc, crop) {
+            const cur = wx.current, wc = wcode(cur.weather_code);
+            const box = document.getElementById('wx-result');
+            box.innerHTML = nowCardHTML(cur, wc, loc, crop) +
+                `<div class="block"><h3>🌱 Tip for ${crop.name}</h3><div class="crop-tip">${crop.tip}</div></div>` +
+                `<div class="block"><h3>🤖 AI forecast analysis &amp; plan</h3><div id="ai-report" class="ai-report"><div class="ai-loading"><span class="spin"></span> Analysing the 14‑day forecast for your ${crop.name}…</div></div></div>`;
             box.classList.add('show');
             box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            askWeatherAI(wx, loc, crop);
         }
+        function buildWeatherPrompt(wx, loc, crop) {
+            const cur = wx.current;
+            const today = new Date();
+            const monthName = today.toLocaleString('en-US', { month: 'long' });
+            const lines = dayObjs(wx).map(d => `${d.time}: ${Math.round(d.tmax)}/${Math.round(d.tmin)}°C, rain ${d.psum}mm (${d.pprob}% chance), ${wcode(d.code).t}`).join('\n');
+            return `You are an expert agronomy advisor for farmers in Nepal.
+Today: ${monthName} ${today.getDate()}.
+Crop: ${crop.name}
+Typical season for this crop in Nepal: ${crop.season}
+Location: ${loc}, Nepal
+Current now: ${Math.round(cur.temperature_2m)}°C, humidity ${cur.relative_humidity_2m}%, wind ${cur.wind_speed_10m} km/h, rain ${cur.precipitation}mm, ${wcode(cur.weather_code).t}.
+14-day daily forecast:
+${lines}
+
+STEP 1: Decide if ${crop.name} is currently IN its planting/growing season — compare today's month (${monthName}) with the crop's typical season above.
+
+IF THE CROP IS OUT OF SEASON NOW:
+- In **Overall**, clearly tell the farmer that ${crop.name} is NOT grown at this time of year in Nepal.
+- Under **📅 Plan**, do NOT give day-by-day field work. Instead give "Plan for the next growing period": the next sowing window (months), plus short steps to prepare (land preparation, seed/variety choice, nursery timing). Note the current forecast is only for general planning, not active field work for this crop now.
+
+IF THE CROP IS IN SEASON NOW:
+- Use the forecast (exact dates) to advise real field operations day-by-day.
+
+Reply in clean GitHub markdown, keep every line short, with EXACTLY these sections:
+
+**Overall:** one sentence (state clearly whether the crop is in season or off-season now).
+
+**⚠️ Risks & prevention:** 2–4 short bullets relevant to this crop and period (disease/blight, waterlogging, frost, heat, drought, pests) with a quick preventive action each.
+
+**📅 Plan:** IF in season → one short line per forecast date "DATE — action" (irrigate / hold irrigation / spray / do NOT spray / harvest / avoid harvest / protect from frost / transplant / weed / drain field). IF off season → short bullets to prepare for the next sowing window.
+
+**✅ Priorities:** 2–3 short bullets to focus on.
+
+Be specific and practical. Do NOT invent weather beyond the data. Nepali crop/disease names in brackets are welcome.`;
+        }
+        async function askWeatherAI(wx, loc, crop) {
+            const el = document.getElementById('ai-report');
+            if (!el) return;
+            if (!WEATHER_AI_URL || /YOUR_/.test(WEATHER_AI_URL)) {
+                el.innerHTML = fallbackHTML(wx, crop) + `<p class="ai-note">Showing basic guidance — connect the AI to enable full analysis.</p>`;
+                return;
+            }
+            try {
+                const res = await fetch(WEATHER_AI_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: buildWeatherPrompt(wx, loc, crop) }) });
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+                const text = (data.response || '').trim();
+                if (!text) throw new Error('empty');
+                el.innerHTML = (window.marked && window.marked.parse) ? window.marked.parse(text) : ('<p>' + text.replace(/\n/g, '<br>') + '</p>');
+            } catch (e) {
+                el.innerHTML = fallbackHTML(wx, crop) + `<p class="ai-note">Showing basic guidance — the live AI analysis was unavailable. Please try again in a moment.</p>`;
+            }
+        }
+        function fallbackHTML(wx, crop) {
+            const nowList = nowAdvice(wx.current, crop);
+            const days = dayObjs(wx);
+            return `<div class="now-advice" style="margin-bottom:1rem">${nowList.map(a => `<div class="advice">${a}</div>`).join('')}</div>
+                <div class="days">${days.map(d => { const w = wcode(d.code); return `<div class="day"><div class="day-top"><span class="day-date">${fmtDay(d.time, d.i)}</span><span class="day-emoji">${w.e}</span></div><div class="day-temp"><b>${Math.round(d.tmax)}°</b> / ${Math.round(d.tmin)}° · ${d.pprob != null ? d.pprob + '% rain' : ''}</div><div class="day-act">${dayAct(d, crop)}</div></div>`; }).join('')}</div>`;
+        }
+        try { if (window.marked) marked.setOptions({ breaks: true, gfm: true }); } catch (e) {}
         buildSelects();
     </script>
 </body>
