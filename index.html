@@ -1435,28 +1435,14 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
                 if (img) return "📷 I received your photo! Photo diagnosis isn't connected yet. In the meantime: look for leaf spots/discolouration, remove and destroy badly infected parts, isolate affected plants, and try a neem-oil spray (5ml per litre). Once the AI is connected, I'll give a full diagnosis with the Nepali disease name and treatment.";
                 return getFallback(text);
             }
-            // Build the request: prior text history + this turn (with image if any)
-            const parts = [];
-            if (text) parts.push({ text });
-            if (img) {
-                if (!text) parts.push({ text: 'Diagnose the plant disease/pest in this photo. Give the plant, English + Nepali disease name, symptoms, treatment and prevention.' });
-                parts.push({ inline_data: { mime_type: img.mime, data: img.base64 } });
-            }
-            const contents = chatHistory.slice(-6).concat([{ role: 'user', parts }]);
-            const body = {
-                systemInstruction: { parts: [{ text: AI_SYSTEM }] },
-                contents,
-                generationConfig: { temperature: 0.4, maxOutputTokens: 900 }
-            };
+            // Send text and/or a photo to the Groq vision Worker
+            const prompt = text || (img ? 'Diagnose the plant disease/pest in this photo. Give the plant, English + Nepali disease name, symptoms, treatment and prevention.' : '');
+            const body = { system: AI_SYSTEM, prompt, image: img ? img.base64 : undefined, mime: img ? img.mime : undefined };
             const res = await fetch(GEMINI_PROXY_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
             const data = await res.json();
-            if (data.error) return 'AI error: ' + (data.error.message || 'request failed') + '. Please try again in a moment.';
-            const reply = (data.candidates?.[0]?.content?.parts || []).map(p => p.text).filter(Boolean).join('\n')
+            if (data.error) return 'AI error: ' + (data.error.message || data.error || 'request failed') + '. Please try again in a moment.';
+            const reply = (data.response || '').trim()
                         || "Sorry, I couldn't read that clearly. Please try again with a closer, well-lit photo of the affected leaf or stem.";
-            // Persist text-only history (don't resend image bytes every turn)
-            chatHistory.push({ role: 'user',  parts: [{ text: text || '[sent a plant photo for diagnosis]' }] });
-            chatHistory.push({ role: 'model', parts: [{ text: reply }] });
-            if (chatHistory.length > 12) chatHistory = chatHistory.slice(-12);
             return reply;
         }
         function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
