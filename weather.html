@@ -105,6 +105,12 @@
         .spin { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--sage); border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; flex-shrink: 0; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .ai-note { font-size: 0.75rem; color: var(--text-label); margin-top: 0.8rem; }
+        .suit-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 1.3rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .suit-cap { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+        .suit-track { display: flex; gap: 5px; }
+        .suit-seg { width: 34px; height: 12px; border-radius: 3px; background: var(--surface-2); border: 1px solid var(--border); transition: background 0.3s; }
+        .suit-label { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.92rem; }
+        @media (max-width: 480px) { .suit-seg { width: 26px; } }
         /* FOOTER */
         footer { border-top: 1px solid var(--border-2); padding: 2.5rem 5%; text-align: center; }
         .foot-brand { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.3em; color: var(--text-label); text-transform: uppercase; }
@@ -173,7 +179,7 @@
     <script>
         // season string also encodes climate/altitude needs for the suitability check
         const CROPS = [
-            { name: 'Rice (धान)',         season: 'Warm lowlands & mid-hills. Monsoon (kharif): nursery June, transplant Jun–Jul, harvest Oct.' },
+            { name: 'Rice (धान)',         season: 'Grows Terai to mid-hills; and cold-tolerant landraces (e.g. Marshi / Marsi rice) are cultivated at very high altitude up to ~3000m in Jumla and other Karnali/Himali valleys — among the highest-altitude rice in the world. So most districts can grow SOME rice variety; pick the variety by altitude. Monsoon crop: transplant Jun–Jul, harvest Oct.' },
             { name: 'Maize (मकै)',        season: 'Hills & Terai. Spring (sow Feb–Mar, harvest Jun–Jul) and autumn (sow Aug–Sep, harvest Nov–Dec).' },
             { name: 'Wheat (गहुँ)',       season: 'Terai & hills, needs cool winter. Sow Oct–Nov, harvest Mar–Apr.' },
             { name: 'Potato (आलु)',       season: 'Hills & Terai. Autumn plant Aug–Sep (harvest Nov–Dec) and winter plant Nov (harvest Feb–Mar).' },
@@ -182,15 +188,15 @@
             { name: 'Millet (कोदो)',      season: 'Rain-fed hill crop, tolerates marginal soil. Sow June, harvest Sep–Oct.' },
             { name: 'Mustard (तोरी)',     season: 'Winter oilseed, Terai & hills. Sow Oct–Nov, harvest Feb–Mar.' },
             { name: 'Lentil (मसुरो)',     season: 'Winter pulse, Terai & low hills. Sow Oct–Nov, harvest Feb–Mar.' },
-            { name: 'Apple (स्याउ)',      season: 'Cold high hills/mountains 1800–2700m, needs winter chilling. Plant Dec–Jan. NOT suited to warm Terai/low hills.' },
-            { name: 'Orange/Citrus (सुन्तला)', season: 'Mild mid-hills 900–1500m. Plant in monsoon Jun–Aug. Poor in hot Terai and cold high mountains.' },
+            { name: 'Apple (स्याउ)',      season: 'Cold high mountains 1800–2700m with winter chilling — grown in Mustang, Manang, Jumla, Humla, Dolpa, Kalikot, Jajarkot (high Himalaya). NOT for warm Terai or low/mid hills.' },
+            { name: 'Citrus (सुन्तला/कागती)', season: 'VARIETY matters: Junar (sweet orange) & Suntala (mandarin) suit mild mid-hills 900–1500m with slightly acidic soil (Syangja, Tanahun, Dhankuta, Gulmi, Ramechhap); Kaagati (acid lime) & lemon tolerate warm Terai and low hills. Recommend the variety that fits the district — do not reject citrus outright. Plant in monsoon.' },
             { name: 'Banana (केरा)',      season: 'Hot, frost-free Terai & low valleys below 1200m. Plant Feb–Mar or monsoon.' },
             { name: 'Mango (आँप)',        season: 'Hot Terai & inner valleys below 1000m, frost-free. Flowers Feb–Mar, harvest May–Jul.' },
-            { name: 'Tea (चिया)',         season: 'Cool wet hills 900–2000m (e.g. Ilam) or Jhapa Terai (CTC). Perennial.' },
-            { name: 'Ginger (अदुवा)',     season: 'Warm-humid mid-hills 500–1500m. Plant Mar–Apr, harvest Dec–Jan.' },
-            { name: 'Large Cardamom (अलैंची)', season: 'Cool shaded high hills 1000–2000m (eastern hills). Perennial.' },
-            { name: 'Coffee (कफी)',       season: 'Shaded mid-hills 800–1600m, frost-free. Perennial, harvest Nov–Feb.' },
-            { name: 'Sugarcane (उखु)',    season: 'Hot Terai. Plant Feb–Mar, ~12-month crop.' }
+            { name: 'Tea (चिया)',         season: 'Needs cool, high-rainfall hills 900–2000m AND ACIDIC soil. Commercially grown almost only in EASTERN Nepal — Ilam hills and Jhapa Terai (CTC) — where soils are acidic and processing factories exist. Not traditional or recommended in western/far-western Nepal even where it is cool, due to non-acidic soils and no industry. Perennial.' },
+            { name: 'Ginger (अदुवा)',     season: 'Warm-humid mid-hills 500–1500m, well-drained soil (e.g. Salyan, Palpa, Kaski, Nawalparasi). Plant Mar–Apr, harvest Dec–Jan.' },
+            { name: 'Large Cardamom (अलैंची)', season: 'Cool, shaded, very moist high hills 1000–2000m of EASTERN Nepal (Taplejung, Ilam, Sankhuwasabha, Panchthar). Needs high rainfall & acidic soil. Perennial.' },
+            { name: 'Coffee (कफी)',       season: 'Shaded mid-hills 800–1600m, frost-free, slightly acidic soil (e.g. Gulmi, Palpa, Syangja, Kaski, Lalitpur). Perennial, harvest Nov–Feb.' },
+            { name: 'Sugarcane (उखु)',    season: 'Hot Terai (e.g. Sarlahi, Rautahat, Kailali). Plant Feb–Mar, ~12-month crop.' }
         ];
         const PLACES = [
             { name: 'Achham', lat: 29.05, lon: 81.29 },
@@ -404,29 +410,41 @@ Current now: ${Math.round(cur.temperature_2m)}°C, humidity ${cur.relative_humid
 16-day daily forecast:
 ${lines}
 
-Work through these steps:
+STEP 1 — SUITABILITY (judge with ALL factors, NOT temperature alone):
+Weigh together: (a) the district's real elevation (${elev} m), temperature and rainfall from the data; (b) SOIL needs — tea, large cardamom, coffee, citrus and potato prefer acidic soils; (c) Nepal's REAL commercial cropping zones from the crop notes above — e.g. tea is an eastern-Nepal (Ilam / Jhapa) acidic-soil crop, apple is a high-Himalaya crop (Mustang, Jumla, Humla, Karnali), large cardamom is the eastern hills.
+If the district is outside the crop's established agro-ecological zone (wrong region, wrong soil, or wrong altitude) — EVEN IF the temperature alone seems fine — treat it as unsuitable and explain the REAL reason (e.g. "tea is not grown in far-western Nepal because the soils are not acidic and there is no processing industry — it is an eastern-hill crop", NOT simply "too hot"). Be geographically accurate about ${loc}'s actual climate — do not assume.
 
-STEP 1 — SUITABILITY: Is ${crop.name} climatically suited to ${loc} (elevation ${elev} m), using its climate needs above and Nepal's geography (Terai = hot lowland, mid-hills = mild, high mountains = cold)?
-- If NOT suitable (e.g. apple in hot Terai like Jhapa, or banana in cold high mountains): in **Overall** say clearly and directly that ${loc}'s climate is NOT suitable for ${crop.name} and why (too hot / too cold / wrong altitude). Then under **✅ Better crops for ${loc}** recommend 3–5 crops that ARE well-suited to this district AND can be planted now or the next window (say which). Do NOT give a weather plan; skip the other sections.
-- If suitable: continue.
+VARIETY AWARENESS (very important): Judge the crop at the VARIETY / species / landrace level, not just the generic crop. If the common type is unsuited but a specific variety IS grown or suitable in this district, treat the crop as SUITABLE via that variety, give an appropriate (higher) score, and NAME the recommended variety. Use real Nepali facts, e.g.: cold-tolerant Marshi/Marsi rice is cultivated at very high altitude (up to ~3000m) in Jumla and Karnali (among the world's highest rice); Kaagati (acid lime) and lemon grow in the warm Terai and low hills while Junar (sweet orange) and mandarin (Suntala) suit mid-hills; apple needs high cold mountains; tea needs acidic eastern hills. Only mark a crop truly unsuitable if NO variety fits the district.
 
-STEP 2 — SEASON: Is ${crop.name} in its planting/growing season now (month ${monthName})? If OUT of season, say so in **Overall** and note the next sowing window with short prep steps.
+STEP 2 — SEASON: Is ${crop.name} in its planting/growing season now (${monthName})? If out of season, say so and give the next sowing window + short prep.
 
-STEP 3 — RISK SCAN: Do NOT list every day. Scan the 16-day forecast and flag ONLY the days with weather that threatens ${crop.name} — heavy rain/waterlogging/flood, thunderstorm/hail, frost/cold snap, heat spike, or strong wind. One line each: "DATE — threat → action". If nothing threatening appears, say "No severe weather in the next 16 days."
+STEP 3 — RISK SCAN: Do NOT list every day. Flag ONLY the forecast days that threaten ${crop.name} (heavy rain/waterlogging/flood, storm/hail, frost/cold snap, heat spike, strong wind) as "DATE — threat → action". If none, say "No severe weather in the next 16 days."
 
-Reply in clean GitHub markdown, short lines, using ONLY the sections that apply:
+FORMAT — begin your reply with ONE line exactly:
+SCORE: N
+where N is 1 to 5 for how suitable ${crop.name} is for ${loc} overall (5 = ideal match, 4 = good, 3 = marginal, 2 = poor, 1 = unsuitable). Then a blank line, then clean GitHub markdown with short lines, using ONLY the sections that apply:
 
-**Overall:** 1–2 sentences (suitability + season verdict).
+**Overall:** 1–2 sentences — clear verdict (suitable / marginal / unsuitable and why; in season or not).
 
-**✅ Better crops for ${loc}:** ONLY if the chosen crop is unsuitable — 3–5 suited crops + best planting time.
+**🌾 Best variety here:** ONLY if a specific variety/species makes this crop workable in ${loc} — name it (e.g. Marshi rice, Kaagati lime, mandarin) and one line why. Omit if not relevant.
 
-**⚠️ Weather risks to watch:** the flagged critical days (date → threat → action), or "No severe weather in the next 16 days."
+**✅ Better crops for ${loc}:** ONLY if the crop scores 1–2 AND no variety fits — 3–5 crops truly suited to THIS district's climate & soil, with best planting time.
 
-**📌 Later this cropping season:** 2–3 bullets on the main weather risks expected LATER in this crop's growing period in this region (monsoon flood, winter frost, pre-monsoon hail, dry spell — even weeks or months ahead) and how to prepare.
+**⚠️ Weather risks to watch:** the flagged critical days, or "No severe weather in the next 16 days."
 
-**✅ Do now:** 2–3 short priority actions.
+**📌 Later this cropping season:** 2–3 bullets on the main weather risks expected later in this crop's growing period in this region and how to prepare.
 
-Be specific and practical. Do NOT invent weather beyond the 16-day data. Nepali crop/disease names in brackets welcome.`;
+**✅ Do now:** 2–3 short priority actions (skip if unsuitable).
+
+Be specific, accurate and practical. Do NOT invent weather beyond the 16-day data. Nepali crop/disease names in brackets welcome.`;
+        }
+        function suitBarHTML(score) {
+            const colors = { 1: '#ef4444', 2: '#f97316', 3: '#f59e0b', 4: '#84cc16', 5: '#22c55e' };
+            const labels = { 1: 'Not suitable', 2: 'Poor match', 3: 'Marginal', 4: 'Good match', 5: 'Excellent match' };
+            const c = colors[score] || '#9195b5';
+            let segs = '';
+            for (let i = 1; i <= 5; i++) segs += `<span class="suit-seg"${i <= score ? ` style="background:${c};border-color:${c}"` : ''}></span>`;
+            return `<div class="suit-wrap"><span class="suit-cap">Suitability</span><div class="suit-track">${segs}</div><span class="suit-label" style="color:${c}">${labels[score] || ''}</span></div>`;
         }
         async function askWeatherAI(wx, loc, crop) {
             const el = document.getElementById('ai-report');
@@ -439,9 +457,13 @@ Be specific and practical. Do NOT invent weather beyond the 16-day data. Nepali 
                 const res = await fetch(WEATHER_AI_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: buildWeatherPrompt(wx, loc, crop) }) });
                 const data = await res.json();
                 if (data.error) throw new Error(data.error);
-                const text = (data.response || '').trim();
+                let text = (data.response || '').trim();
                 if (!text) throw new Error('empty');
-                el.innerHTML = (window.marked && window.marked.parse) ? window.marked.parse(text) : ('<p>' + text.replace(/\n/g, '<br>') + '</p>');
+                const sm = text.match(/SCORE:\s*([1-5])/i);
+                const score = sm ? parseInt(sm[1], 10) : null;
+                text = text.replace(/^\s*#*\s*SCORE:\s*[1-5]\s*\/?\s*5?/i, '').replace(/SCORE:\s*[1-5]\s*\/?\s*5?/i, '').trim();
+                const bodyHtml = (window.marked && window.marked.parse) ? window.marked.parse(text) : ('<p>' + text.replace(/\n/g, '<br>') + '</p>');
+                el.innerHTML = (score ? suitBarHTML(score) : '') + bodyHtml;
             } catch (e) {
                 el.innerHTML = fallbackHTML(wx, crop) + `<p class="ai-note">Showing basic guidance — the live AI analysis was unavailable. Please try again in a moment.</p>`;
             }
