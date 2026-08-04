@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAURAV AGRO-TECH | Modern Agriculture</title>
+    <meta name="description" content="Saurav Agro-Tech — modern agriculture for Nepal: AI plant disease diagnosis, crop calendar, fertilizer calculator, live weather advice and farming articles.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Saurav Agro-Tech">
+    <meta property="og:title" content="Saurav Agro-Tech | Modern Agriculture for Nepal">
+    <meta property="og:description" content="AI Plant Doctor, crop calendar, fertilizer calculator, live weather advice and farming articles for Nepal.">
+    <meta property="og:url" content="https://sauravkattel.com.np/">
+    <meta property="og:image" content="https://sauravkattel.com.np/agriculture-farm-logo-vector.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Saurav Agro-Tech | Modern Agriculture for Nepal">
+    <meta name="twitter:description" content="AI Plant Doctor, crop calendar, fertilizer calculator, live weather advice and farming articles for Nepal.">
+    <meta name="twitter:image" content="https://sauravkattel.com.np/agriculture-farm-logo-vector.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -369,7 +380,17 @@
         .reader-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-muted); font-size: 1.3rem; line-height: 1; cursor: pointer; z-index: 2; transition: color 0.2s, border-color 0.2s; }
         .reader-close:hover { color: var(--sage); border-color: var(--sage); }
         .reader-meta { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.8rem; }
-        .reader-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.6rem; }
+        .reader-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.2rem; }
+        .reader-share { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 1.6rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--border); }
+        .reader-share-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+        .share-btn { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s; }
+        .share-btn:hover { color: #fff; transform: translateY(-2px); }
+        .share-btn.fb:hover { background: #1877f2; border-color: #1877f2; }
+        .share-btn.wa:hover { background: #25d366; border-color: #25d366; }
+        .share-btn.tw:hover { background: #111827; border-color: #111827; }
+        .share-btn.tg:hover { background: #0088cc; border-color: #0088cc; }
+        .share-btn.nv:hover, .share-btn.cp:hover { background: var(--sage); border-color: var(--sage); }
+        .share-btn.copied { background: var(--sage); border-color: var(--sage); color: #fff; }
         .reader-cover { width: 100%; border-radius: 16px; margin-bottom: 1.6rem; display: block; }
         .reader-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; }
         .reader-body h1, .reader-body h2, .reader-body h3 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); font-weight: 700; line-height: 1.25; margin: 1.8rem 0 0.8rem; letter-spacing: -0.01em; }
@@ -919,6 +940,15 @@
             <div class="reader-scroll">
                 <div class="reader-meta" id="reader-meta"></div>
                 <h1 class="reader-title" id="reader-title"></h1>
+                <div class="reader-share">
+                    <span class="reader-share-label">Share</span>
+                    <button class="share-btn fb" onclick="shareArticle('facebook')" aria-label="Share on Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></button>
+                    <button class="share-btn wa" onclick="shareArticle('whatsapp')" aria-label="Share on WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+                    <button class="share-btn tw" onclick="shareArticle('twitter')" aria-label="Share on X/Twitter" title="X (Twitter)"><i class="fab fa-twitter"></i></button>
+                    <button class="share-btn tg" onclick="shareArticle('telegram')" aria-label="Share on Telegram" title="Telegram"><i class="fab fa-telegram"></i></button>
+                    <button class="share-btn nv" onclick="nativeShare()" aria-label="More share options" title="More…"><i class="fas fa-share-nodes"></i></button>
+                    <button class="share-btn cp" id="copy-link-btn" onclick="copyArticleLink()" aria-label="Copy link" title="Copy link"><i class="fas fa-link"></i></button>
+                </div>
                 <img class="reader-cover" id="reader-cover" alt="" hidden>
                 <div class="reader-body" id="reader-body"></div>
             </div>
@@ -1623,11 +1653,12 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
                     </div>
                     <a href="#" class="btn-link" onclick="openReader(${i});return false;">Read Full Article <span class="arrow-line"></span></a>
                 </div>`).join('');
+            openArticleFromUrl();
         }
         function renderFallbackArticles() {
             renderArticles([
-                { title: 'नेपालमा जैविक खेती प्रविधि: चुनौती र अबको बाटो', date: '2024-08-11', summary: 'जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ...', body: 'जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ।\n\n*(Publish the full version any time from the /admin editor.)*' },
-                { title: 'Sustainable Farming Techniques', date: '2024-09-05', summary: 'Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal. A deep dive into sustainable practices...', body: 'Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal. A deep dive into sustainable practices.\n\n*(Publish the full version any time from the /admin editor.)*' }
+                { slug: 'jaibik-kheti-nepal', title: 'नेपालमा जैविक खेती प्रविधि: चुनौती र अबको बाटो', date: '2024-08-11', summary: 'जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ...', body: 'जैविक खेती नेपालमा एक महत्वपूर्ण मुद्दा बनेको छ। यसको प्रविधि र यसको सफलताका चुनौतीहरू धेरै छन्। नेपालमा जैविक खेती प्रविधि अपनाउन धेरै मेहनत र ज्ञानको आवश्यकता पर्छ।\n\n*(Publish the full version any time from the /admin editor.)*' },
+                { slug: 'sustainable-farming', title: 'Sustainable Farming Techniques', date: '2024-09-05', summary: 'Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal. A deep dive into sustainable practices...', body: 'Exploring modern irrigation methods and soil conservation to improve crop yield in hilly regions of Nepal. A deep dive into sustainable practices.\n\n*(Publish the full version any time from the /admin editor.)*' }
             ]);
         }
         async function loadArticles() {
@@ -1641,7 +1672,7 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
                 const posts = await Promise.all(files.map(async f => {
                     const raw = await (await fetch(f.download_url)).text();
                     const { data, body } = parseFrontmatter(raw);
-                    return { title: data.title || f.name.replace(/\.(md|markdown)$/i, ''), date: data.date || '', summary: data.summary || '', cover: data.cover || '', body };
+                    return { slug: f.name.replace(/\.(md|markdown)$/i, ''), title: data.title || f.name.replace(/\.(md|markdown)$/i, ''), date: data.date || '', summary: data.summary || '', cover: data.cover || '', body };
                 }));
                 posts.sort((a, b) => String(b.date).localeCompare(String(a.date)));
                 renderArticles(posts);
@@ -1649,8 +1680,12 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
                 renderFallbackArticles();   // keeps the site looking normal before the CMS is set up
             }
         }
+        let currentShareUrl = '', currentShareTitle = '';
         function openReader(i) {
             const p = ARTICLES[i]; if (!p) return;
+            currentShareTitle = p.title;
+            currentShareUrl = location.origin + location.pathname + '?post=' + encodeURIComponent(p.slug || String(i));
+            try { history.replaceState(null, '', currentShareUrl + '#articles'); } catch (e) {}
             document.getElementById('reader-meta').textContent = fmtDate(p.date);
             document.getElementById('reader-title').textContent = p.title;
             const cover = document.getElementById('reader-cover');
@@ -1664,8 +1699,36 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
             if (e && e.target && !e.target.classList.contains('reader-overlay') && !e.target.classList.contains('reader-close')) return;
             document.getElementById('reader-overlay').classList.remove('active');
             document.body.classList.remove('reader-open');
+            try { history.replaceState(null, '', location.pathname + '#articles'); } catch (e2) {}
         }
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeReader(); });
+        /* ════ ARTICLE SHARING ════ */
+        function shareArticle(platform) {
+            const u = encodeURIComponent(currentShareUrl);
+            const t = encodeURIComponent(currentShareTitle + ' — Saurav Agro-Tech');
+            let link = '';
+            if (platform === 'facebook')      link = 'https://www.facebook.com/sharer/sharer.php?u=' + u;
+            else if (platform === 'whatsapp') link = 'https://api.whatsapp.com/send?text=' + t + '%20' + u;
+            else if (platform === 'twitter')  link = 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u;
+            else if (platform === 'telegram') link = 'https://t.me/share/url?url=' + u + '&text=' + t;
+            if (link) window.open(link, '_blank', 'noopener,noreferrer,width=620,height=520');
+        }
+        function nativeShare() {
+            if (navigator.share) navigator.share({ title: currentShareTitle, text: currentShareTitle, url: currentShareUrl }).catch(() => {});
+            else copyArticleLink();
+        }
+        function copyArticleLink() {
+            const btn = document.getElementById('copy-link-btn');
+            const done = () => { if (!btn) return; const old = btn.innerHTML; btn.classList.add('copied'); btn.innerHTML = '<i class="fas fa-check"></i>'; setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = old; }, 1600); };
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(currentShareUrl).then(done, () => prompt('Copy this link:', currentShareUrl));
+            else prompt('Copy this link:', currentShareUrl);
+        }
+        function openArticleFromUrl() {
+            const post = new URLSearchParams(location.search).get('post');
+            if (!post) return;
+            const idx = ARTICLES.findIndex((a, i) => String(a.slug) === post || String(i) === post);
+            if (idx >= 0) { const s = document.getElementById('articles'); if (s) s.scrollIntoView(); openReader(idx); }
+        }
         /* ════ SIGNUP FORM → Google Sheet ════ */
         const SIGNUP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxc0IvcgtzdZxSDpnYb7FdoN9z2rIEk7V_IoYLAGBDXkrnhaFU2KCra_iO_2uWA6cNUMg/exec';
         async function submitSignup(e) {
