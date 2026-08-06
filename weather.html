@@ -192,7 +192,7 @@
             { name: 'Citrus (सुन्तला/कागती)', season: 'VARIETY matters: Junar (sweet orange) & Suntala (mandarin) suit mild mid-hills 900–1500m with slightly acidic soil (Syangja, Tanahun, Dhankuta, Gulmi, Ramechhap); Kaagati (acid lime) & lemon tolerate warm Terai and low hills. Recommend the variety that fits the district — do not reject citrus outright. Plant in monsoon.' },
             { name: 'Banana (केरा)',      season: 'Hot, frost-free Terai & low valleys below 1200m. Plant Feb–Mar or monsoon.' },
             { name: 'Mango (आँप)',        season: 'Hot Terai & inner valleys below 1000m, frost-free. Flowers Feb–Mar, harvest May–Jul.' },
-            { name: 'Tea (चिया)',         season: 'Needs cool, high-rainfall hills 900–2000m AND ACIDIC soil. Commercially grown almost only in EASTERN Nepal — Ilam hills and Jhapa Terai (CTC) — where soils are acidic and processing factories exist. Not traditional or recommended in western/far-western Nepal even where it is cool, due to non-acidic soils and no industry. Perennial.' },
+            { name: 'Tea (चिया)',         season: 'Two systems, both in EASTERN Nepal: orthodox tea in the cool acidic hills of Ilam (900–2000m), AND large-scale CTC tea across the JHAPA Terai lowland — Jhapa is the LARGEST tea-producing district of Nepal. Both have acidic soils and processing industry, so tea is HIGHLY suitable in Jhapa and Ilam. Not traditional in western/far-western Nepal (non-acidic soils, no industry). Perennial.' },
             { name: 'Ginger (अदुवा)',     season: 'Warm-humid mid-hills 500–1500m, well-drained soil (e.g. Salyan, Palpa, Kaski, Nawalparasi). Plant Mar–Apr, harvest Dec–Jan.' },
             { name: 'Large Cardamom (अलैंची)', season: 'Cool, shaded, very moist high hills 1000–2000m of EASTERN Nepal (Taplejung, Ilam, Sankhuwasabha, Panchthar). Needs high rainfall & acidic soil. Perennial.' },
             { name: 'Coffee (कफी)',       season: 'Shaded mid-hills 800–1600m, frost-free, slightly acidic soil (e.g. Gulmi, Palpa, Syangja, Kaski, Lalitpur). Perennial, harvest Nov–Feb.' },
@@ -414,6 +414,8 @@ STEP 1 — SUITABILITY (judge with ALL factors, NOT temperature alone):
 Weigh together: (a) the district's real elevation (${elev} m), temperature and rainfall from the data; (b) SOIL needs — tea, large cardamom, coffee, citrus and potato prefer acidic soils; (c) Nepal's REAL commercial cropping zones from the crop notes above — e.g. tea is an eastern-Nepal (Ilam / Jhapa) acidic-soil crop, apple is a high-Himalaya crop (Mustang, Jumla, Humla, Karnali), large cardamom is the eastern hills.
 If the district is outside the crop's established agro-ecological zone (wrong region, wrong soil, or wrong altitude) — EVEN IF the temperature alone seems fine — treat it as unsuitable and explain the REAL reason (e.g. "tea is not grown in far-western Nepal because the soils are not acidic and there is no processing industry — it is an eastern-hill crop", NOT simply "too hot"). Be geographically accurate about ${loc}'s actual climate — do not assume.
 
+PRODUCTION REALITY (highest priority — overrides generic climate rules): If ${loc} is a known commercial PRODUCER of ${crop.name}, then the crop IS suitable and productive there — real production proves it — so give a HIGH score even if a textbook climate rule would suggest otherwise. Example: Jhapa is the LARGEST tea-producing district in Nepal (CTC Terai tea), so tea is HIGHLY suitable in Jhapa; the Terai heat does NOT make it unsuitable. Other examples: Ilam=tea, Mustang/Jumla=apple, Chitwan/Terai=rice & vegetables, Kaski=citrus & vegetables. Only mark a crop unsuitable if it is genuinely NOT grown/produced in that district.
+
 VARIETY AWARENESS (very important): Judge the crop at the VARIETY / species / landrace level, not just the generic crop. If the common type is unsuited but a specific variety IS grown or suitable in this district, treat the crop as SUITABLE via that variety, give an appropriate (higher) score, and NAME the recommended variety. Use real Nepali facts, e.g.: cold-tolerant Marshi/Marsi rice is cultivated at very high altitude (up to ~3000m) in Jumla and Karnali (among the world's highest rice); Kaagati (acid lime) and lemon grow in the warm Terai and low hills while Junar (sweet orange) and mandarin (Suntala) suit mid-hills; apple needs high cold mountains; tea needs acidic eastern hills. Only mark a crop truly unsuitable if NO variety fits the district.
 
 STEP 2 — SEASON: Is ${crop.name} in its planting/growing season now (${monthName})? If out of season, say so and give the next sowing window + short prep.
@@ -465,9 +467,10 @@ Be specific, accurate and practical. Do NOT invent weather beyond the 16-day dat
                 if (data.error) throw new Error(data.error);
                 let text = (data.response || '').trim();
                 if (!text) throw new Error('empty');
-                const sm = text.match(/SCORE:\s*([1-5])/i);
+                const sm = text.match(/SCORE\D{0,6}([1-5])/i);
                 const score = sm ? parseInt(sm[1], 10) : null;
-                text = text.replace(/^\s*#*\s*SCORE:\s*[1-5]\s*\/?\s*5?/i, '').replace(/SCORE:\s*[1-5]\s*\/?\s*5?/i, '').trim();
+                // remove the whole SCORE line (handles "SCORE: 3", "**SCORE:** 3", "SCORE 3/5")
+                text = text.replace(/^.*SCORE\D{0,6}[1-5][^\n]*\n+/i, '').replace(/\**\s*SCORE\D{0,6}[1-5]\s*(?:\/\s*5)?\s*\**/i, '').trim();
                 const bodyHtml = (window.marked && window.marked.parse) ? window.marked.parse(text) : ('<p>' + text.replace(/\n/g, '<br>') + '</p>');
                 el.innerHTML = (score ? suitBarHTML(score) : '') + bodyHtml;
             } catch (e) {
