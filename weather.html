@@ -179,33 +179,33 @@
     <script>
         // season string also encodes climate/altitude needs for the suitability check
         const CROPS = [
-            { name: 'Rice (धान)',         season: 'Grows Terai to mid-hills; and cold-tolerant landraces (e.g. Marshi / Marsi rice) are cultivated at very high altitude up to ~3000m in Jumla and other Karnali/Himali valleys — among the highest-altitude rice in the world. So most districts can grow SOME rice variety; pick the variety by altitude. Monsoon crop: transplant Jun–Jul, harvest Oct.' },
-            { name: 'Maize (मकै)',        season: 'Hills & Terai. Spring (sow Feb–Mar, harvest Jun–Jul) and autumn (sow Aug–Sep, harvest Nov–Dec).' },
-            { name: 'Wheat (गहुँ)',       season: 'Terai & hills, needs cool winter. Sow Oct–Nov, harvest Mar–Apr.' },
-            { name: 'Potato (आलु)',       season: 'Hills & Terai. Autumn plant Aug–Sep (harvest Nov–Dec) and winter plant Nov (harvest Feb–Mar).' },
-            { name: 'Tomato (गोलभेडा)',   season: 'Warm season, frost-sensitive. Transplant Feb–Apr; off-season in plastic tunnels.' },
-            { name: 'Vegetables (तरकारी)', season: 'Year-round by altitude; winter veg Oct–Feb, summer veg Mar–Jun.' },
-            { name: 'Millet (कोदो)',      season: 'Rain-fed hill crop, tolerates marginal soil. Sow June, harvest Sep–Oct.' },
-            { name: 'Mustard (तोरी)',     season: 'Winter oilseed, Terai & hills. Sow Oct–Nov, harvest Feb–Mar.' },
-            { name: 'Lentil (मसुरो)',     season: 'Winter pulse, Terai & low hills. Sow Oct–Nov, harvest Feb–Mar.' },
-            { name: 'Apple (स्याउ)',      season: 'Cold high mountains 1800–2700m with winter chilling — grown in Mustang, Manang, Jumla, Humla, Dolpa, Kalikot, Jajarkot (high Himalaya). NOT for warm Terai or low/mid hills.' },
-            { name: 'Citrus (सुन्तला/कागती)', season: 'VARIETY matters: Junar (sweet orange) & Suntala (mandarin) suit mild mid-hills 900–1500m with slightly acidic soil (Syangja, Tanahun, Dhankuta, Gulmi, Ramechhap); Kaagati (acid lime) & lemon tolerate warm Terai and low hills. Recommend the variety that fits the district — do not reject citrus outright. Plant in monsoon.' },
-            { name: 'Banana (केरा)',      season: 'Hot, frost-free Terai & low valleys below 1200m. Plant Feb–Mar or monsoon.' },
-            { name: 'Mango (आँप)',        season: 'Hot Terai & inner valleys below 1000m, frost-free. Flowers Feb–Mar, harvest May–Jul.' },
-            { name: 'Tea (चिया)',         season: 'Two systems, both in EASTERN Nepal: orthodox tea in the cool acidic hills of Ilam (900–2000m), AND large-scale CTC tea across the JHAPA Terai lowland — Jhapa is the LARGEST tea-producing district of Nepal. Both have acidic soils and processing industry, so tea is HIGHLY suitable in Jhapa and Ilam. Not traditional in western/far-western Nepal (non-acidic soils, no industry). Perennial.' },
-            { name: 'Ginger (अदुवा)',     season: 'Warm-humid mid-hills 500–1500m, well-drained soil (e.g. Salyan, Palpa, Kaski, Nawalparasi). Plant Mar–Apr, harvest Dec–Jan.' },
-            { name: 'Large Cardamom (अलैंची)', season: 'Cool, shaded, very moist high hills 1000–2000m of EASTERN Nepal (Taplejung, Ilam, Sankhuwasabha, Panchthar). Needs high rainfall & acidic soil. Perennial.' },
-            { name: 'Coffee (कफी)',       season: 'Shaded mid-hills 800–1600m, frost-free, slightly acidic soil (e.g. Gulmi, Palpa, Syangja, Kaski, Lalitpur). Perennial, harvest Nov–Feb.' },
-            { name: 'Sugarcane (उखु)',    season: 'Hot Terai (e.g. Sarlahi, Rautahat, Kailali). Plant Feb–Mar, ~12-month crop.' },
-            { name: 'Avocado (एभोकाडो)',  season: 'Subtropical mid-hills 800–1600m, frost-free, well-drained slightly acidic soil (e.g. Kaski, Syangja, Tanahun, Nuwakot, Kavre). Plant in monsoon (Jun–Aug). Perennial; a fast-rising commercial crop.' },
-            { name: 'Kiwi (किवी)',        season: 'Cool sub-temperate mid/high hills 1200–2000m, needs winter chilling (e.g. Ilam, Dhankuta, Sindhupalchok, Kaski, Myagdi, Nuwakot). Plant dormant vines Dec–Feb. Perennial, high-value.' },
-            { name: 'Dragon fruit (ड्र्यागन फल)', season: 'Warm, frost-free Terai & low valleys below ~1200m; drought-tolerant cactus, well-drained soil (e.g. Chitwan, Nawalparasi, lower Kavre, Terai). Plant Mar–Jun. Perennial cash crop.' },
-            { name: 'Arecanut/Betel nut (सुपारी)', season: 'Hot, humid, high-rainfall Terai & foothills, frost-free (e.g. Jhapa, Morang, Ilam foothills). Perennial palm; plant in monsoon.' },
-            { name: 'Jackfruit (रुखकटहर)', season: 'Hot, humid Terai & low hills below ~1000m, frost-free. Perennial tree; plant in monsoon. Harvest summer.' },
-            { name: 'Litchi (लिची)',      season: 'Hot Terai & inner valleys below ~900m, frost-free (e.g. Dhankuta lower belt, Sarlahi, Kavre lower). Flowers Feb–Mar, harvest May–Jun.' },
-            { name: 'Guava (अम्बा)',      season: 'Adaptable, Terai to mid-hills below ~1500m, fairly frost-tolerant once established. Plant in monsoon; two harvests a year.' },
-            { name: 'Pear (नास्पाती)',    season: 'Temperate high hills 1500–2500m, needs winter chilling (e.g. Jumla, Mustang, Manang, high Karnali/hills). Plant dormant Dec–Jan.' },
-            { name: 'Walnut (ओखर)',       season: 'Cool temperate high hills/mountains 1500–2800m (e.g. Jumla, Humla, Mustang, Dolpa, high hills). Plant Jan–Feb. Perennial.' }
+            { name: 'Rice (धान)',         season: 'Grows Terai to mid-hills; and cold-tolerant landraces (e.g. Marshi / Marsi rice) are cultivated at very high altitude up to ~3000m in Jumla and other Karnali/Himali valleys — among the highest-altitude rice in the world. So most districts can grow SOME rice variety; pick the variety by altitude. Monsoon crop: transplant Jun–Jul, harvest Oct.', varr: 'Terai — Radha-4, Sabitri, Ramdhan, Sarju-52, Hardinath-1, Sworna Sub-1 (flood-tolerant), Ranjit; spring — Chaite-5; mid-hills — Khumal-4, Machhapuchhre-3, Khumal-6; high mountains (cold-tolerant) — Chandannath-1, Chandannath-3, Lekali-1.' },
+            { name: 'Maize (मकै)',        season: 'Hills & Terai. Spring (sow Feb–Mar, harvest Jun–Jul) and autumn (sow Aug–Sep, harvest Nov–Dec).', varr: 'Rampur Composite, Manakamana-1/3/4, Arun-2, Deuti, Poshilo Makai-1; hybrids — Rampur Hybrid-10, Manakamana-6/7; hills — Ganesh-2.' },
+            { name: 'Wheat (गहुँ)',       season: 'Terai & hills, needs cool winter. Sow Oct–Nov, harvest Mar–Apr.', varr: 'Gautam, Aditya, Bhrikuti, NL-297, Vijay, Banganga, Dhaulagiri, Tilottama, Zinc Gahun-1.' },
+            { name: 'Potato (आलु)',       season: 'Hills & Terai. Autumn plant Aug–Sep (harvest Nov–Dec) and winter plant Nov (harvest Feb–Mar).', varr: 'Kufri Jyoti, Janakdev, Khumal Rato-2, Khumal Seto-1, Desiree, Cardinal, MS-42.3, Khumal Ujjwal.' },
+            { name: 'Tomato (गोलभेडा)',   season: 'Warm season, frost-sensitive. Transplant Feb–Apr; off-season in plastic tunnels.', varr: 'Srijana (F1 hybrid), Lapsigede, Manisha, Pusa Ruby, NCL-1; many hybrids for tunnels.' },
+            { name: 'Vegetables (तरकारी)', season: 'Year-round by altitude; winter veg Oct–Feb, summer veg Mar–Jun.', varr: 'Per vegetable — cauliflower Kathmandu Local/Snowball, cabbage Copenhagen Market, radish Mino Early, cowpea Prakash, cucumber Bhaktapur Local.' },
+            { name: 'Millet (कोदो)',      season: 'Rain-fed hill crop, tolerates marginal soil. Sow June, harvest Sep–Oct.', varr: 'Kabre Kodo-1, Kabre Kodo-2, Okhle-1, Dalle-1.' },
+            { name: 'Mustard (तोरी)',     season: 'Winter oilseed, Terai & hills. Sow Oct–Nov, harvest Feb–Mar.', varr: 'Preeti, Pragati, Bikas, Unnati, Lumle Toria-1.' },
+            { name: 'Lentil (मसुरो)',     season: 'Winter pulse, Terai & low hills. Sow Oct–Nov, harvest Feb–Mar.', varr: 'Khajura Masuro-1/2, Simal, Sisir, Shital, Sagun, Black Masuro-1.' },
+            { name: 'Apple (स्याउ)',      season: 'Cold high mountains 1800–2700m with winter chilling — grown in Mustang, Manang, Jumla, Humla, Dolpa, Kalikot, Jajarkot (high Himalaya). NOT for warm Terai or low/mid hills.', varr: 'Red Delicious, Royal Delicious, Golden Delicious, Fuji, Gala, Richared (high cold mountains).' },
+            { name: 'Citrus (सुन्तला/कागती)', season: 'VARIETY matters: Junar (sweet orange) & Suntala (mandarin) suit mild mid-hills 900–1500m with slightly acidic soil (Syangja, Tanahun, Dhankuta, Gulmi, Ramechhap); Kaagati (acid lime) & lemon tolerate warm Terai and low hills. Recommend the variety that fits the district — do not reject citrus outright. Plant in monsoon.', varr: 'Mid-hills — Mandarin/Suntala (Khoku selection & local), Sweet orange/Junar; Terai/low hills — Kaagati (acid lime), lemon.' },
+            { name: 'Banana (केरा)',      season: 'Hot, frost-free Terai & low valleys below 1200m. Plant Feb–Mar or monsoon.', varr: 'William Hybrid (G-9/Grand Naine), Malbhog, Jhapali Malbhog, Robusta.' },
+            { name: 'Mango (आँप)',        season: 'Hot Terai & inner valleys below 1000m, frost-free. Flowers Feb–Mar, harvest May–Jul.', varr: 'Maldah, Bombai, Krishnabhog, Amrapali, Dashehari, Calcuttia.' },
+            { name: 'Tea (चिया)',         season: 'Two systems, both in EASTERN Nepal: orthodox tea in the cool acidic hills of Ilam (900–2000m), AND large-scale CTC tea across the JHAPA Terai lowland — Jhapa is the LARGEST tea-producing district of Nepal. Both have acidic soils and processing industry, so tea is HIGHLY suitable in Jhapa and Ilam. Not traditional in western/far-western Nepal (non-acidic soils, no industry). Perennial.', varr: 'CTC Terai (Jhapa) clones — T-135, Takdah, BB-35; orthodox hills (Ilam) clones — AV-2, P-312, Ilam local.' },
+            { name: 'Ginger (अदुवा)',     season: 'Warm-humid mid-hills 500–1500m, well-drained soil (e.g. Salyan, Palpa, Kaski, Nawalparasi). Plant Mar–Apr, harvest Dec–Jan.', varr: 'Kapurkot Aduwa-1, Kapurkot Aduwa-2; local — Bhaise, Nase.' },
+            { name: 'Large Cardamom (अलैंची)', season: 'Cool, shaded, very moist high hills 1000–2000m of EASTERN Nepal (Taplejung, Ilam, Sankhuwasabha, Panchthar). Needs high rainfall & acidic soil. Perennial.', varr: 'Ramsey, Golsey, Sawney, Ramnag, Bharlangey, Chibesey.' },
+            { name: 'Coffee (कफी)',       season: 'Shaded mid-hills 800–1600m, frost-free, slightly acidic soil (e.g. Gulmi, Palpa, Syangja, Kaski, Lalitpur). Perennial, harvest Nov–Feb.', varr: 'Arabica — Bourbon, Typica, Yellow Caturra, Pacamara.' },
+            { name: 'Sugarcane (उखु)',    season: 'Hot Terai (e.g. Sarlahi, Rautahat, Kailali). Plant Feb–Mar, ~12-month crop.', varr: 'CoS-767, Bheri (CoS-8436), CoJ-64, CO-6806.' },
+            { name: 'Avocado (एभोकाडो)',  season: 'Subtropical mid-hills 800–1600m, frost-free, well-drained slightly acidic soil (e.g. Kaski, Syangja, Tanahun, Nuwakot, Kavre). Plant in monsoon (Jun–Aug). Perennial; a fast-rising commercial crop.', varr: 'Grafted — Hass, Fuerte, Pollock, Pinkerton.' },
+            { name: 'Kiwi (किवी)',        season: 'Cool sub-temperate mid/high hills 1200–2000m, needs winter chilling (e.g. Ilam, Dhankuta, Sindhupalchok, Kaski, Myagdi, Nuwakot). Plant dormant vines Dec–Feb. Perennial, high-value.', varr: 'Hayward, Bruno, Allison, Monty, Abbott (plus a male pollinator).' },
+            { name: 'Dragon fruit (ड्र्यागन फल)', season: 'Warm, frost-free Terai & low valleys below ~1200m; drought-tolerant cactus, well-drained soil (e.g. Chitwan, Nawalparasi, lower Kavre, Terai). Plant Mar–Jun. Perennial cash crop.', varr: 'White-flesh (Hylocereus undatus), red-flesh (H. costaricensis/polyrhizus).' },
+            { name: 'Arecanut/Betel nut (सुपारी)', season: 'Hot, humid, high-rainfall Terai & foothills, frost-free (e.g. Jhapa, Morang, Ilam foothills). Perennial palm; plant in monsoon.', varr: 'Mangala; local Terai selections.' },
+            { name: 'Jackfruit (रुखकटहर)', season: 'Hot, humid Terai & low hills below ~1000m, frost-free. Perennial tree; plant in monsoon. Harvest summer.', varr: 'Local selections (soft "koa" and crisp types).' },
+            { name: 'Litchi (लिची)',      season: 'Hot Terai & inner valleys below ~900m, frost-free (e.g. Dhankuta lower belt, Sarlahi, Kavre lower). Flowers Feb–Mar, harvest May–Jun.', varr: 'Muzaffarpur, China, Bombai, Calcuttia, Deshi.' },
+            { name: 'Guava (अम्बा)',      season: 'Adaptable, Terai to mid-hills below ~1500m, fairly frost-tolerant once established. Plant in monsoon; two harvests a year.', varr: 'Allahabad Safeda, Lucknow-49 (L-49), local, red-flesh types.' },
+            { name: 'Pear (नास्पाती)',    season: 'Temperate high hills 1500–2500m, needs winter chilling (e.g. Jumla, Mustang, Manang, high Karnali/hills). Plant dormant Dec–Jan.', varr: 'Local Nakh + improved — Bartlett, Kieffer.' },
+            { name: 'Walnut (ओखर)',       season: 'Cool temperate high hills/mountains 1500–2800m (e.g. Jumla, Humla, Mustang, Dolpa, high hills). Plant Jan–Feb. Perennial.', varr: 'Local Okhar (seedling) + grafted — Chandler; NARC selections.' }
         ];
         const PLACES = [
             { name: 'Achham', lat: 29.05, lon: 81.29 },
@@ -414,6 +414,7 @@
 Today: ${monthName} ${today.getDate()}.
 Farmer's chosen crop: ${crop.name}
 This crop's climate & season needs: ${crop.season}
+Officially released/registered varieties in Nepal (NARC / National Seed Board — as listed in the Krishi Diary): ${crop.varr}
 Location: ${loc}, Nepal — elevation about ${elev} m.
 Current now: ${Math.round(cur.temperature_2m)}°C, humidity ${cur.relative_humidity_2m}%, wind ${cur.wind_speed_10m} km/h, rain ${cur.precipitation}mm, ${wcode(cur.weather_code).t}.
 16-day daily forecast:
@@ -439,7 +440,7 @@ Then a blank line, then clean GitHub markdown with short lines, using ONLY the s
 
 **Overall:** 1–2 sentences — clear verdict (suitable / marginal / unsuitable and why; in season or not).
 
-**🌾 Best variety here:** ONLY if a specific variety/species makes this crop workable in ${loc} — name it (e.g. Marshi rice, Kaagati lime, mandarin) and one line why. Omit if not relevant.
+**🌾 Recommended variety for ${loc}:** whenever the crop is suitable, name the single best OFFICIALLY RELEASED / REGISTERED variety from the list above that fits this district's altitude/zone (e.g. Chandannath-3 rice for high Karnali like Jumla, Radha-4/Sabitri for the Terai, Kaagati lime for Terai citrus, Kufri Jyoti potato) + one short line why. Only use varieties from the registered list; omit this section if the crop is unsuitable.
 
 **✅ Better crops for ${loc}:** ONLY if the crop scores 1–2 and no variety fits — recommend crops truly suited to THIS district's climate & soil, GROUPED (skip any group that has nothing well-suited), each with best planting time in brackets:
 - 🌾 Field/cereal crops: 1–3
@@ -476,10 +477,10 @@ Be specific, accurate and practical. Do NOT invent weather beyond the 16-day dat
                 if (data.error) throw new Error(data.error);
                 let text = (data.response || '').trim();
                 if (!text) throw new Error('empty');
-                const sm = text.match(/SCORE\D{0,6}([1-5])/i);
+                const sm = text.match(/SCORE\D{0,8}([1-5])\b/i);
                 const score = sm ? parseInt(sm[1], 10) : null;
-                // remove the whole SCORE line (handles "SCORE: 3", "**SCORE:** 3", "SCORE 3/5")
-                text = text.replace(/^.*SCORE\D{0,6}[1-5][^\n]*\n+/i, '').replace(/\**\s*SCORE\D{0,6}[1-5]\s*(?:\/\s*5)?\s*\**/i, '').trim();
+                // strip the whole SCORE line for ANY number (handles "SCORE: 3", "**SCORE:** 3", "SCORE 3/5", stray values)
+                text = text.replace(/^.*SCORE\D{0,8}\d[^\n]*\n+/i, '').replace(/\**\s*SCORE\D{0,8}\d+\s*(?:\/\s*\d+)?\s*\**/i, '').trim();
                 const bodyHtml = (window.marked && window.marked.parse) ? window.marked.parse(text) : ('<p>' + text.replace(/\n/g, '<br>') + '</p>');
                 el.innerHTML = (score ? suitBarHTML(score) : '') + bodyHtml;
             } catch (e) {
