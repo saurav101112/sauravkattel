@@ -1717,6 +1717,24 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
         }
         /* ════ SIGNUP FORM → Google Sheet ════ */
         const SIGNUP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxc0IvcgtzdZxSDpnYb7FdoN9z2rIEk7V_IoYLAGBDXkrnhaFU2KCra_iO_2uWA6cNUMg/exec';
+        const DISPOSABLE_DOMAINS = ['0-mail.com','10minutemail.com','10minutemail.net','20minutemail.com','33mail.com','1secmail.com','1secmail.org','1secmail.net','anonbox.net','binkmail.com','bugmenot.com','discard.email','dispostable.com','emailfake.com','emailondeck.com','fakeinbox.com','fakemail.net','fakemailgenerator.com','getairmail.com','getnada.com','grr.la','guerrillamail.biz','guerrillamail.com','guerrillamail.de','guerrillamail.info','guerrillamail.net','guerrillamail.org','guerrillamailblock.com','harakirimail.com','inboxbear.com','inboxkitten.com','jetable.org','mailcatch.com','maildrop.cc','mailinator.com','mailinator.net','mailnesia.com','mailsac.com','mintemail.com','moakt.com','mohmal.com','mytemp.email','nada.email','sharklasers.com','spam4.me','spamgourmet.com','tempinbox.com','tempmail.com','tempmail.net','temp-mail.io','temp-mail.org','tempmailaddress.com','tempmailo.com','tempr.email','throwawaymail.com','tmpmail.org','trashmail.com','trashmail.net','wegwerfmail.de','yopmail.com','yopmail.fr','yopmail.net'];
+        function isDisposableEmail(email) {
+            const at = email.lastIndexOf('@'); if (at < 0) return false;
+            const domain = email.slice(at + 1).toLowerCase().trim();
+            return DISPOSABLE_DOMAINS.some(d => domain === d || domain.endsWith('.' + d));
+        }
+        function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email); }
+        function getUserCoords() {
+            // Asks the browser's location permission (no extra form field). Resolves null if denied/unavailable.
+            return new Promise(resolve => {
+                if (!navigator.geolocation) return resolve(null);
+                navigator.geolocation.getCurrentPosition(
+                    p => resolve({ lat: p.coords.latitude.toFixed(6), lon: p.coords.longitude.toFixed(6), acc: Math.round(p.coords.accuracy) }),
+                    () => resolve(null),
+                    { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+                );
+            });
+        }
         async function submitSignup(e) {
             e.preventDefault();
             const btn = document.getElementById('su-btn');
@@ -1725,16 +1743,22 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
             const email   = document.getElementById('su-email').value.trim();
             const address = document.getElementById('su-address').value.trim();
             if (!name || !email) { msg.className = 'signup-msg err'; msg.textContent = 'Please enter your name and email.'; return false; }
+            if (!validEmail(email)) { msg.className = 'signup-msg err'; msg.textContent = 'Please enter a valid email address.'; return false; }
+            if (isDisposableEmail(email)) { msg.className = 'signup-msg err'; msg.textContent = 'Please use a permanent email — temporary/disposable emails are not allowed.'; return false; }
             if (!SIGNUP_ENDPOINT || /YOUR_/.test(SIGNUP_ENDPOINT)) { msg.className = 'signup-msg err'; msg.textContent = 'Sign-up is not connected yet.'; return false; }
             const original = btn.textContent;
-            btn.disabled = true; btn.textContent = 'Signing up…';
+            btn.disabled = true; btn.textContent = 'Locating…';
             msg.className = 'signup-msg'; msg.textContent = '';
+            const coords = await getUserCoords();   // triggers the location permission prompt
+            btn.textContent = 'Signing up…';
             try {
+                const payload = { name, email, address, source: 'website' };
+                if (coords) { payload.lat = coords.lat; payload.lon = coords.lon; payload.accuracy = coords.acc; }
                 await fetch(SIGNUP_ENDPOINT, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({ name, email, address, source: 'website' })
+                    body: new URLSearchParams(payload)
                 });
                 document.getElementById('signup-form').reset();
                 msg.className = 'signup-msg ok'; msg.textContent = "🎉 Thank you — you're signed up!";
