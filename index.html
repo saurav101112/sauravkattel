@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> GREEN AGRO-TECH | Modern Agriculture</title>
-    <meta name="description" content="Green Agro-Tech — modern agriculture for Nepal: AI plant disease diagnosis, crop calendar, fertilizer calculator, live weather advice and farming articles.">
+    <title>SAURAV AGRO-TECH | Modern Agriculture</title>
+    <meta name="description" content="Saurav Agro-Tech — modern agriculture for Nepal: AI plant disease diagnosis, crop calendar, fertilizer calculator, live weather advice and farming articles.">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Green Agro-Tech">
-    <meta property="og:title" content="Green Agro-Tech | Modern Agriculture for Nepal">
+    <meta property="og:site_name" content="Saurav Agro-Tech">
+    <meta property="og:title" content="Saurav Agro-Tech | Modern Agriculture for Nepal">
     <meta property="og:description" content="AI Plant Doctor, crop calendar, fertilizer calculator, live weather advice and farming articles for Nepal.">
     <meta property="og:url" content="https://sauravkattel.com.np/">
     <meta property="og:image" content="https://sauravkattel.com.np/agriculture-farm-logo-vector.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Green Agro-Tech | Modern Agriculture for Nepal">
+    <meta name="twitter:title" content="Saurav Agro-Tech | Modern Agriculture for Nepal">
     <meta name="twitter:description" content="AI Plant Doctor, crop calendar, fertilizer calculator, live weather advice and farming articles for Nepal.">
     <meta name="twitter:image" content="https://sauravkattel.com.np/agriculture-farm-logo-vector.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -740,6 +740,34 @@
 <body>
     <!-- ════ 3D BACKGROUND CANVAS (added — does not change content) ════ -->
     <canvas id="bg3d"></canvas>
+    <!-- ════ LOCATION GATE (asks location on entry; records to sheet; blocks until allowed) ════ -->
+    <style>
+        #loc-gate { position: fixed; inset: 0; z-index: 5000; background: linear-gradient(160deg, #f4f4fd 0%, #eceefe 100%); display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+        #loc-gate.hidden { display: none; }
+        .locg-card { max-width: 430px; width: 100%; text-align: center; background: #fff; border: 1px solid rgba(26,28,51,0.10); border-radius: 24px; box-shadow: 0 24px 60px -28px rgba(26,28,51,0.28); padding: 2.6rem 2rem; font-family: 'DM Sans', sans-serif; }
+        .locg-icon { width: 66px; height: 66px; border-radius: 18px; background: linear-gradient(140deg, #4f46e5, #6366f1); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.7rem; margin: 0 auto 1.3rem; }
+        .locg-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.55rem; color: #1a1c33; margin-bottom: 0.6rem; }
+        .locg-sub { color: #5c6079; font-size: 0.96rem; line-height: 1.65; margin-bottom: 1.7rem; }
+        .locg-sub b { color: #1a1c33; }
+        .locg-btn { width: 100%; background: #4f46e5; color: #fff; border: none; border-radius: 999px; padding: 15px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 12px 26px -12px rgba(79,70,229,0.7); transition: background 0.2s, transform 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+        .locg-btn:hover { background: #6366f1; transform: translateY(-2px); }
+        .locg-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+        .locg-msg { min-height: 1.1rem; font-size: 0.85rem; margin-top: 0.9rem; color: #5c6079; }
+        .locg-msg.err { color: #f97316; }
+        .locg-note { font-size: 0.72rem; color: #9195b5; margin-top: 1.1rem; line-height: 1.55; }
+        body.locked { overflow: hidden; }
+    </style>
+    <div id="loc-gate">
+        <div class="locg-card">
+            <div class="locg-icon"><i class="fas fa-location-dot"></i></div>
+            <h1 class="locg-title">Welcome, Farmer 🌱</h1>
+            <p class="locg-sub">Please allow your location so <b>Saurav Agro‑Tech</b> can send you weather warnings and farming alerts for <b>your area</b> — no form to fill.</p>
+            <button class="locg-btn" id="locg-btn" onclick="requestGate()"><i class="fas fa-location-crosshairs"></i> Allow Location &amp; Enter</button>
+            <p class="locg-msg" id="locg-msg"></p>
+            <p class="locg-note">We use your location only to send area‑specific farming alerts. You can turn it off anytime in your browser settings.</p>
+        </div>
+    </div>
+    <script>try{if(localStorage.getItem('agro-loc-ok')==='1'){var g=document.getElementById('loc-gate');if(g)g.classList.add('hidden');}else{document.body.classList.add('locked');}}catch(e){}</script>
     <!-- ════ NAV ════ -->
     <nav>
         <a href="#" class="logo-container">
@@ -1262,7 +1290,7 @@
            Paste your deployed Worker URL below. Inside the Worker,
            the key is stored as a secret named GEMINI_KEY.
         ════════════════════════════════════════════ */
-        const GEMINI_PROXY_URL = 'https://plant-doctor.sauravkattel130.workers.dev';
+        const GEMINI_PROXY_URL = '/api/plant';
         const AI_SYSTEM = `You are "AI Plant Doctor", an expert agriculture and plant-pathology assistant for Saurav Agro-Tech (run by Saurav Kattel, B.Sc Horticulture, Nepal).
 
 SCOPE: Only help with agriculture, horticulture, crops, soil, plant pests & diseases, and gardening — tailored to Nepal (Terai, Mid-hills, High-hills). If asked anything unrelated, politely say you only help with farming and plants.
@@ -1717,6 +1745,39 @@ STYLE: Concise, practical, encouraging. ALWAYS give the Nepali name of the disea
         }
         /* ════ SIGNUP FORM → Google Sheet ════ */
         const SIGNUP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxc0IvcgtzdZxSDpnYb7FdoN9z2rIEk7V_IoYLAGBDXkrnhaFU2KCra_iO_2uWA6cNUMg/exec';
+        /* ════ LOCATION GATE ════ */
+        function unlockSite() {
+            const g = document.getElementById('loc-gate'); if (g) g.classList.add('hidden');
+            document.body.classList.remove('locked');
+        }
+        function recordLocation(lat, lon, acc) {
+            try {
+                fetch(SIGNUP_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ source: 'location-gate', lat: lat, lon: lon, accuracy: acc || '' }) });
+            } catch (e) {}
+        }
+        function requestGate() {
+            const btn = document.getElementById('locg-btn');
+            const msg = document.getElementById('locg-msg');
+            if (!navigator.geolocation) { msg.className = 'locg-msg err'; msg.textContent = 'Your browser cannot share location. Please use a modern browser (Chrome, Firefox, Edge).'; return; }
+            btn.disabled = true; btn.innerHTML = 'Getting location…'; msg.className = 'locg-msg'; msg.textContent = '';
+            navigator.geolocation.getCurrentPosition(
+                p => {
+                    recordLocation(p.coords.latitude.toFixed(6), p.coords.longitude.toFixed(6), Math.round(p.coords.accuracy));
+                    try { localStorage.setItem('agro-loc-ok', '1'); } catch (e) {}
+                    msg.className = 'locg-msg'; msg.textContent = '🎉 Thank you! Entering…';
+                    setTimeout(unlockSite, 600);
+                },
+                err => {
+                    btn.disabled = false; btn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Allow Location & Enter';
+                    msg.className = 'locg-msg err';
+                    msg.textContent = (err && err.code === 1)
+                        ? 'Location is blocked. Please tap Allow (or enable location for this site in your browser settings) to enter.'
+                        : 'Could not get your location. Please check GPS/internet and try again.';
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        }
         const DISPOSABLE_DOMAINS = ['0-mail.com','10minutemail.com','10minutemail.net','20minutemail.com','33mail.com','1secmail.com','1secmail.org','1secmail.net','anonbox.net','binkmail.com','bugmenot.com','discard.email','dispostable.com','emailfake.com','emailondeck.com','fakeinbox.com','fakemail.net','fakemailgenerator.com','getairmail.com','getnada.com','grr.la','guerrillamail.biz','guerrillamail.com','guerrillamail.de','guerrillamail.info','guerrillamail.net','guerrillamail.org','guerrillamailblock.com','harakirimail.com','inboxbear.com','inboxkitten.com','jetable.org','mailcatch.com','maildrop.cc','mailinator.com','mailinator.net','mailnesia.com','mailsac.com','mintemail.com','moakt.com','mohmal.com','mytemp.email','nada.email','sharklasers.com','spam4.me','spamgourmet.com','tempinbox.com','tempmail.com','tempmail.net','temp-mail.io','temp-mail.org','tempmailaddress.com','tempmailo.com','tempr.email','throwawaymail.com','tmpmail.org','trashmail.com','trashmail.net','wegwerfmail.de','yopmail.com','yopmail.fr','yopmail.net'];
         function isDisposableEmail(email) {
             const at = email.lastIndexOf('@'); if (at < 0) return false;

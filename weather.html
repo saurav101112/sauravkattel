@@ -368,7 +368,7 @@
             return '✅ Good field day — sow, weed, transplant or spray as needed.';
         }
         // Cloudflare Workers AI endpoint (free edge LLM). Paste your weather-ai Worker URL here.
-        const WEATHER_AI_URL = 'https://weather-ai.sauravkattel130.workers.dev';
+        const WEATHER_AI_URL = '/api/weather';
         function dayObjs(wx) {
             return wx.daily.time.map((t, i) => ({
                 time: t, i,
